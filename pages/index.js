@@ -3,6 +3,7 @@ import React from 'react';
 import ArticleCard from '../components/ArticleCard';
 import Container from '../components/Container';
 import Layout from '../components/Layout';
+import Masonry from '../components/Masonry';
 import ResultEmpty from '../components/ResultEmpty';
 import SideBar from '../components/SideBar';
 import StickyColumn from '../components/StickyColumn';
@@ -18,17 +19,13 @@ export default function Home({ pageProps }) {
     const pageNodes =
         pages || query.s
             ? pages?.map((data, i) => {
-                return (
-                    <React.Fragment key={i}>
-                        {data?.nodes?.map((props, i) => {
-                            return <ArticleCard key={i} {...props} />;
-                        })}
-                    </React.Fragment>
-                );
-            })
+                  return data?.nodes?.map((props, i) => {
+                      return <ArticleCard key={i} {...props} />;
+                  });
+              })
             : pageProps?.recentPosts?.map((props, i) => {
-                return <ArticleCard key={i} {...props} />;
-            });
+                  return <ArticleCard key={i} {...props} />;
+              });
     return (
         <Layout pageProps={pageProps}>
             {query.s && (
@@ -69,7 +66,7 @@ export default function Home({ pageProps }) {
                                                     />
                                                 </svg>
                                             </span>
-                                            <span className="breadcrumbs_item current opacity-75">
+                                            <span className="opacity-75 breadcrumbs_item current">
                                                 Search: {query.s}
                                             </span>
                                         </div>
@@ -87,12 +84,12 @@ export default function Home({ pageProps }) {
             )}
             {!isEmpty && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
-                    <div className="space-y-8 flex-1">
-                        {pageNodes}
+                    <div className="space-y-6">
+                        <Masonry className="space-y-6">{pageNodes}</Masonry>
                         {hasNextPage && (
                             <div className="flex justify-center">
                                 <button
-                                    className="text-white font-heading bg-[#6f96c5] hover:bg-[#c0b9a8] rounded border border-[color:#6f96c5] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
+                                    className="text-white font-heading bg-[#720f21] hover:bg-[#c0b9a8] rounded border border-[color:#720f21] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
                                     onClick={onLoadMore}>
                                     <span>Load More</span>
                                     <div
@@ -102,7 +99,7 @@ export default function Home({ pageProps }) {
                                                 : 'transition-all opacity-0 ml-[-44px] pl-3'
                                         }>
                                         <svg
-                                            className="animate-spin h-5 w-5 mr-3"
+                                            className="w-5 h-5 mr-3 animate-spin"
                                             stroke="currentColor"
                                             fill="currentColor"
                                             strokeWidth={0}
@@ -118,6 +115,7 @@ export default function Home({ pageProps }) {
                             </div>
                         )}
                     </div>
+
                     <StickyColumn offsetTop={120} offsetBottom={20}>
                         <SideBar pageProps={pageProps} />{' '}
                     </StickyColumn>

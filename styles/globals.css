@@ -38,7 +38,7 @@ a {
     @apply duration-100 ease-in-out;
 }
 :root {
-    --header-height: 100px;
+    --header-height: 126px;
     @apply lg:text-[17px] xl:text-[18px];
 }
 
@@ -71,4 +71,36 @@ h7 {
 
 .shadow-custom {
     box-shadow: 0 3px 5px rgb(70 70 70 / 10%);
+}
+
+.animated {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

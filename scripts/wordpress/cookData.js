@@ -195,7 +195,8 @@ const normalize = (raw) => {
         postsByCategory,
         app: {
             mainMenu: rest.menus.nodes[0].menuItems.edges,
-            generalSettings: rest.generalSettings
+            generalSettings: rest.generalSettings,
+            copyright: defaultData.copyright
         }
     };
 };

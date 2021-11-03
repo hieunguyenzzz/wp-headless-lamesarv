@@ -50,7 +50,7 @@ const ArticlePage = ({ pageProps }) => {
                         </h1>
                         <div className="mt-[2.65em] space-x-3 xl:space-x-[19px] text-[13px] flex flex-wrap items-baseline">
                             <Link
-                                className="flex items-center hover:text-[#6f96c5]"
+                                className="flex items-center hover:text-[#720f21]"
                                 rel="author"
                                 href={`/author/${post.author.node.slug}`}>
                                 <span className="mr-[11px] align-middle inline-block ">
@@ -111,7 +111,7 @@ const ArticlePage = ({ pageProps }) => {
                             height={434}
                             src={imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
-                                '/wp-content/uploads/',
+                                    '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/rec-van-assets/'
                             )}
                             className="w-full object-contain bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
@@ -119,22 +119,22 @@ const ArticlePage = ({ pageProps }) => {
                             loading="lazy"
                             srcSet={`${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
-                                '/wp-content/uploads/',
+                                    '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/rec-van-assets/'
                             )} 1170w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
-                                '/wp-content/uploads/',
+                                    '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/w_770,f_auto/rec-van-assets/'
                             )} 770w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
-                                '/wp-content/uploads/',
+                                    '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/w_370,f_auto/rec-van-assets/'
                             )} 370w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
-                                '/wp-content/uploads/',
+                                    '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
                             )} 270w`}
                             sizes="(max-width: 770px) 100vw, 770px"
@@ -149,8 +149,21 @@ const ArticlePage = ({ pageProps }) => {
                             dangerouslySetInnerHTML={{
                                 __html: post.content
                                     .replace(/-[0-9]{3}x[0-9]{3}\.jpg/g, '.jpg')
-                                    .replace(new RegExp(process.env.NEXT_PUBLIC_API_URL + 'wp-content/uploads/', 'g'), 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/')
-                                    .replace(new RegExp('https://myrecvan.com/wp-content/uploads/', 'g'), 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/')
+                                    .replace(
+                                        new RegExp(
+                                            process.env.NEXT_PUBLIC_API_URL +
+                                                'wp-content/uploads/',
+                                            'g'
+                                        ),
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/'
+                                    )
+                                    .replace(
+                                        new RegExp(
+                                            'https://myrecvan.com/wp-content/uploads/',
+                                            'g'
+                                        ),
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/'
+                                    )
                             }}
                         />
                         <div className="space-y-[2.5em] py-[2.5em]">
@@ -161,7 +174,7 @@ const ArticlePage = ({ pageProps }) => {
                                         onClick={() => {
                                             onLike();
                                         }}
-                                        className="inline-flex rounded w-[46px] h-[46px] bg-[#E5D8CE] align-middle mr-[12px] text-[#6f96c5] group-hover:text-white  justify-center items-center">
+                                        className="inline-flex rounded w-[46px] h-[46px] bg-[#E5D8CE] align-middle mr-[12px] text-[#720f21] group-hover:text-white  justify-center items-center">
                                         <svg
                                             stroke="currentColor"
                                             fill="currentColor"
@@ -173,10 +186,10 @@ const ArticlePage = ({ pageProps }) => {
                                             <path d="M349.6 64c-36.4 0-70.7 16.7-93.6 43.9C233.1 80.7 198.8 64 162.4 64 97.9 64 48 114.2 48 179.1c0 79.5 70.7 143.3 177.8 241.7L256 448l30.2-27.2C393.3 322.4 464 258.6 464 179.1 464 114.2 414.1 64 349.6 64zm-80.8 329.3l-4.2 3.9-8.6 7.8-8.6-7.8-4.2-3.9c-50.4-46.3-94-86.3-122.7-122-28-34.7-40.4-63.1-40.4-92.2 0-22.9 8.4-43.9 23.7-59.3 15.2-15.4 36-23.8 58.6-23.8 26.1 0 52 12.2 69.1 32.5l24.5 29.1 24.5-29.1c17.1-20.4 43-32.5 69.1-32.5 22.6 0 43.4 8.4 58.7 23.8 15.3 15.4 23.7 36.5 23.7 59.3 0 29-12.5 57.5-40.4 92.2-28.8 35.7-72.3 75.7-122.8 122z" />
                                         </svg>
                                     </button>
-                                    <span className="mr-2 group-hover:text-[#6f96c5]">
+                                    <span className="mr-2 group-hover:text-[#720f21]">
                                         {likesCount}
                                     </span>
-                                    <span className="mr-2 group-hover:text-[#6f96c5]">
+                                    <span className="mr-2 group-hover:text-[#720f21]">
                                         likes
                                     </span>
                                 </div>
@@ -229,7 +242,7 @@ const ArticlePage = ({ pageProps }) => {
                                     </a>
                                     <a
                                         href={`mailto:${EMAIL}?subject=Why%20Your%20Van%20Needs%20a%20Fall%20Cleaning&body=https%3A%2F%2Fmyrecvan.com%2F2021%2F09%2Fwhy-your-van-needs-a-fall-cleaning%2F`}
-                                        className="text-white inline-flex justify-center items-center rounded w-[46px] h-[46px] bg-[#6f96c5] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
+                                        className="text-white inline-flex justify-center items-center rounded w-[46px] h-[46px] bg-[#720f21] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
                                         <svg
                                             stroke="currentColor"
                                             fill="currentColor"
@@ -274,7 +287,7 @@ const ArticlePage = ({ pageProps }) => {
                                                 });
                                             return false;
                                         }}
-                                        className="text-white inline-flex justify-center  group relative items-center rounded w-[46px] h-[46px] bg-[#6f96c5] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
+                                        className="text-white inline-flex justify-center  group relative items-center rounded w-[46px] h-[46px] bg-[#720f21] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
                                         <div
                                             hidden
                                             className="absolute text-black transition-opacity opacity-0 pointer-events-none bottom-full group-hover:opacity-100">
@@ -300,7 +313,7 @@ const ArticlePage = ({ pageProps }) => {
                                     post && (
                                         <Link
                                             href={post.link}
-                                            className="lg:flex col-start-1 col-end-2 lg:space-x-4 hover:text-[#6f96c5]">
+                                            className="lg:flex col-start-1 col-end-2 lg:space-x-4 hover:text-[#720f21]">
                                             <div className="relative lg:max-w-[118px] w-full flex-shrink-0 mb-5">
                                                 <div className="w-full pt-[70%] lg:pt-[100%]" />
                                                 <img
@@ -309,12 +322,12 @@ const ArticlePage = ({ pageProps }) => {
                                                     src={post?.featuredImage?.node?.sourceUrl.replace(
                                                         process.env
                                                             .NEXT_PUBLIC_API_URL +
-                                                        '/wp-content/uploads/',
+                                                            '/wp-content/uploads/',
                                                         'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
                                                     )}></img>
                                             </div>
                                             <div className="flex flex-col space-y-3">
-                                                <div className="flex items-center space-x-1 font-bold text-[#6f96c5]">
+                                                <div className="flex items-center space-x-1 font-bold text-[#720f21]">
                                                     <div className="height-[20px]">
                                                         <svg
                                                             className="transform rotate-180"
@@ -342,22 +355,24 @@ const ArticlePage = ({ pageProps }) => {
                                     post && (
                                         <Link
                                             href={post.link}
-                                            className="lg:flex col-start-2 col-end-3 lg:space-x-4 hover:text-[#6f96c5] flex-row-reverse lg:space-x-reverse">
+                                            className="lg:flex col-start-2 col-end-3 lg:space-x-4 hover:text-[#720f21] flex-row-reverse lg:space-x-reverse">
                                             <div className="relative lg:max-w-[118px] w-full flex-shrink-0 mb-5">
                                                 <div className="w-full pt-[70%] lg:pt-[100%]" />
-                                                {post?.featuredImage?.node?.sourceUrl && <img
-                                                    loading="lazy"
-                                                    className="absolute inset-0 object-cover w-full h-full overflow-hidden rounded"
-                                                    src={post?.featuredImage?.node?.sourceUrl.replace(
-                                                        process.env
-                                                            .NEXT_PUBLIC_API_URL +
-                                                        '/wp-content/uploads/',
-                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
-                                                    )}></img>}
-
+                                                {post?.featuredImage?.node
+                                                    ?.sourceUrl && (
+                                                    <img
+                                                        loading="lazy"
+                                                        className="absolute inset-0 object-cover w-full h-full overflow-hidden rounded"
+                                                        src={post?.featuredImage?.node?.sourceUrl.replace(
+                                                            process.env
+                                                                .NEXT_PUBLIC_API_URL +
+                                                                '/wp-content/uploads/',
+                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                                        )}></img>
+                                                )}
                                             </div>
                                             <div className="flex flex-col items-end space-y-3 text-right">
-                                                <div className="flex items-center space-x-1 space-x-reverse flex-row-reverse font-bold text-[#6f96c5]">
+                                                <div className="flex items-center space-x-1 space-x-reverse flex-row-reverse font-bold text-[#720f21]">
                                                     <div className="height-[20px]">
                                                         <svg
                                                             stroke="currentColor"
@@ -380,8 +395,8 @@ const ArticlePage = ({ pageProps }) => {
                                             </div>
                                         </Link>
                                     ))({
-                                        post: nextPost
-                                    })}
+                                    post: nextPost
+                                })}
                             </div>
                         </div>
                         {/* <Comments post={post} /> */}
@@ -402,12 +417,12 @@ const ArticlePage = ({ pageProps }) => {
                                                         src={post?.featuredImage?.node?.sourceUrl.replace(
                                                             process.env
                                                                 .NEXT_PUBLIC_API_URL +
-                                                            '/wp-content/uploads/',
+                                                                '/wp-content/uploads/',
                                                             'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
                                                         )}></img>
                                                 </div>
                                                 <div className="post_header entry-header">
-                                                    <h6 className="font-bold hover:text-[#6f96c5]">
+                                                    <h6 className="font-bold hover:text-[#720f21]">
                                                         <Link href={post.link}>
                                                             {post.title}
                                                         </Link>

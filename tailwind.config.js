@@ -11,6 +11,8 @@ module.exports = {
         ]
     },
     theme: {
+        columnCount: [1, 2, 3],
+
         extend: {
             fontFamily: {
                 heading: ['Museo', 'sans-serif'],
@@ -24,7 +26,7 @@ module.exports = {
                     css: {
                         a: {
                             fontFamily: 'inherit',
-                            color: '#6f96c5',
+                            color: '#720f21',
                             textDecoration: 'none',
                             fontWeight: 400,
                             '&:hover': {
@@ -44,7 +46,7 @@ module.exports = {
                         a: {
                             color: 'inherit',
                             '&:hover': {
-                                color: 'var(--color-link-hover,#6f96c5)'
+                                color: 'var(--color-link-hover,#720f21)'
                             }
                         }
                     }
@@ -52,5 +54,18 @@ module.exports = {
             }
         }
     },
-    plugins: [require('@tailwindcss/typography')]
+    variants: {
+        columnCount: ['responsive'],
+        columnGap: ['responsive'],
+        columnWidth: ['responsive'],
+        columnRuleColor: ['responsive'],
+        columnRuleWidth: ['responsive'],
+        columnRuleStyle: ['responsive'],
+        columnFill: ['responsive'],
+        columnSpan: ['responsive']
+    },
+    plugins: [
+        require('tailwindcss-multi-column')(),
+        require('@tailwindcss/typography')
+    ]
 };

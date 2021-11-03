@@ -141,7 +141,7 @@ const ArchivePage = ({ pageProps }) => {
                         {hasNextPage && (
                             <div className="flex justify-center">
                                 <button
-                                    className="text-white font-heading bg-[#6f96c5] hover:bg-[#c0b9a8] rounded border border-[color:#6f96c5] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
+                                    className="text-white font-heading bg-[#720f21] hover:bg-[#c0b9a8] rounded border border-[color:#720f21] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
                                     onClick={onLoadMore}>
                                     <span>Load More</span>
                                     <div
