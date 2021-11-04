@@ -191,7 +191,7 @@ export const Header = ({ pageProps }) => {
                                     name="openNav"
                                 />
                                 <div className="block lg:hidden">
-                                    <div className="w-full group">
+                                    <div className="flex items-center w-full group">
                                         <button
                                             onClick={() => {
                                                 setOpenMenu(true);
@@ -370,7 +370,7 @@ export const Header = ({ pageProps }) => {
                             </div>
                         </div>
                     </Container>
-                    <div className="absolute inset-0 z-[-1] border-b border-black bg-white" />
+                    <div className="absolute inset-0 z-[-1] border-b border-[#720f21] bg-white" />
                 </div>
             </header>
             <div
@@ -462,7 +462,6 @@ export const Header = ({ pageProps }) => {
                                 type="text"
                                 className="flex-1 block bg-transparent appearance-none search_field fill_inited focus:outline-none"
                                 placeholder="Search"
-                                autoFocus
                                 name="s"
                             />
                         </form>

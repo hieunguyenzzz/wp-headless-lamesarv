@@ -14,6 +14,9 @@ module.exports = {
         columnCount: [1, 2, 3],
 
         extend: {
+            color: {
+                primary: '#720f21'
+            },
             fontFamily: {
                 heading: ['Museo', 'sans-serif'],
                 body: ['Nunito', 'sans-serif']

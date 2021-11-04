@@ -1,4 +1,6 @@
+import classNames from 'classnames';
 import { Image, Transformation } from 'cloudinary-react';
+import { useState } from 'react';
 import Link from './Link';
 
 export default function ArticleCard({
@@ -11,9 +13,10 @@ export default function ArticleCard({
 }) {
     const href = link || '/';
     const imageUrl = featuredImage?.node?.sourceUrl;
+    const [imageLoaded, setImageLoaded] = useState(false);
     return (
         <article className="rounded shadow">
-            <div className="relative w-full overflow-hidden rounded-t group">
+            <div className="relative w-full overflow-hidden bg-gray-100 rounded-t group">
                 {imageUrl && (
                     <Image
                         width={featuredImage.node.mediaDetails.width}
@@ -28,8 +31,15 @@ export default function ArticleCard({
                             )
                         }
                         secure="true"
+                        onLoad={(props) => {
+                            console.log({ props });
+                            setImageLoaded(true);
+                        }}
                         upload_preset="rec-van-assets"
-                        className="w-full object-contain bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
+                        className={classNames(
+                            'w-full object-contain transform transition-all duration-1000 ease-in-out group-hover:scale-105 z-[-1]',
+                            imageLoaded ? 'opacity-100' : 'opacity-0'
+                        )}
                         alt={featuredImage?.node?.altText}
                         loading="lazy">
                         <Transformation

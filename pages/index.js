@@ -1,3 +1,4 @@
+import AnimateBlock from 'components/AnimateBlock';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import ArticleCard from '../components/ArticleCard';
@@ -10,6 +11,13 @@ import StickyColumn from '../components/StickyColumn';
 import { postsApi } from '../libs/apis';
 import { usePages } from '../libs/hooks/usePages';
 import { getAppProps } from '../libs/utils/pageProps';
+const VisibleAnimationArticleCard = (props) => {
+    return (
+        <AnimateBlock>
+            <ArticleCard {...props} />
+        </AnimateBlock>
+    );
+};
 export default function Home({ pageProps }) {
     const { query } = useRouter();
     const { pages, onLoadMore, isLoading, hasNextPage, isEmpty } = usePages({
@@ -18,13 +26,17 @@ export default function Home({ pageProps }) {
     });
     const pageNodes =
         pages || query.s
-            ? pages?.map((data, i) => {
-                  return data?.nodes?.map((props, i) => {
-                      return <ArticleCard key={i} {...props} />;
-                  });
-              })
+            ? pages
+                  ?.flatMap((data, i) => {
+                      return data?.nodes?.map((props, i) => {
+                          return props;
+                      });
+                  })
+                  .map((props, i) => (
+                      <VisibleAnimationArticleCard key={i} {...props} />
+                  ))
             : pageProps?.recentPosts?.map((props, i) => {
-                  return <ArticleCard key={i} {...props} />;
+                  return <VisibleAnimationArticleCard key={i} {...props} />;
               });
     return (
         <Layout pageProps={pageProps}>

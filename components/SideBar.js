@@ -1,6 +1,5 @@
 import { fixImageUrl } from 'libs/utils/cloudinary';
 import { useRouter } from 'next/router';
-import { HOST_URL } from '../libs/const';
 import { useNewsletter } from '../libs/hooks/useNewsletter';
 import Link from './Link';
 const NewsletterForm = () => {
@@ -27,7 +26,11 @@ const NewsletterForm = () => {
                 nameElement.value = '';
                 return false;
             }}>
-            <div className=" pb-[18px]">Rec Van Newsletter</div>
+            <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
+                Join Our La Mesa RV’s Newsletter – RVs, Recipes, Travel & Tips
+                <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
+                <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
+            </h5>
             <div className="mb-[11px]">
                 <label>
                     Name*
@@ -56,7 +59,7 @@ const NewsletterForm = () => {
             <button
                 type="submit"
                 className="cursor-pointer text-[17px] leading-[22px] pt-[1em] px-[2.65em] pb-[1.08em] font-heading hover:bg-[#c0b9a8] text-white bg-[#720f21] border-[color:#720f21] rounded border hover:border-[color:#c0b9a8] font-bold capitalize flex items-center">
-                Subscribe
+                Stay informed
                 <div
                     className={
                         loading
@@ -105,65 +108,65 @@ function SideBar({ pageProps }) {
                 href="#sidebar_skip_link_anchor">
                 sidebar_skip_link_anchor
             </a>
-            <aside
-                className="p-7 lg:p-[35px] rounded shadow-custom"
-                style={{
-                    backgroundImage: `url('${HOST_URL}/search-bg.png')`,
-                    backgroundPosition: 'center right',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain'
-                }}>
-                <form
-                    role="search"
-                    method="get"
-                    className="flex overflow-hidden bg-white rounded shadow-custom"
-                    action={HOST_URL}
-                    data-inited-keypress={1}>
-                    <label className="flex-1">
-                        <span className="screen-reader-text">Search for:</span>
-                        <input
-                            type="search"
-                            className="px-[24px] py-[16px] leading-[24px] w-full appearance-none focus:outline-none"
-                            placeholder="Search …"
-                            name="s"
-                        />
-                    </label>
-                    <label className="bg-[#720f21] text-white w-[56px] h-[56px] flex items-center justify-center flex-shrink-0 cursor-pointer">
-                        <input
-                            hidden
-                            type="submit"
-                            className="hidden"
-                            defaultValue="Search"
-                        />
-                        <svg
-                            stroke="currentColor"
-                            fill="currentColor"
-                            strokeWidth={0}
-                            viewBox="0 0 512 512"
-                            height="1em"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
-                        </svg>
-                    </label>
-                </form>
+            <aside className="flex-1 p-8 shadow">
+                <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
+                    Locations
+                    <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
+                    <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
+                </h5>
+                <ul className="flex flex-col space-y-3">
+                    <div className="text-[#720f21] space-y-4">
+                        <p>
+                            <a
+                                href="https://www.lamesarv.com/california-motorhome-dealer"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                CALIFORNIA
+                            </a>
+                        </p>
+                        <p>
+                            <a
+                                href="https://www.lamesarv.com/florida-motorhome-dealer"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                FLORIDA
+                            </a>
+                        </p>
+                        <p>
+                            <a
+                                href="https://www.lamesarv.com/arizona-motorhome-dealer"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                ARIZONA
+                            </a>
+                        </p>
+                        <p>
+                            <a
+                                href="https://www.lamesarv.com/new-mexico-motorhome-dealer"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                NEW MEXICO
+                            </a>
+                        </p>
+                    </div>
+                </ul>
             </aside>
             {showAdImage && (
-                <aside>
+                <aside className="">
                     <img
                         className="w-full"
                         src={displayAdImage}
                         alt={displayAdImage}></img>
                 </aside>
             )}
-            <aside className="widget widget_email-subscribers-form">
+            <aside className="p-8 shadow widget widget_email-subscribers-form">
                 <div>
                     <NewsletterForm />
                 </div>
             </aside>
-            <aside className="flex-1">
+            <aside className="flex-1 p-8 shadow">
                 <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
-                    Recent Posts
+                    RV Lifestyle
                     <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
                     <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
                 </h5>
