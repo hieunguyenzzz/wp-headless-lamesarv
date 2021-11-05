@@ -163,9 +163,6 @@ function SideBar({ pageProps }) {
             <AsideCard heading="RV Lifestyle">
                 <ul className="flex flex-col space-y-3">
                     {pageProps.recentPosts?.map(({ title, link }, i) => {
-                        if (i >= 5) {
-                            return null;
-                        }
                         return (
                             <li
                                 key={i}
