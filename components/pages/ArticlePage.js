@@ -145,7 +145,7 @@ const ArticlePage = ({ pageProps }) => {
                         </div>
                     </Container>
                 </div>
-                <Container className="flex mt:2em lg:mt-[3.8em] flex-col lg:flex-row lg:space-x-[30px]  gap-y-16 items-start">
+                <Container className="flex mt-[2em] lg:mt-[3.8em] flex-col lg:flex-row lg:space-x-[30px]  gap-y-16 items-start">
                     <div className="flex-1">
                         <article
                             className="max-w-full prose"
