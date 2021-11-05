@@ -198,7 +198,7 @@ const normalize = (raw) => {
         allPaths.homepage = [...allPaths.homepage, ...paths];
     });
 
-    const recentPosts = posts.slice(0, 5);
+    const recentPosts = posts.slice(0, 10);
     return {
         ...defaultData,
         mainMenu: defaultData.mainMenu,
