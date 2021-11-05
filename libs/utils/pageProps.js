@@ -45,7 +45,16 @@ export const getAppProps = (context, cookedData = data) => {
         copyright: cookedData.app.copyright
     };
 };
-
+export const getHomePageProps = (context, cookedData = data) => {
+    // console.log({ context });
+    const pathDetail =
+        data.allPaths.homepage[Number(context.params?.slug || 1) - 1];
+    return {
+        ...getAppProps(context, cookedData),
+        pathDetail,
+        posts: pathDetail.posts.map((id) => data.postEntities[id])
+    };
+};
 export const getGalleryProps = (context, cookedData = data) => {
     return {
         ...getAppProps(context, cookedData),

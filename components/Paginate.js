@@ -35,10 +35,10 @@ export default function Paginate(props) {
                     </svg>
                 </div>
             }
-            pageLinkClassName="w-[40px] h-[40px] flex justify-center items-center "
+            pageLinkClassName="w-[40px] h-[40px] flex  justify-center items-center "
             activeClassName="!text-white !bg-[#720f21]"
-            pageRangeDisplayed={5}
-            containerClassName="flex items-center flex-wrap space-x-[8px]"
+            pageRangeDisplayed={2}
+            containerClassName="flex items-center justify-between gap-4 flex-wrap "
             pageClassName="text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#720f21] rounded transition-all"
             {...props}
         />

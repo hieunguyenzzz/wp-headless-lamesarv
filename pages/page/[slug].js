@@ -1,13 +1,15 @@
 import AnimateBlock from 'components/AnimateBlock';
 import Paginate from 'components/Paginate';
 import { useRouter } from 'next/dist/client/router';
-import ArticleCard from '../components/ArticleCard';
-import Container from '../components/Container';
-import Layout from '../components/Layout';
-import Masonry from '../components/Masonry';
-import SideBar from '../components/SideBar';
-import StickyColumn from '../components/StickyColumn';
-import { getHomePageProps } from '../libs/utils/pageProps';
+import ArticleCard from '../../components/ArticleCard';
+import Container from '../../components/Container';
+import Layout from '../../components/Layout';
+import Masonry from '../../components/Masonry';
+import SideBar from '../../components/SideBar';
+import StickyColumn from '../../components/StickyColumn';
+import cookedData from '../../data/cookedData.json';
+import { getHomePageProps } from '../../libs/utils/pageProps';
+
 const VisibleAnimationArticleCard = (props) => {
     return (
         <AnimateBlock>
@@ -112,5 +114,15 @@ export default function Home({ pageProps }) {
 export async function getStaticProps(context) {
     return {
         props: getHomePageProps(context)
+    };
+}
+
+export async function getStaticPaths() {
+    const paths = cookedData.allPaths.homepage.map(
+        ({ path }) => `/page${path}`
+    );
+    return {
+        paths,
+        fallback: false
     };
 }

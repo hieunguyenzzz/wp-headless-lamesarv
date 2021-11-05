@@ -1,16 +1,20 @@
 import classNames from 'classnames';
 import { Image, Transformation } from 'cloudinary-react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Avartar from './Avartar';
 import Link from './Link';
-
+import Tag from './Tag';
 export default function ArticleCard({
     featuredImage,
     title,
     categories,
     date,
     link,
-    excerpt
+    excerpt,
+    author
 }) {
+    const { basePath } = useRouter();
     const href = link || '/';
     const imageUrl = featuredImage?.node?.sourceUrl;
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -66,24 +70,19 @@ export default function ArticleCard({
                     </h3>
                 </div>
                 <div className="space-y-4 post_content entry-content">
-                    <div className="space-x-3 space-x-reverse post_meta">
-                        <span />
+                    <div className="flex flex-wrap items-baseline gap-3 post_meta">
                         {categories?.edges?.map(({ node: cate }, i) => (
-                            <span
+                            <Tag
                                 key={i}
-                                className="mt-3 py-1 rounded-lg px-3 inline-block text-sm text-white bg-[#a58858]">
-                                <Link
-                                    href={`/category/${cate.slug}/`}
-                                    rel="category tag">
-                                    {cate.name}
-                                </Link>
-                            </span>
+                                href={`/category/${cate.slug}/`}
+                                label={cate.name}
+                                rel="category tag"></Tag>
                         ))}
-                        <span className="inline-block mt-3 text-sm ">
+                        <span className="inline-block text-sm ">
                             <Link
-                                className="flex items-baseline hover:text-[#720f21]"
+                                className="flex items-baseline hover:text-[#720f21] leading-[15px]"
                                 href={href}>
-                                <span className="self-center inline-block mr-1">
+                                <span className="self-center inline-block mr-1 text-[15px]">
                                     <svg
                                         stroke="currentColor"
                                         fill="none"
@@ -98,7 +97,7 @@ export default function ArticleCard({
                                         <polyline points="12 6 12 12 16 14" />
                                     </svg>
                                 </span>
-                                <span className="leading-none text-[13px] mt-px">
+                                <span className="text-[13px] leading-[15px] font-bold">
                                     {new Date(date).toLocaleDateString(
                                         'en-US',
                                         {
@@ -107,6 +106,18 @@ export default function ArticleCard({
                                             day: 'numeric'
                                         }
                                     )}
+                                </span>
+                            </Link>
+                        </span>
+                        <span className="inline-block text-sm ">
+                            <Link
+                                className="flex items-baseline hover:text-[#720f21] leading-[15px]"
+                                href={`/author/${author.node.slug}/`}>
+                                <div className="h-[13px] w-[28px] inline-flex items-center relative mr-1">
+                                    <Avartar author={author} />
+                                </div>
+                                <span className="text-[13px] font-bold  leading-[15px]">
+                                    {author.node.name}
                                 </span>
                             </Link>
                         </span>

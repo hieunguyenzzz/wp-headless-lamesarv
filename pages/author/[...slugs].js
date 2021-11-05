@@ -1,3 +1,4 @@
+import Avartar from 'components/Avartar';
 import { useRouter } from 'next/dist/client/router';
 import ArticleCard from '../../components/ArticleCard';
 import Container from '../../components/Container';
@@ -9,8 +10,6 @@ import SideBar from '../../components/SideBar';
 import StickyColumn from '../../components/StickyColumn';
 import cookedData from '../../data/cookedData.json';
 import { getAuthorPageProps } from '../../libs/utils/pageProps';
-
-
 
 export default function Category({ pageProps }) {
     const router = useRouter();
@@ -58,7 +57,7 @@ export default function Category({ pageProps }) {
                                                 />
                                             </svg>
                                         </span>
-                                        <span className="breadcrumbs_item current opacity-75">
+                                        <span className="opacity-75 breadcrumbs_item current">
                                             Author page:{author.name}
                                         </span>
                                     </div>
@@ -76,7 +75,7 @@ export default function Category({ pageProps }) {
             )}
             {posts?.length && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
-                    <div className="space-y-8 flex-1">
+                    <div className="flex-1 space-y-8">
                         <div
                             className="!mb-[4.5em] text-center flex flex-col items-center"
                             itemProp="author"
@@ -85,14 +84,9 @@ export default function Category({ pageProps }) {
                             <div
                                 className="w-[120px] h-[120px] rounded-full mb-[1em] relative overflow-hidden"
                                 itemProp="image">
-                                <img
-                                    alt
-                                    src={author.avatar.url}
-                                    className="absolute inset-0 object-cover"
-                                    height={120}
-                                    width={120}
-                                    loading="lazy"
-                                />
+                                <div className="h-[120px] w-[120px] inline-flex items-center relative">
+                                    <Avartar size={120} />
+                                </div>
                             </div>
                             <h4
                                 className="font-heading mb-[1em] text-[25px] font-bold"
@@ -117,7 +111,7 @@ export default function Category({ pageProps }) {
 
                         {pageNodes}
                         {pathDetail.totalPages > 1 && (
-                            <div className="w-full flex justify-center items-center">
+                            <div className="flex items-center justify-center w-full">
                                 <Paginate
                                     initialPage={pathDetail.currentPage - 1}
                                     marginPagesDisplayed={2}
@@ -130,8 +124,9 @@ export default function Category({ pageProps }) {
                                         if (Number(selected) === 0) {
                                             path = `/author/${pathDetail.params.slugs[0]}`;
                                         } else {
-                                            path = `/author/${pathDetail.params.slugs[0]
-                                                }/page/${selected + 1}`;
+                                            path = `/author/${
+                                                pathDetail.params.slugs[0]
+                                            }/page/${selected + 1}`;
                                         }
                                         router.push(path);
                                     }}

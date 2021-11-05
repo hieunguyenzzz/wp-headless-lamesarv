@@ -11,11 +11,12 @@ module.exports = {
         ]
     },
     theme: {
+        namedGroups: ['one', 'two'],
         columnCount: [1, 2, 3],
-
         extend: {
-            color: {
-                primary: '#720f21'
+            colors: {
+                primary: '#720f21',
+                base: '#40526a'
             },
             fontFamily: {
                 heading: ['Museo', 'sans-serif'],
@@ -41,6 +42,15 @@ module.exports = {
                             '&:hover': {
                                 color: 'currentColor'
                             }
+                        },
+                        img: {
+                            width: '100%'
+                        },
+                        figure: {
+                            width: '100%!important'
+                        },
+                        iframe: {
+                            maxWidth: '100%!important'
                         }
                     }
                 },

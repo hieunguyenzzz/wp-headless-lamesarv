@@ -1,6 +1,5 @@
 import htmlParser from 'html-react-parser';
 import { GTM_ID, pageview } from 'libs/gtm';
-import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -12,6 +11,9 @@ function MyApp({ Component, pageProps }) {
     const yoastHead = htmlParser(pageProps.seo || defaultSeo);
     const router = useRouter();
     useEffect(() => {
+        if (process.env.NODE_ENV !== 'production') {
+            return;
+        }
         router.events.on('routeChangeComplete', pageview);
         return () => {
             router.events.off('routeChangeComplete', pageview);
@@ -35,12 +37,6 @@ function MyApp({ Component, pageProps }) {
                     }}
                 />
             )}
-            <DefaultSeo
-                {...{
-                    defaultTitle: 'My Rec Van',
-                    description: 'My Rec Van - Blog'
-                }}
-            />
             <Head>{yoastHead}</Head>
             <Component pageProps={pageProps} />
         </>

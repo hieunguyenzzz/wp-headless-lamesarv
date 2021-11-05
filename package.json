@@ -3,12 +3,11 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "NODE_OPTIONS=--max_old_space_size=8192 next dev ",
         "getWordpress": "node scripts/wordpress",
         "getSitemap": "node scripts/sitemap",
-        "getInstagram": "node scripts/instagram",
         "getData": "next dev",
-        "prebuild": "npm run getInstagram && npm run getSitemap &&  npm run getWordpress ",
+        "prebuild": "npm run getSitemap &&  npm run getWordpress ",
         "build": "next build && next export",
         "start": "next start",
         "lint": "next lint"

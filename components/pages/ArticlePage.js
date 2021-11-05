@@ -1,3 +1,4 @@
+import Avartar from 'components/Avartar';
 import { EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
 import Container from '../Container';
@@ -54,15 +55,9 @@ const ArticlePage = ({ pageProps }) => {
                                 rel="author"
                                 href={`/author/${post.author.node.slug}`}>
                                 <span className="mr-[11px] align-middle inline-block ">
-                                    <img
-                                        alt
-                                        src="https://secure.gravatar.com/avatar/0b9956a2b16aab3a656b4166a2bc65a8?s=56&d=mm&r=g"
-                                        srcSet="https://secure.gravatar.com/avatar/0b9956a2b16aab3a656b4166a2bc65a8?s=112&d=mm&r=g 2x"
-                                        className="w-[28px] h-[28px] rounded-full overflow-hidden inline"
-                                        height={56}
-                                        width={56}
-                                        loading="lazy"
-                                    />
+                                    <div className="h-[13px] w-[28px] inline-flex items-center relative">
+                                        <Avartar author={post?.author?.node} />
+                                    </div>
                                 </span>
                                 <span className="truncate post_author_name">
                                     {post.author.node.name}

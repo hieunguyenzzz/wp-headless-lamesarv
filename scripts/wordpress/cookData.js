@@ -26,6 +26,7 @@ const normalize = (raw) => {
         ...rest
     } = raw;
     const allPaths = {
+        homepage: [],
         category: [],
         author: [],
         ['[...pages]']: []
@@ -177,10 +178,30 @@ const normalize = (raw) => {
         });
         allPaths.author = [...allPaths.author, ...paths];
     });
+
+    posts.forEach((post, i, arr) => {
+        const totalPages = Math.ceil(arr.length / 10);
+        const paths = new Array(totalPages).fill(true).map((_, i) => {
+            const page = i + 1;
+            return {
+                currentPage: page,
+                path: `/${page}`,
+                params: { page },
+                posts: posts
+                    .filter((key, index) => {
+                        return Math.ceil(index / 10) === page;
+                    })
+                    .map(({ id }) => id),
+                totalPages
+            };
+        });
+        allPaths.homepage = [...allPaths.homepage, ...paths];
+    });
+
     const recentPosts = posts.slice(0, 5);
     return {
         ...defaultData,
-        mainMenu: rest.menus.nodes[0].menuItems.edges,
+        mainMenu: defaultData.mainMenu,
         allPaths,
         recentPosts,
         recentComments: comments.nodes,
@@ -194,7 +215,8 @@ const normalize = (raw) => {
         archives,
         postsByCategory,
         app: {
-            mainMenu: rest.menus.nodes[0].menuItems.edges,
+            // mainMenu: rest.menus.nodes[0].menuItems.edges,
+            mainMenu: defaultData.mainMenu,
             generalSettings: rest.generalSettings,
             copyright: defaultData.copyright
         }

@@ -202,6 +202,22 @@ function SideBar({ pageProps }) {
                     })}
                 </ul>
             </aside>
+            <aside className="flex-1 p-8 shadow">
+                <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
+                    RV Lifestyle
+                    <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
+                    <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
+                </h5>
+                <div>
+                    <a
+                        target="_blank"
+                        className="text-primary hover:text-opacity-50"
+                        href="https://www.lamesarv.com/search/advancedsearch?utm_source=Blog&amp;utm_medium=sidelink"
+                        rel="noreferrer">
+                        View Our Inventory
+                    </a>
+                </div>
+            </aside>
         </div>
     );
 }

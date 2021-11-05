@@ -93,13 +93,14 @@ export const Header = ({ pageProps }) => {
                         }
 
                         return headerClass;
-                    })()}>
-                    {status !== 'reset' && (
-                        <style
-                            dangerouslySetInnerHTML={{
-                                __html: `:root{--header-height:74px}`
-                            }}></style>
-                    )}
+                    })()}
+                    style={
+                        status !== 'reset'
+                            ? {
+                                  '--header-height': '74px'
+                              }
+                            : null
+                    }>
                     <Container>
                         <div className="w-full h-full pointer-events-auto">
                             <div className="flex items-center justify-between w-full space-x-6 transition-all h-header">
@@ -118,7 +119,7 @@ export const Header = ({ pageProps }) => {
                                 </div>
                                 <div className="flex-1" />
                                 <div className="hidden lg:block">
-                                    <div className="group">
+                                    <div>
                                         <nav
                                             itemScope="itemscope"
                                             itemType="https://schema.org/SiteNavigationElement">
@@ -132,23 +133,79 @@ export const Header = ({ pageProps }) => {
                                                         {
                                                             node: {
                                                                 path,
-                                                                label
+                                                                label,
+                                                                children
                                                             }
                                                         },
                                                         i
-                                                    ) => (
-                                                        <li
-                                                            key={i}
-                                                            className="py-2">
-                                                            <Link
-                                                                className="hover:text-[#a58858]"
-                                                                href={path}>
-                                                                <span>
-                                                                    {label}
-                                                                </span>
-                                                            </Link>
-                                                        </li>
-                                                    )
+                                                    ) => {
+                                                        if (children) {
+                                                            return (
+                                                                <li
+                                                                    key={i}
+                                                                    className="relative flex items-center py-2 h-header group">
+                                                                    <Link
+                                                                        className="hover:text-[#a58858]"
+                                                                        href={
+                                                                            path
+                                                                        }>
+                                                                        <span>
+                                                                            {
+                                                                                label
+                                                                            }
+                                                                        </span>
+                                                                    </Link>
+                                                                    <div className="absolute right-0 hidden gap-4 shadow top-header group-hover:block">
+                                                                        <div className="flex flex-col gap-1 py-3 bg-white animated fadeIn">
+                                                                            {children.map(
+                                                                                (
+                                                                                    {
+                                                                                        node: {
+                                                                                            path,
+                                                                                            label
+                                                                                        }
+                                                                                    },
+                                                                                    i
+                                                                                ) => {
+                                                                                    return (
+                                                                                        <div
+                                                                                            key={
+                                                                                                i
+                                                                                            }
+                                                                                            className="inline-block px-10 font-bold hover:text-[#a58858] truncate">
+                                                                                            <Link
+                                                                                                href={
+                                                                                                    path
+                                                                                                }>
+                                                                                                <span>
+                                                                                                    {
+                                                                                                        label
+                                                                                                    }
+                                                                                                </span>
+                                                                                            </Link>
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            );
+                                                        }
+                                                        return (
+                                                            <li
+                                                                key={i}
+                                                                className="flex items-center py-2 h-header">
+                                                                <Link
+                                                                    className="hover:text-[#a58858]"
+                                                                    href={path}>
+                                                                    <span>
+                                                                        {label}
+                                                                    </span>
+                                                                </Link>
+                                                            </li>
+                                                        );
+                                                    }
                                                 )}
                                             </ul>
                                         </nav>
@@ -271,55 +328,158 @@ export const Header = ({ pageProps }) => {
                                                 className="mt-12"
                                                 itemScope="itemscope"
                                                 itemType="https://schema.org/SiteNavigationElement">
-                                                <ul
+                                                <div
                                                     className="lg:flex flex-col flex-wrap space-y-6 font-bold text-lg lg:text-[17px]"
                                                     style={{
                                                         touchAction: 'pan-x'
                                                     }}>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="/category/news-and-reviews/">
-                                                            <span>
-                                                                News and Reviews
-                                                            </span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="/category/lifestyle/">
-                                                            <span>
-                                                                Lifestyle
-                                                            </span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="/category/tips/">
-                                                            <span>Tips</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="/category/travel/">
-                                                            <span>Travel</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="/gallery/">
-                                                            <span>Gallery</span>
-                                                        </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
+                                                    {pageProps.app.mainMenu.map(
+                                                        (
+                                                            {
+                                                                node: {
+                                                                    path,
+                                                                    label,
+                                                                    children
+                                                                }
+                                                            },
+                                                            i
+                                                        ) => {
+                                                            if (children) {
+                                                                return (
+                                                                    <div
+                                                                        className="inline-block w-full px-10 pointer-events-auto focus:pointer-events-none group"
+                                                                        tabIndex={
+                                                                            0
+                                                                        }>
+                                                                        <div className="w-full flex items-center font-bold text-2xl hover:text-[#a58858]">
+                                                                            <div className="flex-1 py-1 text-left">
+                                                                                <span className="font-bold capitalize ">
+                                                                                    Details
+                                                                                </span>
+                                                                            </div>
+                                                                            <div className="transform transition-transform rotate-90 text-white group-focus:-rotate-90 duration-300 ease-in-out text-[24px]">
+                                                                                <svg
+                                                                                    stroke="currentColor"
+                                                                                    fill="none"
+                                                                                    strokeWidth={
+                                                                                        0
+                                                                                    }
+                                                                                    viewBox="0 0 24 24"
+                                                                                    height="1em"
+                                                                                    width="1em"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <polyline
+                                                                                        strokeWidth={
+                                                                                            2
+                                                                                        }
+                                                                                        points="9 6 15 12 9 18"
+                                                                                    />
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="h-0 -mt-4 overflow-hidden whitespace-pre-line transition-all pointer-events-auto group-focus:h-auto group-focus:block group-focus:mt-0">
+                                                                            {children.map(
+                                                                                (
+                                                                                    {
+                                                                                        node: {
+                                                                                            path,
+                                                                                            label
+                                                                                        }
+                                                                                    },
+                                                                                    i
+                                                                                ) => {
+                                                                                    return (
+                                                                                        <div
+                                                                                            key={
+                                                                                                i
+                                                                                            }
+                                                                                            className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#a58858]">
+                                                                                            <Link
+                                                                                                href={
+                                                                                                    path
+                                                                                                }>
+                                                                                                <span>
+                                                                                                    {
+                                                                                                        label
+                                                                                                    }
+                                                                                                </span>
+                                                                                            </Link>
+                                                                                        </div>
+                                                                                    );
+                                                                                }
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
+                                                                    <Link
+                                                                        href={
+                                                                            path
+                                                                        }>
+                                                                        <span>
+                                                                            {
+                                                                                label
+                                                                            }
+                                                                        </span>
+                                                                    </Link>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    )}
+                                                    <div className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
                                                         <Link href="https://www.recvan.com/?utm_source=Blog&utm_medium=Nav%20Link&utm_campaign=blogtraffic">
                                                             <span>
                                                                 Shop Now
                                                             </span>
                                                         </Link>
-                                                    </li>
-                                                    <li className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="https://www.recvan.com/?utm_source=Blog&utm_medium=Nav%20Link&utm_campaign=blogtraffic">
-                                                            <span>
-                                                                Shop Now
-                                                            </span>
-                                                        </Link>
-                                                    </li>
-                                                </ul>
+                                                    </div>
+                                                    <div className="px-10">
+                                                        <form
+                                                            role="search"
+                                                            method="get"
+                                                            className="flex overflow-hidden bg-white rounded shadow-custom"
+                                                            action={basePath}
+                                                            data-inited-keypress={
+                                                                1
+                                                            }>
+                                                            <label className="flex-1">
+                                                                <span className="screen-reader-text">
+                                                                    Search for:
+                                                                </span>
+                                                                <input
+                                                                    type="search"
+                                                                    className="px-[24px] text-black  py-[16px] leading-[24px] w-full appearance-none focus:outline-none"
+                                                                    placeholder="Search …"
+                                                                    name="s"
+                                                                />
+                                                            </label>
+                                                            <label className="bg-[#d85726]  text-white w-[56px] h-[56px] flex items-center justify-center flex-shrink-0 cursor-pointer">
+                                                                <input
+                                                                    hidden
+                                                                    type="submit"
+                                                                    className="hidden"
+                                                                    defaultValue="Search"
+                                                                />
+                                                                <svg
+                                                                    stroke="currentColor"
+                                                                    fill="currentColor"
+                                                                    strokeWidth={
+                                                                        0
+                                                                    }
+                                                                    viewBox="0 0 512 512"
+                                                                    height="1em"
+                                                                    width="1em"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
+                                                                </svg>
+                                                            </label>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </nav>
                                         </div>
                                     </div>

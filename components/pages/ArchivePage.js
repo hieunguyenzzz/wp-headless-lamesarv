@@ -136,7 +136,7 @@ const ArchivePage = ({ pageProps }) => {
             )}
             {!isEmpty && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
-                    <div className="space-y-8 flex-1">
+                    <div className="flex-1 space-y-8">
                         {pageNodes}
                         {hasNextPage && (
                             <div className="flex justify-center">
@@ -151,7 +151,7 @@ const ArchivePage = ({ pageProps }) => {
                                                 : 'transition-all opacity-0 ml-[-44px] pl-3'
                                         }>
                                         <svg
-                                            className="animate-spin h-5 w-5 mr-3"
+                                            className="w-5 h-5 mr-3 animate-spin"
                                             stroke="currentColor"
                                             fill="currentColor"
                                             strokeWidth={0}
