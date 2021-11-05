@@ -29,7 +29,7 @@ export default function Category({ pageProps }) {
                                     <h1
                                         itemProp="headline"
                                         className="text-[27px] lg:text-[52px] xl:leading-[67px] font-bold leading-normal">
-                                        Author page:{author.name}
+                                        Author page : {author.name}
                                     </h1>
                                 </div>
                                 <div className="lg:text-[18px] lg:leading-[22px]  ">
@@ -58,7 +58,7 @@ export default function Category({ pageProps }) {
                                             </svg>
                                         </span>
                                         <span className="opacity-75 breadcrumbs_item current">
-                                            Author page:{author.name}
+                                            Author page : {author.name}
                                         </span>
                                     </div>
                                 </div>{' '}

@@ -1,4 +1,5 @@
 import Avartar from 'components/Avartar';
+import Tag from 'components/Tag';
 import { EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
 import Container from '../Container';
@@ -26,76 +27,10 @@ const ArticlePage = ({ pageProps }) => {
     const { likesCount, onLike } = useLike(post);
     return (
         <Layout pageProps={pageProps}>
-            <div className="py-10 lg:py-[3.8em] text-[18px]">
-                <Container className="lg:mb-[4em]">
-                    <div className="mb-[3.8em] text-center flex flex-col items-center">
-                        <div className="mb-[1em] space-x-3 xl:space-x-[19px] ]">
-                            {post.categories?.edges?.map(
-                                ({ node: cate }, i) => (
-                                    <span
-                                        key={i}
-                                        className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#a58858] text-[13px]">
-                                        <Link
-                                            href={`/category/${cate.slug}/`}
-                                            rel="category tag">
-                                            {cate.name}
-                                        </Link>
-                                    </span>
-                                )
-                            )}
-                        </div>
-                        <h1
-                            className="text-3xl lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%]"
-                            itemProp="headline">
-                            {post.title}
-                        </h1>
-                        <div className="mt-[2.65em] space-x-3 xl:space-x-[19px] text-[13px] flex flex-wrap items-baseline">
-                            <Link
-                                className="flex items-center hover:text-[#720f21]"
-                                rel="author"
-                                href={`/author/${post.author.node.slug}`}>
-                                <span className="mr-[11px] align-middle inline-block ">
-                                    <div className="h-[13px] w-[28px] inline-flex items-center relative">
-                                        <Avartar author={post?.author?.node} />
-                                    </div>
-                                </span>
-                                <span className="truncate post_author_name">
-                                    {post.author.node.name}
-                                </span>
-                            </Link>{' '}
-                            <span className="inline-block mt-3 text-sm ">
-                                <span className="flex items-baseline ">
-                                    <span className="self-center inline-block mr-1">
-                                        <svg
-                                            stroke="currentColor"
-                                            fill="none"
-                                            strokeWidth={2}
-                                            viewBox="0 0 24 24"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            height="1em"
-                                            width="1em"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx={12} cy={12} r={10} />
-                                            <polyline points="12 6 12 12 16 14" />
-                                        </svg>
-                                    </span>
-                                    <span className="leading-none text-[13px] mt-px">
-                                        {new Date(post.date).toLocaleDateString(
-                                            'en-US',
-                                            {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric'
-                                            }
-                                        )}
-                                    </span>
-                                </span>
-                            </span>
-                        </div>{' '}
-                    </div>
+            <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
+                <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-screen py-5 lg:py-12 flex items-end">
                     <div
-                        className="mx-auto "
+                        className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
                         itemScope="itemscope"
                         itemProp="image"
                         itemType="https://schema.org/ImageObject">
@@ -109,7 +44,7 @@ const ArticlePage = ({ pageProps }) => {
                                     '/wp-content/uploads/',
                                 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/rec-van-assets/'
                             )}
-                            className="w-full object-contain bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
+                            className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
                             alt={featuredImage?.node?.altText}
                             loading="lazy"
                             srcSet={`${imageUrl.replace(
@@ -135,9 +70,82 @@ const ArticlePage = ({ pageProps }) => {
                             sizes="(max-width: 770px) 100vw, 770px"
                         />
                     </div>
-                </Container>
-
-                <Container className="flex flex-col lg:flex-row lg:space-x-[30px]  gap-y-16 items-start">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000a8] to-transparent"></div>
+                    <Container className="relative">
+                        <div className="flex flex-col items-start text-left text-white ">
+                            <div className="mb-[0.5em] flex flex-wrap gap-3 xl:gap-[19px] ]">
+                                {post.categories?.edges?.map(
+                                    ({ node: cate }, i) => (
+                                        <Tag
+                                            key={i}
+                                            href={`/category/${cate.slug}/`}
+                                            label={cate.name}
+                                            className="inline-block px-3 py-1 text-sm text-white bg-opacity-100 rounded bg-primary hover:bg-secondary"
+                                        />
+                                    )
+                                )}
+                            </div>
+                            <h1
+                                style={{
+                                    textShadow: '2px 1px black'
+                                }}
+                                className="text-2xl md:text-3xl  lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
+                                itemProp="headline">
+                                {post.title}
+                            </h1>
+                            <div className="mt-[1.65em] gap-6 lg:gap-6 text-[13px] flex flex-wrap items-baseline">
+                                <Link
+                                    className="flex items-center font-bold text-white hover:text-opacity-70"
+                                    rel="author"
+                                    href={`/author/${post.author.node.slug}`}>
+                                    <span className="inline-block mr-1 align-middle ">
+                                        <div className="h-[13px] w-[28px] inline-flex items-center relative">
+                                            <Avartar
+                                                author={post?.author?.node}
+                                            />
+                                        </div>
+                                    </span>
+                                    <span className="truncate post_author_name">
+                                        {post.author.node.name}
+                                    </span>
+                                </Link>{' '}
+                                <span className="inline-block text-sm ">
+                                    <span className="flex items-baseline leading-[15px]">
+                                        <span className="self-center inline-block mr-1 text-[15px]">
+                                            <svg
+                                                stroke="currentColor"
+                                                fill="none"
+                                                strokeWidth={2}
+                                                viewBox="0 0 24 24"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                height="1em"
+                                                width="1em"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle
+                                                    cx={12}
+                                                    cy={12}
+                                                    r={10}
+                                                />
+                                                <polyline points="12 6 12 12 16 14" />
+                                            </svg>
+                                        </span>
+                                        <span className="leading-[15px] font-bold">
+                                            {new Date(
+                                                post.date
+                                            ).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>{' '}
+                        </div>
+                    </Container>
+                </div>
+                <Container className="flex mt:2em lg:mt-[3.8em] flex-col lg:flex-row lg:space-x-[30px]  gap-y-16 items-start">
                     <div className="flex-1">
                         <article
                             className="max-w-full prose"
@@ -430,7 +438,7 @@ const ArticlePage = ({ pageProps }) => {
                                                             ) => (
                                                                 <span
                                                                     key={i}
-                                                                    className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#a58858] text-[13px]">
+                                                                    className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#720f21] text-[13px]">
                                                                     <Link
                                                                         href={`/category/${cate.slug}/`}
                                                                         rel="category tag">

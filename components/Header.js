@@ -5,7 +5,7 @@ import Container from './Container';
 import Link from './Link';
 export const Header = ({ pageProps }) => {
     const headerRef = useRef();
-    const { basePath } = useRouter();
+    const { basePath = '/' } = useRouter();
     const [showUp, setShowUp] = useState();
     const [openMenu, setOpenMenu] = useState();
     const [status, setStatus] = useState('reset');
@@ -217,7 +217,7 @@ export const Header = ({ pageProps }) => {
                                                     role="search"
                                                     method="get"
                                                     className="search_form"
-                                                    action={basePath}
+                                                    action={'/' + basePath}
                                                     data-inited-keypress={1}>
                                                     <input
                                                         type="hidden"
@@ -351,7 +351,7 @@ export const Header = ({ pageProps }) => {
                                                                         tabIndex={
                                                                             0
                                                                         }>
-                                                                        <div className="w-full flex items-center font-bold text-2xl hover:text-[#a58858]">
+                                                                        <div className="w-full flex items-center font-bold text-2xl hover:text-[#d85726]">
                                                                             <div className="flex-1 py-1 text-left">
                                                                                 <span className="font-bold capitalize ">
                                                                                     Details
@@ -393,7 +393,7 @@ export const Header = ({ pageProps }) => {
                                                                                             key={
                                                                                                 i
                                                                                             }
-                                                                                            className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#a58858]">
+                                                                                            className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#d85726]">
                                                                                             <Link
                                                                                                 href={
                                                                                                     path
@@ -415,7 +415,7 @@ export const Header = ({ pageProps }) => {
                                                             return (
                                                                 <div
                                                                     key={i}
-                                                                    className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
+                                                                    className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#d85726]">
                                                                     <Link
                                                                         href={
                                                                             path
@@ -442,7 +442,9 @@ export const Header = ({ pageProps }) => {
                                                             role="search"
                                                             method="get"
                                                             className="flex overflow-hidden bg-white rounded shadow-custom"
-                                                            action={basePath}
+                                                            action={
+                                                                '/' + basePath
+                                                            }
                                                             data-inited-keypress={
                                                                 1
                                                             }>
@@ -490,7 +492,7 @@ export const Header = ({ pageProps }) => {
                                                     role="search"
                                                     method="get"
                                                     className="search_form"
-                                                    action={basePath}
+                                                    action={'/' + basePath}
                                                     data-inited-keypress={1}>
                                                     <input
                                                         type="hidden"
@@ -603,7 +605,7 @@ export const Header = ({ pageProps }) => {
                             role="search"
                             method="get"
                             className="relative flex items-center w-full max-w-2xl py-3 mx-auto space-x-3 text-2xl border-b-2 border-black"
-                            action={basePath}
+                            action={'/' + basePath}
                             data-inited-keypress={1}>
                             <input type="hidden" name="post_types" hidden />
                             <div>

@@ -1,6 +1,7 @@
 import { fixImageUrl } from 'libs/utils/cloudinary';
 import { useRouter } from 'next/router';
 import { useNewsletter } from '../libs/hooks/useNewsletter';
+import AsideCard from './AsideCard';
 import Link from './Link';
 const NewsletterForm = () => {
     const { loading, onSubmit, success } = useNewsletter();
@@ -26,7 +27,7 @@ const NewsletterForm = () => {
                 nameElement.value = '';
                 return false;
             }}>
-            <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
+            <h5 className="font-bold text-xl hover:text-[#720f21] pb-[18px] mb-[18px] relative">
                 Join Our La Mesa RV’s Newsletter – RVs, Recipes, Travel & Tips
                 <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
                 <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
@@ -108,12 +109,7 @@ function SideBar({ pageProps }) {
                 href="#sidebar_skip_link_anchor">
                 sidebar_skip_link_anchor
             </a>
-            <aside className="flex-1 p-8 shadow">
-                <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
-                    Locations
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
-                </h5>
+            <AsideCard heading="Locations">
                 <ul className="flex flex-col space-y-3">
                     <div className="text-[#720f21] space-y-4">
                         <p>
@@ -150,7 +146,7 @@ function SideBar({ pageProps }) {
                         </p>
                     </div>
                 </ul>
-            </aside>
+            </AsideCard>
             {showAdImage && (
                 <aside className="">
                     <img
@@ -164,12 +160,7 @@ function SideBar({ pageProps }) {
                     <NewsletterForm />
                 </div>
             </aside>
-            <aside className="flex-1 p-8 shadow">
-                <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
-                    RV Lifestyle
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
-                </h5>
+            <AsideCard heading="RV Lifestyle">
                 <ul className="flex flex-col space-y-3">
                     {pageProps.recentPosts?.map(({ title, link }, i) => {
                         if (i >= 5) {
@@ -201,23 +192,16 @@ function SideBar({ pageProps }) {
                         );
                     })}
                 </ul>
-            </aside>
-            <aside className="flex-1 p-8 shadow">
-                <h5 className="font-bold text-xl hover:text-[#a58858] pb-[18px] mb-[18px] relative">
-                    RV Lifestyle
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-[14px] w-[11px] h-[5px] rounded"></span>
-                    <span className="bg-[#E5D8CE] absolute bottom-0 left-0 w-[11px] h-[5px] rounded"></span>
-                </h5>
-                <div>
-                    <a
-                        target="_blank"
-                        className="text-primary hover:text-opacity-50"
-                        href="https://www.lamesarv.com/search/advancedsearch?utm_source=Blog&amp;utm_medium=sidelink"
-                        rel="noreferrer">
-                        View Our Inventory
-                    </a>
-                </div>
-            </aside>
+            </AsideCard>
+            <AsideCard heading="Shop At La Mesa RV">
+                <a
+                    target="_blank"
+                    className="text-primary hover:text-opacity-50"
+                    href="https://www.lamesarv.com/search/advancedsearch?utm_source=Blog&amp;utm_medium=sidelink"
+                    rel="noreferrer">
+                    View Our Inventory
+                </a>
+            </AsideCard>
         </div>
     );
 }
