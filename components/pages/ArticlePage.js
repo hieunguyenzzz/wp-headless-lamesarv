@@ -93,7 +93,7 @@ const ArticlePage = ({ pageProps }) => {
                                 itemProp="headline">
                                 {post.title}
                             </h1>
-                            <div className="mt-[1.65em] gap-6 lg:gap-6 text-[13px] flex flex-wrap items-baseline">
+                            <div className="mt-[1.65em] gap-6 lg:gap-6 text-sm flex flex-wrap items-baseline">
                                 <Link
                                     className="flex items-center font-bold text-white hover:text-opacity-70"
                                     rel="author"

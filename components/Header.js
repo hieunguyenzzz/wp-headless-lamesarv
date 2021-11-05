@@ -65,7 +65,7 @@ export const Header = ({ pageProps }) => {
         createObserver(headerElement);
         return () => {};
     }, []);
-
+    const searchPath = basePath + '/';
     return (
         <>
             <header className="sticky top-0 z-10 pointer-events-none h-header">
@@ -217,7 +217,7 @@ export const Header = ({ pageProps }) => {
                                                     role="search"
                                                     method="get"
                                                     className="search_form"
-                                                    action={'/' + basePath}
+                                                    action={searchPath}
                                                     data-inited-keypress={1}>
                                                     <input
                                                         type="hidden"
@@ -442,9 +442,7 @@ export const Header = ({ pageProps }) => {
                                                             role="search"
                                                             method="get"
                                                             className="flex overflow-hidden bg-white rounded shadow-custom"
-                                                            action={
-                                                                '/' + basePath
-                                                            }
+                                                            action={searchPath}
                                                             data-inited-keypress={
                                                                 1
                                                             }>
@@ -492,7 +490,7 @@ export const Header = ({ pageProps }) => {
                                                     role="search"
                                                     method="get"
                                                     className="search_form"
-                                                    action={'/' + basePath}
+                                                    action={searchPath}
                                                     data-inited-keypress={1}>
                                                     <input
                                                         type="hidden"
@@ -605,7 +603,7 @@ export const Header = ({ pageProps }) => {
                             role="search"
                             method="get"
                             className="relative flex items-center w-full max-w-2xl py-3 mx-auto space-x-3 text-2xl border-b-2 border-black"
-                            action={'/' + basePath}
+                            action={searchPath}
                             data-inited-keypress={1}>
                             <input type="hidden" name="post_types" hidden />
                             <div>
