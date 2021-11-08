@@ -1,6 +1,7 @@
 require('dotenv').config();
 // var raw = require('./raw.json');
 var defaultData = require('./app.json');
+var numeral = require('numeral');
 // console.log({ raw });
 const normalizeDate = (dateString) => {
     const date = new Date(dateString);
@@ -40,12 +41,15 @@ const normalize = (raw) => {
     const postsByAuthor = {};
     const posts = postsRaw.edges.map(({ node }) => {
         const objectDate = normalizeDate(node.date);
+        const { likesCount = 0, viewsCount = 0 } = node;
         const post = {
             ...node,
             id: node.databaseId,
             archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
             link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
-            objectDate
+            objectDate,
+            likesCountString: numeral(likesCount).format('0 a').trim(),
+            viewsCountString: numeral(viewsCount).format('0 a').trim()
         };
         return post;
     });
