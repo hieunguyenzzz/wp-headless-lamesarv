@@ -3,7 +3,8 @@ module.exports =
         ? {
               reactStrictMode: true,
               trailingSlash: true,
-              basePath: '/blog'
+              basePath: '/blog',
+              distDir: '/blog'
           }
         : {
               reactStrictMode: true,
