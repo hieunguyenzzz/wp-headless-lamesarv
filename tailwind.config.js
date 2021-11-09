@@ -17,7 +17,8 @@ module.exports = {
             colors: {
                 primary: '#720f21',
                 secondary: '#00255a',
-                base: '#40526a'
+                base: '#40526a',
+                heading: '#122947'
             },
             fontFamily: {
                 heading: ['Museo', 'sans-serif'],

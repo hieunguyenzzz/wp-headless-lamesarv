@@ -30,12 +30,21 @@ body {
     position: relative;
     min-height: 100%;
     margin: 0;
-    color: #40526a;
+    @apply text-base;
 }
 
 a {
     transition-property: background-color, color;
     @apply duration-100 ease-in-out;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+    @apply text-heading;
 }
 :root {
     --header-height: 126px;

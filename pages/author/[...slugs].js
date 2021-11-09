@@ -1,4 +1,5 @@
 import Avartar from 'components/Avartar';
+import { Banner } from 'components/Banner';
 import { useRouter } from 'next/dist/client/router';
 import ArticleCard from '../../components/ArticleCard';
 import Container from '../../components/Container';
@@ -20,53 +21,39 @@ export default function Category({ pageProps }) {
     });
     return (
         <Layout pageProps={pageProps}>
-            <div className="py-9 bg-[#272726] text-white">
-                <div className="content_wrap">
-                    <div className="sc_layouts_column sc_layouts_column_align_center">
-                        <Container>
-                            <div className="flex flex-col items-center justify-center text-center mx-[12px] my-[9px]">
-                                <div className="sc_layouts_title_title">
-                                    <h1
-                                        itemProp="headline"
-                                        className="text-[27px] lg:text-[52px] xl:leading-[67px] font-bold leading-normal">
-                                        Author page : {author.name}
-                                    </h1>
-                                </div>
-                                <div className="lg:text-[18px] lg:leading-[22px]  ">
-                                    <div className="font-bold">
-                                        <Link
-                                            className="text-[#888583]"
-                                            href="/">
-                                            Home
-                                        </Link>
-                                        <span className="mx-[0.3em] opacity-75 text-2xl">
-                                            <svg
-                                                className="inline-block"
-                                                stroke="currentColor"
-                                                fill="none"
-                                                strokeWidth={0}
-                                                viewBox="0 0 24 24"
-                                                height="1em"
-                                                width="1em"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    clipRule="evenodd"
-                                                    d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
-                                                    fill="currentColor"
-                                                />
-                                            </svg>
-                                        </span>
-                                        <span className="opacity-75 breadcrumbs_item current">
-                                            Author page : {author.name}
-                                        </span>
-                                    </div>
-                                </div>{' '}
-                            </div>
-                        </Container>
+            <Banner
+                heading={`Author page : ${author.name}`}
+                subHeading={
+                    <div className="font-bold">
+                        <Link
+                            className="text-opacity-50 hover:text-opacity-100"
+                            href="/">
+                            Home
+                        </Link>
+                        <span className="mx-[0.3em] opacity-75 text-2xl">
+                            <svg
+                                className="inline-block"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeWidth={0}
+                                viewBox="0 0 24 24"
+                                height="1em"
+                                width="1em"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </span>
+                        <span className="opacity-75 breadcrumbs_item current">
+                            Author page : {author.name}
+                        </span>
                     </div>
-                </div>
-            </div>
+                }
+            />
 
             {!posts?.length && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-8 py-16 lg:py-[110px] gap-y-16 items-start">

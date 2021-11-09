@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Image, Transformation } from 'cloudinary-react';
+import { CLOUDINARY_UPLOAD_PRESET } from 'libs/const';
 import { useState } from 'react';
 import Avartar from './Avartar';
 import Link from './Link';
@@ -29,7 +30,8 @@ export default function ArticleCard({
                         height={featuredImage.node.mediaDetails.height}
                         cloudName="la-mesa-rv"
                         publicId={
-                            'rec-van-assets/' +
+                            CLOUDINARY_UPLOAD_PRESET +
+                            '/' +
                             imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
@@ -41,7 +43,7 @@ export default function ArticleCard({
                             console.log({ props });
                             setImageLoaded(true);
                         }}
-                        upload_preset="rec-van-assets"
+                        upload_preset={CLOUDINARY_UPLOAD_PRESET}
                         className={classNames(
                             'w-full object-contain transform transition-all duration-1000 ease-in-out group-hover:scale-105 z-[-1]',
                             imageLoaded ? 'opacity-100' : 'opacity-0'

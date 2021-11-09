@@ -42,7 +42,9 @@ const ArticlePage = ({ pageProps }) => {
                             src={imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/rec-van-assets/'
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                    CLOUDINARY_UPLOAD_PRESET +
+                                    '/'
                             )}
                             className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
                             alt={featuredImage?.node?.altText}
@@ -50,22 +52,30 @@ const ArticlePage = ({ pageProps }) => {
                             srcSet={`${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/rec-van-assets/'
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/' +
+                                    CLOUDINARY_UPLOAD_PRESET +
+                                    '/'
                             )} 1170w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_770,f_auto/rec-van-assets/'
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_770,f_auto/' +
+                                    CLOUDINARY_UPLOAD_PRESET +
+                                    '/'
                             )} 770w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_370,f_auto/rec-van-assets/'
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_370,f_auto/' +
+                                    CLOUDINARY_UPLOAD_PRESET +
+                                    '/'
                             )} 370w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
+                                    CLOUDINARY_UPLOAD_PRESET +
+                                    '/'
                             )} 270w`}
                             sizes="(max-width: 770px) 100vw, 770px"
                         />
@@ -158,14 +168,18 @@ const ArticlePage = ({ pageProps }) => {
                                                 'wp-content/uploads/',
                                             'g'
                                         ),
-                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/'
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/' +
+                                            CLOUDINARY_UPLOAD_PRESET +
+                                            '/'
                                     )
                                     .replace(
                                         new RegExp(
                                             'https://myrecvan.com/wp-content/uploads/',
                                             'g'
                                         ),
-                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/'
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/' +
+                                            CLOUDINARY_UPLOAD_PRESET +
+                                            '/'
                                     )
                             }}
                         />
@@ -326,7 +340,9 @@ const ArticlePage = ({ pageProps }) => {
                                                         process.env
                                                             .NEXT_PUBLIC_API_URL +
                                                             '/wp-content/uploads/',
-                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
+                                                            CLOUDINARY_UPLOAD_PRESET +
+                                                            '/'
                                                     )}></img>
                                             </div>
                                             <div className="flex flex-col space-y-3">
@@ -370,7 +386,9 @@ const ArticlePage = ({ pageProps }) => {
                                                             process.env
                                                                 .NEXT_PUBLIC_API_URL +
                                                                 '/wp-content/uploads/',
-                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
+                                                                CLOUDINARY_UPLOAD_PRESET +
+                                                                '/'
                                                         )}></img>
                                                 )}
                                             </div>
@@ -421,7 +439,9 @@ const ArticlePage = ({ pageProps }) => {
                                                             process.env
                                                                 .NEXT_PUBLIC_API_URL +
                                                                 '/wp-content/uploads/',
-                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
+                                                                CLOUDINARY_UPLOAD_PRESET +
+                                                                '/'
                                                         )}></img>
                                                 </div>
                                                 <div className="post_header entry-header">

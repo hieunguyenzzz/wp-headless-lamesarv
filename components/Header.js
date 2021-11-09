@@ -347,6 +347,7 @@ export const Header = ({ pageProps }) => {
                                                             if (children) {
                                                                 return (
                                                                     <div
+                                                                        key={i}
                                                                         className="inline-block w-full px-10 pointer-events-auto focus:pointer-events-none group"
                                                                         tabIndex={
                                                                             0
