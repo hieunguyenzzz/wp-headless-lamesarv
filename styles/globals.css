@@ -30,22 +30,20 @@ body {
     position: relative;
     min-height: 100%;
     margin: 0;
-    @apply text-base;
+
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.66em;
+    text-transform: none;
+    @apply text-base font-body;
 }
 
 a {
     transition-property: background-color, color;
     @apply duration-100 ease-in-out;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-h7 {
-    @apply text-heading;
-}
+
 :root {
     --header-height: 126px;
     @apply lg:text-[17px] xl:text-[18px];
@@ -75,9 +73,12 @@ h4,
 h5,
 h6,
 h7 {
-    @apply font-heading;
+    @apply font-heading text-heading;
 }
-
+input[type='submit'],
+button {
+    @apply font-heading text-heading;
+}
 .shadow-custom {
     box-shadow: 0 3px 5px rgb(70 70 70 / 10%);
 }

@@ -26,7 +26,7 @@ export default function Category({ pageProps }) {
                 subHeading={
                     <div className="font-bold">
                         <Link
-                            className="text-opacity-50 hover:text-opacity-100"
+                            className="text-opacity-60 text-heading hover:text-opacity-100"
                             href="/">
                             Home
                         </Link>

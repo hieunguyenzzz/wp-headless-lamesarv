@@ -66,6 +66,31 @@ export const Header = ({ pageProps }) => {
         return () => {};
     }, []);
     const searchPath = basePath + '/';
+    const menu = pageProps.app.mainMenu
+        .filter(({ node: { parentId } }) => {
+            return !parentId;
+        })
+        .map(({ node: { id, label, parentId, path } }) => {
+            return {
+                id,
+                label,
+                parentId,
+                path,
+                children: pageProps.app.mainMenu
+                    .filter(({ node: { parentId } }) => {
+                        return parentId === id;
+                    })
+                    .map(({ node: { id, label, parentId, path } }) => {
+                        return {
+                            id,
+                            label,
+                            parentId,
+                            path
+                        };
+                    })
+            };
+        });
+    console.log({ menu });
     return (
         <>
             <header className="sticky top-0 z-10 pointer-events-none h-header">
@@ -124,18 +149,16 @@ export const Header = ({ pageProps }) => {
                                             itemScope="itemscope"
                                             itemType="https://schema.org/SiteNavigationElement">
                                             <ul
-                                                className="lg:flex flex-wrap space-x-6 font-bold text-lg lg:text-[17px]"
+                                                className="lg:flex flex-wrap gap-x-6 font-bold text-lg lg:text-[17px]"
                                                 style={{
                                                     touchAction: 'pan-y'
                                                 }}>
-                                                {pageProps.app.mainMenu.map(
+                                                {menu.map(
                                                     (
                                                         {
-                                                            node: {
-                                                                path,
-                                                                label,
-                                                                children
-                                                            }
+                                                            path,
+                                                            label,
+                                                            children
                                                         },
                                                         i
                                                     ) => {
@@ -143,7 +166,7 @@ export const Header = ({ pageProps }) => {
                                                             return (
                                                                 <li
                                                                     key={i}
-                                                                    className="relative flex items-center py-2 h-header group">
+                                                                    className="relative flex items-center py-2 group">
                                                                     <Link
                                                                         className="hover:text-[#a58858]"
                                                                         href={
@@ -155,15 +178,13 @@ export const Header = ({ pageProps }) => {
                                                                             }
                                                                         </span>
                                                                     </Link>
-                                                                    <div className="absolute right-0 hidden gap-4 shadow top-header group-hover:block">
+                                                                    <div className="absolute right-0 hidden gap-4 shadow top-full group-hover:block">
                                                                         <div className="flex flex-col gap-1 py-3 bg-white animated fadeIn">
                                                                             {children.map(
                                                                                 (
                                                                                     {
-                                                                                        node: {
-                                                                                            path,
-                                                                                            label
-                                                                                        }
+                                                                                        path,
+                                                                                        label
                                                                                     },
                                                                                     i
                                                                                 ) => {
@@ -195,7 +216,7 @@ export const Header = ({ pageProps }) => {
                                                         return (
                                                             <li
                                                                 key={i}
-                                                                className="flex items-center py-2 h-header">
+                                                                className="flex items-center py-2 ">
                                                                 <Link
                                                                     className="hover:text-[#a58858]"
                                                                     href={path}>
@@ -333,14 +354,12 @@ export const Header = ({ pageProps }) => {
                                                     style={{
                                                         touchAction: 'pan-x'
                                                     }}>
-                                                    {pageProps.app.mainMenu.map(
+                                                    {menu.map(
                                                         (
                                                             {
-                                                                node: {
-                                                                    path,
-                                                                    label,
-                                                                    children
-                                                                }
+                                                                path,
+                                                                label,
+                                                                children
                                                             },
                                                             i
                                                         ) => {
@@ -382,10 +401,8 @@ export const Header = ({ pageProps }) => {
                                                                             {children.map(
                                                                                 (
                                                                                     {
-                                                                                        node: {
-                                                                                            path,
-                                                                                            label
-                                                                                        }
+                                                                                        path,
+                                                                                        label
                                                                                     },
                                                                                     i
                                                                                 ) => {

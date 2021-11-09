@@ -44,20 +44,6 @@ class MyDocument extends Document {
                         type="text/css"
                         media="all"
                     />
-                    <style
-                        dangerouslySetInnerHTML={{
-                            __html: `body>* {
-                            font-family: "Nunito",sans-serif;
-                            font-size: 1rem;
-                            font-weight: 400;
-                            font-style: normal;
-                            line-height: 1.66em;
-                            text-transform: none;
-                        }
-                        a,input[type="submit"],button{
-                            font-family: "Museo",sans-serif;
-                        }`
-                        }}></style>
                 </Head>
                 <body>
                     <noscript>

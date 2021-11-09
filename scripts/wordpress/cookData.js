@@ -205,7 +205,7 @@ const normalize = (raw) => {
     const recentPosts = posts.slice(0, 10);
     return {
         ...defaultData,
-        mainMenu: defaultData.mainMenu,
+        mainMenu: rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
         allPaths,
         recentPosts,
         recentComments: comments.nodes,
@@ -220,7 +220,8 @@ const normalize = (raw) => {
         postsByCategory,
         app: {
             // mainMenu: rest.menus.nodes[0].menuItems.edges,
-            mainMenu: defaultData.mainMenu,
+            mainMenu:
+                rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
             generalSettings: rest.generalSettings,
             copyright: defaultData.copyright
         }
