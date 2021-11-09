@@ -13,8 +13,6 @@ export default function ArticleCard({
     link,
     excerpt,
     author,
-    likesCount = 0,
-    viewsCount = 0,
     likesCountString,
     viewsCountString
 }) {
