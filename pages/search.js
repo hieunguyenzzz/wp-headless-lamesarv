@@ -27,8 +27,8 @@ export default function Home({ pageProps }) {
     const pageNodes =
         pages || query.s
             ? pages
-                  ?.flatMap((data, i) => {
-                      return data?.nodes?.map((props, i) => {
+                  ?.flatMap((data) => {
+                      return data?.nodes?.map((props) => {
                           return props;
                       });
                   })
