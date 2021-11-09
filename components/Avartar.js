@@ -1,4 +1,3 @@
-import NextImage from 'next/image';
 import authorImage from '../public/author.png';
 function Avartar({ author, size = 28 }) {
     return (
@@ -12,12 +11,10 @@ function Avartar({ author, size = 28 }) {
                     : null
             }
             className="inline-block mr-1  w-[28px] h-[28px] absolute ">
-            <NextImage
-                className="rounded-full"
-                layout="intrinsic"
+            <img
+                className="absolute inset-0 object-cover w-full h-full rounded-full"
                 src={author?.avatar?.url || authorImage.src}
-                width={`${size}px`}
-                height={`${size}px`}></NextImage>
+            />
         </span>
     );
 }
