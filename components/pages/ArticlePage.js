@@ -1,6 +1,6 @@
 import Avartar from 'components/Avartar';
 import Tag from 'components/Tag';
-import { EMAIL, HOST_URL } from '../../libs/const';
+import { CLOUDINARY_UPLOAD_PRESET, EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
 import Container from '../Container';
 import Layout from '../Layout';

@@ -1,9 +1,8 @@
-import React from 'react';
 import Container from './Container';
 
 export function Banner({ heading, subHeading }) {
     return (
-        <div className="py-9 ">
+        <div key={heading} className="py-9 animated fadeIn">
             <div className="content_wrap">
                 <div className="sc_layouts_column sc_layouts_column_align_center">
                     <Container>
