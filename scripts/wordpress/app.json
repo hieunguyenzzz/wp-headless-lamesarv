@@ -1,3 +1,71 @@
 {
-    "copyright": "Copyright © 2021  Rec Van. All rights reserved.   Contact Us. 833-REC-VAN1"
+    "copyright": "Copyright © 2021 La Mesa RV Center Inc. All rights reserved.",
+    "mainMenu": [
+        {
+            "node": {
+                "id": "cG9zdDoyMjg=",
+                "label": "News and Reviews",
+                "path": "/category/news-and-reviews/",
+                "parentId": null
+            }
+        },
+        {
+            "node": {
+                "id": "cG9zdDoyMjU=",
+                "label": "Lifestyle",
+                "path": "/category/lifestyle/",
+                "parentId": null
+            }
+        },
+        {
+            "node": {
+                "id": "cG9zdDoyMjQ=",
+                "label": "Tips",
+                "path": "/category/tips/",
+                "parentId": null
+            }
+        },
+        {
+            "node": {
+                "id": "cG9zdDoyMjc=",
+                "label": "Travel",
+                "path": "/category/travel/",
+                "parentId": null,
+                "children": [
+                    {
+                        "node": {
+                            "id": "cG9zdDoyMjc=-1",
+                            "label": "Travel 1",
+                            "path": "/category/travel/travel-1",
+                            "parentId": null
+                        }
+                    },
+                    {
+                        "node": {
+                            "id": "cG9zdDoyMjc=-2",
+                            "label": "Travel 2",
+                            "path": "/category/travel/travel-2",
+                            "parentId": null
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "node": {
+                "id": "cG9zdDo1ODE=",
+                "label": "Gallery",
+                "path": "/gallery/",
+                "parentId": null
+            }
+        },
+        {
+            "node": {
+                "id": "cG9zdDoxNTM=",
+                "label": "Shop Now",
+                "path": "https://www.recvan.com/?utm_source=Blog&utm_medium=Nav%20Link&utm_campaign=blogtraffic",
+                "parentId": null
+            }
+        }
+    ]
 }

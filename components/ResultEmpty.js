@@ -15,7 +15,7 @@ const ResultEmpty = ({ search }) => {
                 <p className="mt-4 mb-6">
                     {`Can't find what you need? Take a moment and do a search
                     below or start from`}{' '}
-                    <Link className="text-[#6f96c5]" href="/">
+                    <Link className="text-[#720f21]" href="/">
                         our homepage
                     </Link>
                     .{' '}
@@ -39,7 +39,7 @@ const ResultEmpty = ({ search }) => {
                                     name="s"
                                 />
                             </label>
-                            <label className="bg-[#6f96c5] text-white w-[56px] h-[56px] flex items-center justify-center flex-shrink-0 cursor-pointer">
+                            <label className="bg-[#720f21] text-white w-[56px] h-[56px] flex items-center justify-center flex-shrink-0 cursor-pointer">
                                 <input
                                     hidden
                                     type="submit"

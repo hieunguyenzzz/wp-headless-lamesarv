@@ -1,3 +1,4 @@
+import { Banner } from 'components/Banner';
 import React, { useMemo } from 'react';
 import { postsByDateApi } from '../../libs/apis';
 import { usePages } from '../../libs/hooks/usePages';
@@ -32,103 +33,81 @@ const ArchivePage = ({ pageProps }) => {
           });
     return (
         <Layout pageProps={pageProps}>
-            <div className="py-9 bg-[#272726] text-white">
-                <div className="content_wrap">
-                    <div className="sc_layouts_column sc_layouts_column_align_center">
-                        <Container>
-                            <div className="flex flex-col items-center justify-center text-center mx-[12px] my-[9px]">
-                                <div className="sc_layouts_title_title">
-                                    <h1
-                                        itemProp="headline"
-                                        className="text-[27px] lg:text-[52px] xl:leading-[67px] font-bold leading-normal">
-                                        {month
-                                            ? `Monthly Archives: ${new Date(
-                                                  year,
-                                                  month - 1
-                                              ).toLocaleDateString(undefined, {
-                                                  year: 'numeric',
-                                                  month: 'long'
-                                              })}`
-                                            : `Year Archives: ${year}`}
-                                    </h1>
-                                </div>
-                                <div className="lg:text-[18px] lg:leading-[22px]  ">
-                                    <div className="font-bold">
-                                        <Link
-                                            className="text-[#888583]"
-                                            href="/">
-                                            Home
-                                        </Link>
-                                        <span className="mx-[0.3em] opacity-75 text-2xl">
-                                            <svg
-                                                className="inline-block"
-                                                stroke="currentColor"
-                                                fill="none"
-                                                strokeWidth={0}
-                                                viewBox="0 0 24 24"
-                                                height="1em"
-                                                width="1em"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    clipRule="evenodd"
-                                                    d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
-                                                    fill="currentColor"
-                                                />
-                                            </svg>
-                                        </span>
-                                        {month ? (
-                                            <Link
-                                                href={'/' + year}
-                                                className="text-[#888583] ">
-                                                {year}
-                                            </Link>
-                                        ) : (
-                                            <span className="opacity-75">
-                                                {year}
-                                            </span>
-                                        )}
-                                        {month ? (
-                                            <>
-                                                <span className="mx-[0.3em] opacity-75 text-2xl">
-                                                    <svg
-                                                        className="inline-block"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        strokeWidth={0}
-                                                        viewBox="0 0 24 24"
-                                                        height="1em"
-                                                        width="1em"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            fillRule="evenodd"
-                                                            clipRule="evenodd"
-                                                            d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
-                                                            fill="currentColor"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                <span className="opacity-75">
-                                                    {`Monthly Archives: ${new Date(
-                                                        year,
-                                                        month - 1
-                                                    ).toLocaleDateString(
-                                                        undefined,
-                                                        {
-                                                            year: 'numeric',
-                                                            month: 'long'
-                                                        }
-                                                    )}`}
-                                                </span>
-                                            </>
-                                        ) : null}
-                                    </div>
-                                </div>{' '}
-                            </div>
-                        </Container>
+            <Banner
+                heading={
+                    month
+                        ? `Monthly Archives: ${new Date(
+                              year,
+                              month - 1
+                          ).toLocaleDateString(undefined, {
+                              year: 'numeric',
+                              month: 'long'
+                          })}`
+                        : `Year Archives: ${year}`
+                }
+                subHeading={
+                    <div className="font-bold">
+                        <Link className="text-[#888583]" href="/">
+                            Home
+                        </Link>
+                        <span className="mx-[0.3em] opacity-75 text-2xl">
+                            <svg
+                                className="inline-block"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeWidth={0}
+                                viewBox="0 0 24 24"
+                                height="1em"
+                                width="1em"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </span>
+                        {month ? (
+                            <Link href={'/' + year} className="text-[#888583] ">
+                                {year}
+                            </Link>
+                        ) : (
+                            <span className="opacity-75">{year}</span>
+                        )}
+                        {month ? (
+                            <>
+                                <span className="mx-[0.3em] opacity-75 text-2xl">
+                                    <svg
+                                        className="inline-block"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        strokeWidth={0}
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                            d="M14.526 6.10576C15.0265 6.33917 15.2667 6.88343 15.0625 7.3214L9.88541 18.4237C9.68118 18.8616 9.10985 19.0275 8.60931 18.7941C8.10877 18.5607 7.86857 18.0164 8.0728 17.5784L13.2499 6.47616C13.4541 6.03819 14.0254 5.87235 14.526 6.10576Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </span>
+                                <span className="opacity-75">
+                                    {`Monthly Archives: ${new Date(
+                                        year,
+                                        month - 1
+                                    ).toLocaleDateString(undefined, {
+                                        year: 'numeric',
+                                        month: 'long'
+                                    })}`}
+                                </span>
+                            </>
+                        ) : null}
                     </div>
-                </div>
-            </div>
+                }></Banner>
             {isEmpty && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-8 py-16 lg:py-[110px] gap-y-16 items-start">
                     <ResultEmpty search={year + month ? `/${month}` : ''} />
@@ -136,12 +115,12 @@ const ArchivePage = ({ pageProps }) => {
             )}
             {!isEmpty && (
                 <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
-                    <div className="space-y-8 flex-1">
+                    <div className="flex-1 space-y-8">
                         {pageNodes}
                         {hasNextPage && (
                             <div className="flex justify-center">
                                 <button
-                                    className="text-white font-heading bg-[#6f96c5] hover:bg-[#c0b9a8] rounded border border-[color:#6f96c5] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
+                                    className="text-white font-heading bg-[#720f21] hover:bg-[#c0b9a8] rounded border border-[color:#720f21] hover:border-[color:#c0b9a8] text-lg font-bold capitalize py-[1.04em] px-[2.65em] flex items-center"
                                     onClick={onLoadMore}>
                                     <span>Load More</span>
                                     <div
@@ -151,7 +130,7 @@ const ArchivePage = ({ pageProps }) => {
                                                 : 'transition-all opacity-0 ml-[-44px] pl-3'
                                         }>
                                         <svg
-                                            className="animate-spin h-5 w-5 mr-3"
+                                            className="w-5 h-5 mr-3 animate-spin"
                                             stroke="currentColor"
                                             fill="currentColor"
                                             strokeWidth={0}

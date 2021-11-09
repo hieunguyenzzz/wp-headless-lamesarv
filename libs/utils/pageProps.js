@@ -1,21 +1,35 @@
-import { CLOUDINARY_STORAGE_URL, DOMAIN, HOST_URL, STORAGE_PATH, STORAGE_URL, STORAGE_URL_2 } from 'libs/const';
+import {
+    CLOUDINARY_STORAGE_URL,
+    DOMAIN,
+    HOST_URL,
+    STORAGE_PATH,
+    STORAGE_URL,
+    STORAGE_URL_2
+} from 'libs/const';
 import replaceall from 'replaceall';
 import data from '../../data/cookedData.json';
 import { getNextAndPrePosts, getRecommendationPosts } from './post';
 import seo, { gallerySeo } from './seo';
 
 const fixSeoImage = (seo) => {
+    let fixedSeo;
+    fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
+    fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo);
+    fixedSeo = replaceall(
+        `http://${DOMAIN}${STORAGE_PATH}`,
+        CLOUDINARY_STORAGE_URL,
+        fixedSeo
+    );
+    fixedSeo = replaceall(
+        `https://${DOMAIN}${STORAGE_PATH}`,
+        CLOUDINARY_STORAGE_URL,
+        fixedSeo
+    );
 
-    let fixedSeo
-    fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo)
-    fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo)
-    fixedSeo = replaceall(`http://${DOMAIN}${STORAGE_PATH}`, CLOUDINARY_STORAGE_URL, fixedSeo)
-    fixedSeo = replaceall(`https://${DOMAIN}${STORAGE_PATH}`, CLOUDINARY_STORAGE_URL, fixedSeo)
-
-    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo)
-    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo)
-    return fixedSeo
-}
+    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    return fixedSeo;
+};
 
 export const getAppProps = (context, cookedData = data) => {
     // console.log({ seo })
@@ -27,32 +41,42 @@ export const getAppProps = (context, cookedData = data) => {
             .filter((item) => item.approved)
             .slice(0, 5),
         categories: cookedData.categories,
-        app: cookedData.app
-    }
-}
-
+        app: cookedData.app,
+        copyright: cookedData.app.copyright
+    };
+};
+export const getHomePageProps = (context, cookedData = data) => {
+    // console.log({ context });
+    const pathDetail =
+        data.allPaths.homepage[Number(context.params?.slug || 1) - 1];
+    return {
+        ...getAppProps(context, cookedData),
+        pathDetail,
+        posts: pathDetail.posts.map((id) => data.postEntities[id])
+    };
+};
 export const getGalleryProps = (context, cookedData = data) => {
     return {
         ...getAppProps(context, cookedData),
-        seo: fixSeoImage(gallerySeo),
-    }
-}
+        seo: fixSeoImage(gallerySeo)
+    };
+};
 export const getPostPageProps = (pageDetail, cookedData = data) => {
     const {
         params: { id }
     } = pageDetail;
     const post = cookedData.postEntities[id];
-    const { nextPost, prePost } = getNextAndPrePosts(post, cookedData)
-    const recommendationPosts = getRecommendationPosts(post, cookedData)
+    const { nextPost, prePost } = getNextAndPrePosts(post, cookedData);
+    const recommendationPosts = getRecommendationPosts(post, cookedData);
     return {
         recommendationPosts,
         pageDetail,
         nextPost,
         seo: fixSeoImage(post.seo.fullHead),
         prePost,
-        post,
-    }
-}
+        post
+    };
+};
 
 export const getArchivesPageProps = (pageDetail, cookedData = data) => {
     const {
@@ -60,21 +84,23 @@ export const getArchivesPageProps = (pageDetail, cookedData = data) => {
     } = pageDetail;
     let posts = month
         ? cookedData.postsByMonth[`${year}/${month}`].map(
-            (postId) => cookedData.postEntities[postId]
-        )
+              (postId) => cookedData.postEntities[postId]
+          )
         : cookedData.postsByYear[year].map(
-            (postId) => cookedData.postEntities[postId]
-        );
+              (postId) => cookedData.postEntities[postId]
+          );
     posts = posts.slice(0, 10);
     return {
         pageDetail,
         posts,
         year,
-        month,
-    }
-}
+        month
+    };
+};
 export const getCategoryPageProps = (context, cookedData = data) => {
-    const { params: { slugs } } = context
+    const {
+        params: { slugs }
+    } = context;
     const category = cookedData.categories.find(
         (item) => item.slug === slugs[0]
     );
@@ -84,19 +110,19 @@ export const getCategoryPageProps = (context, cookedData = data) => {
         (item) => item.path === path
     );
     const posts = pathDetail.posts.map((id) => cookedData.postEntities[id]);
-    return (
-        {
-            ...getAppProps(context, cookedData),
-            pathDetail,
-            posts,
-            category,
-            seo: fixSeoImage(category.seo.fullHead)
-        }
-    )
-}
+    return {
+        ...getAppProps(context, cookedData),
+        pathDetail,
+        posts,
+        category,
+        seo: fixSeoImage(category.seo.fullHead)
+    };
+};
 
 export const getAuthorPageProps = (context, cookedData = data) => {
-    const { params: { slugs } } = context
+    const {
+        params: { slugs }
+    } = context;
     const [slug, sufix, page] = slugs;
     const author = cookedData.authorEntities[slug];
     const path = page ? `/${slug}/${sufix}/${page}` : `/${slug}`;
@@ -110,28 +136,32 @@ export const getAuthorPageProps = (context, cookedData = data) => {
         posts,
         postCount: cookedData.postsByAuthor[slug].length,
         author,
-        seo: fixSeoImage(author.seo.fullHead),
+        seo: fixSeoImage(author.seo.fullHead)
     };
-}
+};
 
 export const getDynamicPageProps = (context, cookedData = data) => {
-    const { params } = context
+    const { params } = context;
     const path = '/' + params.pages.join('/') + '/';
-    const pageDetail = cookedData.allPaths['[...pages]'].find(
-        (page) => {
-            // console.log([page.path, path])
-            return page.path === path
-        }
-    );
+    const pageDetail = cookedData.allPaths['[...pages]'].find((page) => {
+        // console.log([page.path, path])
+        return page.path === path;
+    });
     switch (pageDetail.type) {
         case 'MONTH':
         case 'YEAR': {
-            return { ...getAppProps(context, cookedData), ...getArchivesPageProps(pageDetail) }
+            return {
+                ...getAppProps(context, cookedData),
+                ...getArchivesPageProps(pageDetail)
+            };
         }
         case 'POST': {
-            return { ...getAppProps(context, cookedData), ...getPostPageProps(pageDetail) }
+            return {
+                ...getAppProps(context, cookedData),
+                ...getPostPageProps(pageDetail)
+            };
         }
         default:
             throw new Error('Path not found!');
     }
-}
+};
