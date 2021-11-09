@@ -109,6 +109,7 @@ export const getCategoryPageProps = (context, cookedData = data) => {
     const pathDetail = cookedData.allPaths.category.find(
         (item) => item.path === path
     );
+    console.log({ pathDetail });
     const posts = pathDetail.posts.map((id) => cookedData.postEntities[id]);
     return {
         ...getAppProps(context, cookedData),

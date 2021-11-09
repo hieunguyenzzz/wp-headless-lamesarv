@@ -69,7 +69,7 @@ const normalize = (raw) => {
         );
         const totalPages = Math.ceil(postsByCate.length / 10);
         const postsByPage = postsByCate.reduce((result, post, index) => {
-            const page = Math.ceil(index / 10);
+            const page = Math.floor(index / 10) + 1;
             result[page] = result[page] || [];
             result[page].push(post.id);
             return result;
