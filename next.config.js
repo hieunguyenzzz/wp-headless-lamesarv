@@ -4,7 +4,7 @@ module.exports =
               reactStrictMode: true,
               trailingSlash: true,
               basePath: '/blog',
-              distDir: '/blog'
+              outDir: './blog'
           }
         : {
               reactStrictMode: true,
