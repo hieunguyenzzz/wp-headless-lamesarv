@@ -15,7 +15,7 @@ function Avartar({ author, size = 28 }) {
             className="inline-block mr-1  w-[28px] h-[28px] absolute ">
             <img
                 className="absolute inset-0 object-cover w-full h-full rounded-full"
-                src={basePath + author?.avatar?.url || authorImage.src}
+                src={basePath + (author?.avatar?.url || authorImage.src)}
             />
         </span>
     );
