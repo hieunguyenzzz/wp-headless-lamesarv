@@ -88,7 +88,7 @@ const getAllDataQuery = `{
       }
     }
   }
-  posts(first: 99999) {
+  posts(first: 999999) {
     pageInfo {
       hasNextPage
       endCursor

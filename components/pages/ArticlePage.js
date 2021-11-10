@@ -99,7 +99,7 @@ const ArticlePage = ({ pageProps }) => {
                                 style={{
                                     textShadow: '2px 1px black'
                                 }}
-                                className="text-2xl md:text-3xl  lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
+                                className="text-2xl md:text-3xl text-white lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
                                 itemProp="headline">
                                 {post.title}
                             </h1>
