@@ -72,7 +72,7 @@ export default function ArticleCard({
                     </h3>
                 </div>
                 <div className="space-y-4 post_content entry-content">
-                    <div className="flex flex-wrap items-baseline gap-3 post_meta">
+                    <div className="flex flex-wrap items-baseline gap-3 mt-3">
                         {categories?.edges?.map(({ node: cate }, i) => (
                             <Tag
                                 key={i}
@@ -153,18 +153,20 @@ export default function ArticleCard({
                                 </span>
                             </Link>
                         </span>
-                        <span className="inline-block text-sm ">
-                            <Link
-                                className="flex items-baseline hover:text-[#720f21] leading-[15px]"
-                                href={`/author/${author.node.slug}/`}>
-                                <div className="h-[13px] w-[28px] inline-flex items-center relative mr-1">
-                                    <Avartar author={author} />
-                                </div>
-                                <span className="text-[13px] font-bold  leading-[15px]">
-                                    {author.node.name}
-                                </span>
-                            </Link>
-                        </span>
+                        {author && (
+                            <span className="inline-block text-sm ">
+                                <Link
+                                    className="flex items-baseline hover:text-[#720f21] leading-[15px]"
+                                    href={`/author/${author.node.slug}/`}>
+                                    <div className="h-[13px] w-[28px] inline-flex items-center relative mr-1">
+                                        <Avartar author={author} />
+                                    </div>
+                                    <span className="text-[13px] font-bold  leading-[15px]">
+                                        {author.node.name}
+                                    </span>
+                                </Link>
+                            </span>
+                        )}
                     </div>
                     <div
                         className="whitespace-pre-line"
