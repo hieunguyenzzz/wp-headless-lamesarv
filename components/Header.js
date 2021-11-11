@@ -149,7 +149,7 @@ export const Header = ({ pageProps }) => {
                                             itemScope="itemscope"
                                             itemType="https://schema.org/SiteNavigationElement">
                                             <ul
-                                                className="lg:flex flex-wrap gap-x-6 font-bold text-lg lg:text-[17px]"
+                                                className="lg:flex flex-wrap gap-x-6 gap-y-2 font-bold text-lg lg:text-[17px]"
                                                 style={{
                                                     touchAction: 'pan-y'
                                                 }}>
@@ -166,7 +166,7 @@ export const Header = ({ pageProps }) => {
                                                             return (
                                                                 <li
                                                                     key={i}
-                                                                    className="relative flex items-center py-2 group">
+                                                                    className="relative flex items-center group">
                                                                     <Link
                                                                         className="hover:text-[#a58858]"
                                                                         href={
