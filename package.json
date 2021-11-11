@@ -8,7 +8,7 @@
         "getSitemap": "node scripts/sitemap",
         "getData": "next dev",
         "prebuild": "npm run getSitemap &&  npm run getWordpress ",
-        "build": "next build && next export",
+        "build": "next build && next export -o blog/",
         "start": "next start",
         "lint": "next lint"
     },

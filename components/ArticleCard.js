@@ -37,8 +37,7 @@ export default function ArticleCard({
                             )
                         }
                         secure="true"
-                        onLoad={(props) => {
-                            // console.log({ props });
+                        onLoad={() => {
                             setImageLoaded(true);
                         }}
                         upload_preset={CLOUDINARY_UPLOAD_PRESET}

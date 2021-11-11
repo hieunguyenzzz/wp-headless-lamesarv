@@ -1,5 +1,5 @@
-// eslint-disable-next-line @next/next/no-document-import-in-page
 import { GTM_ID } from 'libs/gtm';
+// eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
