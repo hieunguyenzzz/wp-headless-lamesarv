@@ -29,33 +29,34 @@ const ArticlePage = ({ pageProps }) => {
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
                 <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-screen py-5 lg:py-12 flex items-end">
-                    <div
-                        className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
-                        itemScope="itemscope"
-                        itemProp="image"
-                        itemType="https://schema.org/ImageObject">
-                        <meta itemProp="width" content />
-                        <meta itemProp="height" content />
-                        <img
-                            width={770}
-                            height={434}
-                            src={imageUrl.replace(
-                                process.env.NEXT_PUBLIC_API_URL +
-                                    '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                    CLOUDINARY_UPLOAD_PRESET +
-                                    '/'
-                            )}
-                            className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
-                            alt={featuredImage?.node?.altText}
-                            loading="lazy"
-                            srcSet={`${imageUrl.replace(
-                                process.env.NEXT_PUBLIC_API_URL +
-                                    '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/' +
-                                    CLOUDINARY_UPLOAD_PRESET +
-                                    '/'
-                            )} 1170w, 
+                    {imageUrl && (
+                        <div
+                            className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
+                            itemScope="itemscope"
+                            itemProp="image"
+                            itemType="https://schema.org/ImageObject">
+                            <meta itemProp="width" content />
+                            <meta itemProp="height" content />
+                            <img
+                                width={770}
+                                height={434}
+                                src={imageUrl.replace(
+                                    process.env.NEXT_PUBLIC_API_URL +
+                                        '/wp-content/uploads/',
+                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                        CLOUDINARY_UPLOAD_PRESET +
+                                        '/'
+                                )}
+                                className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
+                                alt={featuredImage?.node?.altText}
+                                loading="lazy"
+                                srcSet={`${imageUrl.replace(
+                                    process.env.NEXT_PUBLIC_API_URL +
+                                        '/wp-content/uploads/',
+                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/' +
+                                        CLOUDINARY_UPLOAD_PRESET +
+                                        '/'
+                                )} 1170w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
@@ -77,9 +78,10 @@ const ArticlePage = ({ pageProps }) => {
                                     CLOUDINARY_UPLOAD_PRESET +
                                     '/'
                             )} 270w`}
-                            sizes="(max-width: 770px) 100vw, 770px"
-                        />
-                    </div>
+                                sizes="(max-width: 770px) 100vw, 770px"
+                            />
+                        </div>
+                    )}
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000a8] to-transparent"></div>
                     <Container className="relative">
                         <div className="flex flex-col items-start text-left text-white ">
@@ -450,7 +452,7 @@ const ArticlePage = ({ pageProps }) => {
                                                             {post.title}
                                                         </Link>
                                                     </h6>
-                                                    <div className="mb-[1em] space-x-3 xl:space-x-[19px]">
+                                                    <div className="mb-[1em] mt-3 flex flex-wrap gap-2">
                                                         {post.categories?.edges?.map(
                                                             (
                                                                 { node: cate },
