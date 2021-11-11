@@ -191,6 +191,7 @@ async function fetcher({ query, variables = {} }) {
     });
 
     const { data } = await res.json();
+
     return data;
 }
 const getData = async () => {

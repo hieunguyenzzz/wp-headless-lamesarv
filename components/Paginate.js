@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 export default function Paginate(props) {
     return (
         <ReactPaginate
+            key={props.initialPage}
             disableInitialCallback
             marginPagesDisplayed={2}
             nextLabel={
@@ -50,7 +51,6 @@ export const RouterPaginate = (props) => {
     const initialPage = Number(page - 1);
     return (
         <Paginate
-            key={initialPage}
             initialPage={initialPage}
             disableInitialCallback
             onPageChange={({ selected }) => {
