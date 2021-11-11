@@ -1,7 +1,7 @@
 import { postsByOffsetApi } from 'libs/apis';
 import { usePages } from 'libs/hooks/usePages';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import AnimateBlock from './AnimateBlock';
 import ArticleCard from './ArticleCard';
 import { Banner } from './Banner';
@@ -10,8 +10,7 @@ import Layout from './Layout';
 import Link from './Link';
 import ListWithPaginate from './ListWithPaginate';
 import ResultEmpty from './ResultEmpty';
-import SideBar from './SideBar';
-import StickyColumn from './StickyColumn';
+import TwoColumnsWithSidebar from './TwoColumnsWithSidebar';
 const VisibleAnimationArticleCard = (props) => {
     return (
         <AnimateBlock>
@@ -24,12 +23,15 @@ function PageHomepage({ pageProps }) {
     const { query } = router;
     const { pathDetail } = pageProps;
     const { pages, isLoading } = usePages({
-        fetcher: useCallback(
-            async () =>
-                postsByOffsetApi({
-                    search: query.s,
-                    offset: pathDetail.currentPage * 10
-                }),
+        fetcher: useMemo(
+            () =>
+                query.s
+                    ? async () =>
+                          postsByOffsetApi({
+                              search: query.s,
+                              offset: pathDetail.currentPage * 10
+                          })
+                    : null,
             [pathDetail.currentPage, query.s]
         ),
         search: query.s
@@ -80,12 +82,12 @@ function PageHomepage({ pageProps }) {
                     <ResultEmpty search={query.s} />
                 </Container>
             ) : (
-                <Container className="flex w-full flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
-                    <div className="flex-1 ">
+                <TwoColumnsWithSidebar pageProps={pageProps}>
+                    <div className="flex-1 w-full">
                         <div className="flex justify-center w-full">
                             <div
                                 className={
-                                    isLoading
+                                    query.s && isLoading
                                         ? 'transition-all opacity-100 pt-3 pointer-events-none h-6'
                                         : 'transition-all opacity-0  pt-0 h-0'
                                 }>
@@ -127,10 +129,7 @@ function PageHomepage({ pageProps }) {
                             )}
                         </div>
                     </div>
-                    <StickyColumn offsetTop={120} offsetBottom={20}>
-                        <SideBar pageProps={pageProps} />{' '}
-                    </StickyColumn>
-                </Container>
+                </TwoColumnsWithSidebar>
             )}
         </Layout>
     );
