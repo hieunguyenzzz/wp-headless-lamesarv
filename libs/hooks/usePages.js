@@ -11,7 +11,7 @@ export const usePages = ({ search = null, fetcher }) => {
         [fetcher, search]
     );
     const { data, size, setSize } = useSWRInfinite(getKey, fetcher);
-    useEffect(() => {}, [search, fetcher]);
+    useEffect(() => { }, [search, fetcher]);
     const isLoading = !data?.[size - 1];
     const hasNextPage = isLoading || data?.[size - 1]?.pageInfo?.hasNextPage;
     const isEmpty = data?.[0] && !data[0]?.nodes?.length;

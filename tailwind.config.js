@@ -11,15 +11,7 @@ module.exports = {
         ]
     },
     theme: {
-        namedGroups: ['one', 'two'],
-        columnCount: [1, 2, 3],
         extend: {
-            colors: {
-                primary: '#720f21',
-                secondary: '#00255a',
-                base: '#40526a',
-                heading: '#122947'
-            },
             fontFamily: {
                 heading: ['Museo', 'sans-serif'],
                 body: ['Nunito', 'sans-serif']
@@ -32,7 +24,7 @@ module.exports = {
                     css: {
                         a: {
                             fontFamily: 'inherit',
-                            color: '#720f21',
+                            color: '#6f96c5',
                             textDecoration: 'none',
                             fontWeight: 400,
                             '&:hover': {
@@ -44,15 +36,6 @@ module.exports = {
                             '&:hover': {
                                 color: 'currentColor'
                             }
-                        },
-                        img: {
-                            width: '100%'
-                        },
-                        figure: {
-                            width: '100%!important'
-                        },
-                        iframe: {
-                            maxWidth: '100%!important'
                         }
                     }
                 },
@@ -61,7 +44,7 @@ module.exports = {
                         a: {
                             color: 'inherit',
                             '&:hover': {
-                                color: 'var(--color-link-hover,#720f21)'
+                                color: 'var(--color-link-hover,#6f96c5)'
                             }
                         }
                     }
@@ -69,18 +52,5 @@ module.exports = {
             }
         }
     },
-    variants: {
-        columnCount: ['responsive'],
-        columnGap: ['responsive'],
-        columnWidth: ['responsive'],
-        columnRuleColor: ['responsive'],
-        columnRuleWidth: ['responsive'],
-        columnRuleStyle: ['responsive'],
-        columnFill: ['responsive'],
-        columnSpan: ['responsive']
-    },
-    plugins: [
-        require('tailwindcss-multi-column')(),
-        require('@tailwindcss/typography')
-    ]
+    plugins: [require('@tailwindcss/typography')]
 };
