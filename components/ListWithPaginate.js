@@ -6,7 +6,7 @@ function ListWithPaginate({
     items = [],
     totalPages,
     currentPage = 1,
-    layout = 'masonry'
+    layout = 'default'
 }) {
     const router = useRouter();
     let children;

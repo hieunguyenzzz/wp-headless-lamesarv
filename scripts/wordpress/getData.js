@@ -74,6 +74,7 @@ const getAllDataQuery = `{
     edges {
       cursor
       node {
+        viewCount
         likesCount
         databaseId
         id
