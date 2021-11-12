@@ -90,7 +90,6 @@ export const Header = ({ pageProps }) => {
                     })
             };
         });
-    console.log({ menu });
     return (
         <>
             <header className="sticky top-0 z-10 pointer-events-none h-header">

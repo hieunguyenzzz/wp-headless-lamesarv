@@ -29,10 +29,10 @@ function PageHomepage({ pageProps }) {
                     ? async () =>
                           postsByOffsetApi({
                               search: query.s,
-                              offset: pathDetail.currentPage * 10
+                              offset: pathDetail?.currentPage * 10
                           })
                     : null,
-            [pathDetail.currentPage, query.s]
+            [pathDetail?.currentPage, query.s]
         ),
         search: query.s
     });
@@ -122,8 +122,8 @@ function PageHomepage({ pageProps }) {
                                 <ListWithPaginate
                                     {...{
                                         items: pageNodes,
-                                        totalPages: pathDetail.totalPages,
-                                        currentPage: pathDetail.currentPage
+                                        totalPages: pathDetail?.totalPages,
+                                        currentPage: pathDetail?.currentPage
                                     }}
                                 />
                             )}

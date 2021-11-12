@@ -11,7 +11,7 @@ import data from '../../data/cookedData.json';
 import { getNextAndPrePosts, getRecommendationPosts } from './post';
 import seo, { gallerySeo } from './seo';
 
-const fixSeoImage = (seo) => {
+export const fixSeoImage = (seo) => {
     let fixedSeo;
     fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
     fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo);
@@ -37,9 +37,6 @@ export const getAppProps = (context, cookedData = data) => {
         seo: fixSeoImage(seo),
         recentPosts: cookedData.recentPosts,
         archives: cookedData.archives,
-        recentComments: cookedData.recentComments
-            .filter((item) => item.approved)
-            .slice(0, 5),
         categories: cookedData.categories,
         app: cookedData.app,
         copyright: cookedData.app.copyright
@@ -48,11 +45,11 @@ export const getAppProps = (context, cookedData = data) => {
 export const getHomePageProps = (context, cookedData = data) => {
     // console.log({ context });
     const pathDetail =
-        data.allPaths.homepage[Number(context.params?.slug || 1) - 1];
+        data.allPaths.homepage[Number(context.params?.slug || 1) - 1] || null;
     return {
         ...getAppProps(context, cookedData),
         pathDetail,
-        posts: pathDetail.posts.map((id) => data.postEntities[id])
+        posts: pathDetail?.posts.map((id) => data.postEntities[id]) || []
     };
 };
 export const getGalleryProps = (context, cookedData = data) => {
@@ -72,7 +69,7 @@ export const getPostPageProps = (pageDetail, cookedData = data) => {
         recommendationPosts,
         pageDetail,
         nextPost,
-        seo: fixSeoImage(post.seo.fullHead),
+        // seo: fixSeoImage(post.seo.fullHead),
         prePost,
         post
     };

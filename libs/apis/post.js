@@ -1,6 +1,56 @@
 import { normalizePost } from '../utils/normalize';
 import fetcher from './fetcher';
-
+export const postApi = async ({ postId }) => {
+    const { post } = await fetcher({
+        query: `{
+          post(id:"${postId}"){
+            likesCount
+          databaseId
+          id
+          link
+          uri
+          slug
+          title
+          content
+          excerpt
+          utmCampaign
+          displayAdImage
+          seo {
+            fullHead
+          }
+          author {
+            node {
+              id
+              name
+              slug
+            }
+          }
+          featuredImage {
+            node {
+              id
+              altText
+              sourceUrl
+              mediaDetails {
+                width
+                height
+              }
+            }
+          }
+          categories {
+            edges {
+              node {
+                id
+                name
+                slug
+              }
+            }
+          }
+          date
+        }
+      }`
+    });
+    return post;
+};
 export const postsApi = async (search, endCursor) => {
     const data = await fetcher({
         query: `{
@@ -158,4 +208,15 @@ export const postsByDateApi = async (first = 10, endCursor, year, month) => {
         pageInfo: data?.posts?.pageInfo,
         nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
     };
+};
+export const insertViewCount = async ({ postId }) => {
+    const { updateViewCount } = await fetcher({
+        query: `mutation {
+        updateViewCount(input: {id: ${postId}}) {
+          view_count
+        }
+      }`,
+        variables: {}
+    });
+    return updateViewCount;
 };
