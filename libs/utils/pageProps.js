@@ -11,6 +11,12 @@ import data from '../../data/cookedData.json';
 import { getNextAndPrePosts, getRecommendationPosts } from './post';
 import seo, { gallerySeo } from './seo';
 
+export const fixLink = (seo) => {
+    let fixedSeo;
+    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, seo);
+    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    return fixedSeo;
+};
 export const fixSeoImage = (seo) => {
     let fixedSeo;
     fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
@@ -30,7 +36,6 @@ export const fixSeoImage = (seo) => {
     fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
     return fixedSeo;
 };
-
 export const getAppProps = (context, cookedData = data) => {
     // console.log({ seo })
     return {
