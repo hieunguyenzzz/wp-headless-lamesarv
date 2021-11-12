@@ -37,7 +37,7 @@ export const normalizePost = (node) => {
         objectDate,
         likesCountString: numeral(likesCount).format('0 a').trim(),
         viewsCountString: numeral(viewsCount).format('0 a').trim(),
-        content: fixLink(fixSeoImage(content))
+        content: content ? fixLink(fixSeoImage(content)) : ''
     };
     return post;
 };
