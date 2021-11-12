@@ -328,8 +328,11 @@ export const Header = ({ pageProps }) => {
                                             </svg>
                                         </button>
                                         <div
+                                            style={{
+                                                overscrollBehavior: 'contain'
+                                            }}
                                             className={classNames(
-                                                ` overflow-x-hidden text-white bg-[#720f21] overflow-y-auto transition-all fixed top-0 left-0 w-full h-screen transform origin-top  duration-300`,
+                                                ` overflow-x-hidden h-screen text-white bg-[#720f21] overflow-y-auto transition-all fixed top-0 left-0 w-full  transform origin-top  duration-300 `,
                                                 {
                                                     ' opacity-0 pointer-events-none  scale-y-0 ':
                                                         !openMenu,
@@ -373,59 +376,65 @@ export const Header = ({ pageProps }) => {
                                                                         <div className="w-full flex items-center font-bold text-2xl hover:text-[#d85726]">
                                                                             <div className="flex-1 py-1 text-left">
                                                                                 <span className="font-bold capitalize ">
-                                                                                    Details
+                                                                                    {
+                                                                                        label
+                                                                                    }
                                                                                 </span>
                                                                             </div>
-                                                                            <div className="transform transition-transform rotate-90 text-white group-focus:-rotate-90 duration-300 ease-in-out text-[24px]">
-                                                                                <svg
-                                                                                    stroke="currentColor"
-                                                                                    fill="none"
-                                                                                    strokeWidth={
-                                                                                        0
-                                                                                    }
-                                                                                    viewBox="0 0 24 24"
-                                                                                    height="1em"
-                                                                                    width="1em"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <polyline
+                                                                            {!!children?.length && (
+                                                                                <div className="transform transition-transform rotate-90 text-white group-focus:-rotate-90 duration-300 ease-in-out text-[24px]">
+                                                                                    <svg
+                                                                                        stroke="currentColor"
+                                                                                        fill="none"
                                                                                         strokeWidth={
-                                                                                            2
+                                                                                            0
                                                                                         }
-                                                                                        points="9 6 15 12 9 18"
-                                                                                    />
-                                                                                </svg>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="h-0 -mt-4 overflow-hidden whitespace-pre-line transition-all pointer-events-auto group-focus:h-auto group-focus:block group-focus:mt-0">
-                                                                            {children.map(
-                                                                                (
-                                                                                    {
-                                                                                        path,
-                                                                                        label
-                                                                                    },
-                                                                                    i
-                                                                                ) => {
-                                                                                    return (
-                                                                                        <div
-                                                                                            key={
-                                                                                                i
+                                                                                        viewBox="0 0 24 24"
+                                                                                        height="1em"
+                                                                                        width="1em"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <polyline
+                                                                                            strokeWidth={
+                                                                                                2
                                                                                             }
-                                                                                            className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#d85726]">
-                                                                                            <Link
-                                                                                                href={
-                                                                                                    path
-                                                                                                }>
-                                                                                                <span>
-                                                                                                    {
-                                                                                                        label
-                                                                                                    }
-                                                                                                </span>
-                                                                                            </Link>
-                                                                                        </div>
-                                                                                    );
-                                                                                }
+                                                                                            points="9 6 15 12 9 18"
+                                                                                        />
+                                                                                    </svg>
+                                                                                </div>
                                                                             )}
                                                                         </div>
+                                                                        {!!children?.length && (
+                                                                            <div className="h-0 -mt-4 overflow-hidden whitespace-pre-line transition-all pointer-events-auto group-focus:h-auto group-focus:block group-focus:mt-0">
+                                                                                {children.map(
+                                                                                    (
+                                                                                        {
+                                                                                            path,
+                                                                                            label
+                                                                                        },
+                                                                                        i
+                                                                                    ) => {
+                                                                                        return (
+                                                                                            <div
+                                                                                                key={
+                                                                                                    i
+                                                                                                }
+                                                                                                className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#d85726]">
+                                                                                                <Link
+                                                                                                    href={
+                                                                                                        path
+                                                                                                    }>
+                                                                                                    <span>
+                                                                                                        {
+                                                                                                            label
+                                                                                                        }
+                                                                                                    </span>
+                                                                                                </Link>
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                )}
+                                                                            </div>
+                                                                        )}
                                                                     </div>
                                                                 );
                                                             }
@@ -447,13 +456,7 @@ export const Header = ({ pageProps }) => {
                                                             );
                                                         }
                                                     )}
-                                                    <div className="inline-block w-[28rem] pl-10 font-bold text-2xl hover:text-[#a58858]">
-                                                        <Link href="https://www.recvan.com/?utm_source=Blog&utm_medium=Nav%20Link&utm_campaign=blogtraffic">
-                                                            <span>
-                                                                Shop Now
-                                                            </span>
-                                                        </Link>
-                                                    </div>
+
                                                     <div className="px-10">
                                                         <form
                                                             role="search"
@@ -553,13 +556,13 @@ export const Header = ({ pageProps }) => {
             <div
                 key="srollTopButton"
                 style={{
-                    padding: `env(safe-area-inset-top, 50px)
-                    env(safe-area-inset-right, 50px)
-                    env(safe-area-inset-bottom, 50px)
-                    env(safe-area-inset-left, 50px)`
+                    padding: `env(safe-area-inset-top, 1.5rem)
+                    env(safe-area-inset-right, 1.5rem)
+                    env(safe-area-inset-bottom, 1.5rem)
+                    env(safe-area-inset-left, 1.5rem)`
                 }}
                 className="fixed bottom-0 right-0 p-[2em] pointer-events-none z-10">
-                <div className="p-[2em]">
+                <div className="p-6">
                     <div
                         style={{
                             willChange: 'tranform'

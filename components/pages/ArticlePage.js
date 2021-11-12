@@ -28,7 +28,7 @@ const ArticlePage = ({ pageProps }) => {
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-screen py-5 lg:py-12 flex items-end">
+                <div className="relative w-full min-h-[280px] lg:min-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
                     {imageUrl && (
                         <div
                             className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
@@ -53,7 +53,13 @@ const ArticlePage = ({ pageProps }) => {
                                 srcSet={`${imageUrl.replace(
                                     process.env.NEXT_PUBLIC_API_URL +
                                         '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/' +
+                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                        CLOUDINARY_UPLOAD_PRESET +
+                                        '/'
+                                )} 1440w,${imageUrl.replace(
+                                    process.env.NEXT_PUBLIC_API_URL +
+                                        '/wp-content/uploads/',
+                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
                                         CLOUDINARY_UPLOAD_PRESET +
                                         '/'
                                 )} 1170w, 
@@ -78,7 +84,7 @@ const ArticlePage = ({ pageProps }) => {
                                     CLOUDINARY_UPLOAD_PRESET +
                                     '/'
                             )} 270w`}
-                                sizes="(max-width: 770px) 100vw, 770px"
+                                sizes="100vw"
                             />
                         </div>
                     )}
