@@ -66,28 +66,6 @@ const getAllDataQuery = `{
       }
     }
   }
-  comments {
-    nodes {
-      id
-      author {
-        node {
-          name
-        }
-      }
-      approved
-      commentedOn {
-        node {
-          link
-          slug
-          id
-          ... on Post {
-            id
-            title
-          }
-        }
-      }
-    }
-  }
   posts(first: 999999) {
     pageInfo {
       hasNextPage
@@ -103,13 +81,9 @@ const getAllDataQuery = `{
         uri
         slug
         title
-        content
         excerpt
         utmCampaign
         displayAdImage
-        seo {
-          fullHead
-        }
         author {
           node {
             id

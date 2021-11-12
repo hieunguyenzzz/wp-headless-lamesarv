@@ -39,11 +39,12 @@ const normalize = (raw) => {
     const postsByCategory = {};
     const postsByMonth = {};
     const postsByAuthor = {};
-    const posts = postsRaw.edges.map(({ node }) => {
+    const posts = (postsRaw?.edges || []).map(({ node }) => {
         const objectDate = normalizeDate(node.date);
         const { likesCount = 0, viewsCount = 0 } = node;
         const post = {
             ...node,
+            postId: node.id,
             id: node.databaseId,
             archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
             link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
@@ -115,7 +116,7 @@ const normalize = (raw) => {
         allPaths['[...pages]'].push({
             path: post.link,
             type: 'POST',
-            params: { id: post.id, slug: post.slug }
+            params: { id: post.id, postId: post.postId, slug: post.slug }
         });
     });
 
@@ -208,7 +209,6 @@ const normalize = (raw) => {
         mainMenu: rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
         allPaths,
         recentPosts,
-        recentComments: comments.nodes,
         categories: categoriesraw.nodes,
         postEntities,
         cateEntities,
@@ -219,7 +219,6 @@ const normalize = (raw) => {
         archives,
         postsByCategory,
         app: {
-            // mainMenu: rest.menus.nodes[0].menuItems.edges,
             mainMenu:
                 rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
             generalSettings: rest.generalSettings,
