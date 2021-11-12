@@ -1,4 +1,5 @@
 import numeral from 'numeral';
+import { fixLink, fixSeoImage } from './pageProps';
 
 export const normalizeDate = (dateString) => {
     const date = new Date(dateString);
@@ -26,7 +27,7 @@ export const normalizeDate = (dateString) => {
 // };
 export const normalizePost = (node) => {
     const objectDate = normalizeDate(node.date);
-    const { likesCount = 0, viewCount: viewsCount = 0 } = node;
+    const { likesCount = 0, viewCount: viewsCount = 0, content } = node;
     const post = {
         ...node,
         postId: node.id,
@@ -35,7 +36,8 @@ export const normalizePost = (node) => {
         link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
         objectDate,
         likesCountString: numeral(likesCount).format('0 a').trim(),
-        viewsCountString: numeral(viewsCount).format('0 a').trim()
+        viewsCountString: numeral(viewsCount).format('0 a').trim(),
+        content: fixLink(fixSeoImage(content))
     };
     return post;
 };

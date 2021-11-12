@@ -31,6 +31,7 @@ function PageSearch({ pageProps }) {
     const pageNodes = data?.nodes?.map((props, i) => {
         return <ArticleCard key={i} {...props} />;
     });
+    console.log([data]);
     return (
         <Layout pageProps={pageProps}>
             <Banner
@@ -99,8 +100,8 @@ function PageSearch({ pageProps }) {
                                 {...{
                                     items: pageNodes,
                                     totalPages: Math.ceil(
-                                        data?.pageInfo.offsetPagination.total
-                                            .total / 10
+                                        data?.pageInfo.offsetPagination.total /
+                                            10
                                     ),
                                     currentPage: query?.slug
                                 }}
