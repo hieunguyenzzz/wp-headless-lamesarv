@@ -18,12 +18,10 @@ const normalizeDate = (dateString) => {
     };
 };
 const normalize = (raw) => {
-    // console.log({ raw });
     const {
         users: usersRaw,
         posts: postsRaw,
         categories: categoriesraw,
-        comments,
         ...rest
     } = raw;
     const allPaths = {
