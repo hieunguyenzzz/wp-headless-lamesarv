@@ -1,63 +1,11 @@
 import { normalizePost } from '../utils/normalize';
 import fetcher from './fetcher';
-export const postApi = async ({ postId }) => {
-    const { post } = await fetcher({
-        query: `{
-          post(id:"${postId}"){
-            viewCount
-            likesCount
-          databaseId
-          id
-          link
-          uri
-          slug
-          title
-          content
-          excerpt
-          utmCampaign
-          displayAdImage
-          seo {
-            fullHead
-          }
-          author {
-            node {
-              id
-              name
-              slug
-            }
-          }
-          featuredImage {
-            node {
-              id
-              altText
-              sourceUrl
-              mediaDetails {
-                width
-                height
-              }
-            }
-          }
-          categories {
-            edges {
-              node {
-                id
-                name
-                slug
-              }
-            }
-          }
-          date
-        }
-      }`
-    });
-    return post;
-};
+
 export const postsApi = async (search, endCursor) => {
-    const data = await fetcher({
-        query: `{
-      posts(first: 10 ${endCursor ? ', after:"' + endCursor + '"' : ''} ${
-            search ? ', where:{search:"' + search + '"}' : ''
-        }) {
+  const data = await fetcher({
+    query: `{
+      posts(first: 10 ${endCursor ? ', after:"' + endCursor + '"' : ''} ${search ? ', where:{search:"' + search + '"}' : ''
+      }) {
         pageInfo {
           hasNextPage
           endCursor
@@ -70,7 +18,6 @@ export const postsApi = async (search, endCursor) => {
             slug
             title
             excerpt
-            view_count
             utmCampaign
             displayAdImage
             featuredImage {
@@ -98,84 +45,15 @@ export const postsApi = async (search, endCursor) => {
         }
       }
     }`
-    });
-    return {
-        pageInfo: data?.posts?.pageInfo,
-        nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
-    };
-};
-export const postsByOffsetApi = async ({ search = '', offset = 0 }) => {
-    const data = await fetcher({
-        query: `{
-      posts(where: {search:"${search}", offsetPagination: { size: 10,offset:${offset} }}) {
-        pageInfo {
-          offsetPagination {
-            total
-          }
-        }
-        edges {
-          cursor
-          node {
-            viewCount
-        likesCount
-        databaseId
-        id
-        link
-        uri
-        slug
-        title
-        excerpt
-        utmCampaign
-        displayAdImage
-        author {
-          node {
-            id
-            name
-            slug
-          }
-        }
-        featuredImage {
-          node {
-            id
-            altText
-            sourceUrl
-            mediaDetails {
-              width
-              height
-            }
-          }
-        }
-        categories {
-          edges {
-            node {
-              id
-              name
-              slug
-            }
-          }
-        }
-        comments {
-          edges {
-            node {
-              id
-              content
-            }
-          }
-        }
-        date
-          }
-        }
-      }
-    }`
-    });
-    return {
-        pageInfo: data?.posts?.pageInfo,
-        nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
-    };
+  });
+  return {
+    pageInfo: data?.posts?.pageInfo,
+    nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
+  };
 };
 export const postsByDateApi = async (first = 10, endCursor, year, month) => {
-    const data = await fetcher({
-        query: `query GET_POSTS($first: Int, $endCursor: String, $dateQuery: DateQueryInput) {
+  const data = await fetcher({
+    query: `query GET_POSTS($first: Int, $endCursor: String, $dateQuery: DateQueryInput) {
         posts(first: $first, after: $endCursor , where: {dateQuery: $dateQuery}) {
           pageInfo {
             hasNextPage
@@ -216,28 +94,17 @@ export const postsByDateApi = async (first = 10, endCursor, year, month) => {
           }
         }
       }`,
-        variables: {
-            first,
-            endCursor,
-            dateQuery: {
-                year: year && Number(year),
-                month: month && Number(month)
-            }
-        }
-    });
-    return {
-        pageInfo: data?.posts?.pageInfo,
-        nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
-    };
-};
-export const insertViewCount = async ({ postId }) => {
-    const { updateViewCount } = await fetcher({
-        query: `mutation {
-        updateViewCount(input: {id: ${postId}}) {
-          view_count
-        }
-      }`,
-        variables: {}
-    });
-    return updateViewCount;
+    variables: {
+      first,
+      endCursor,
+      dateQuery: {
+        year: year && Number(year),
+        month: month && Number(month)
+      }
+    }
+  });
+  return {
+    pageInfo: data?.posts?.pageInfo,
+    nodes: data?.posts?.edges?.map(({ node }) => normalizePost(node))
+  };
 };

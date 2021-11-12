@@ -30,22 +30,15 @@ body {
     position: relative;
     min-height: 100%;
     margin: 0;
-
-    font-size: 1rem;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.66em;
-    text-transform: none;
-    @apply text-base font-body;
+    color: #272726;
 }
 
 a {
     transition-property: background-color, color;
     @apply duration-100 ease-in-out;
 }
-
 :root {
-    --header-height: 126px;
+    --header-height: 100px;
     @apply lg:text-[17px] xl:text-[18px];
 }
 
@@ -73,48 +66,9 @@ h4,
 h5,
 h6,
 h7 {
-    @apply font-heading text-heading;
+    @apply font-heading;
 }
-input[type='submit'],
-button {
-    @apply font-heading text-heading;
-}
+
 .shadow-custom {
     box-shadow: 0 3px 5px rgb(70 70 70 / 10%);
-}
-
-.animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-.fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-body.loading * {
-    transition: none !important;
 }

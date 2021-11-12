@@ -4,11 +4,10 @@ import ReactPaginate from 'react-paginate';
 export default function Paginate(props) {
     return (
         <ReactPaginate
-            key={props.initialPage}
             disableInitialCallback
             marginPagesDisplayed={2}
             nextLabel={
-                <div className="w-[40px] h-[40px] flex justify-center items-center text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#720f21] rounded transition-all">
+                <div className="w-[40px] h-[40px] flex justify-center items-center text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#6f96c5] rounded transition-all">
                     <svg
                         stroke="currentColor"
                         fill="none"
@@ -22,7 +21,7 @@ export default function Paginate(props) {
                 </div>
             }
             previousLabel={
-                <div className="w-[40px] h-[40px] flex justify-center items-center text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#720f21] rounded transition-all">
+                <div className="w-[40px] h-[40px] flex justify-center items-center text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#6f96c5] rounded transition-all">
                     <svg
                         className="transform rotate-180"
                         stroke="currentColor"
@@ -36,11 +35,11 @@ export default function Paginate(props) {
                     </svg>
                 </div>
             }
-            pageLinkClassName="w-[40px] h-[40px] flex  justify-center items-center "
-            activeClassName="!text-white !bg-[#720f21]"
-            pageRangeDisplayed={2}
-            containerClassName="flex items-center justify-between gap-4 flex-wrap "
-            pageClassName="text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#720f21] rounded transition-all"
+            pageLinkClassName="w-[40px] h-[40px] flex justify-center items-center "
+            activeClassName="!text-white !bg-[#6f96c5]"
+            pageRangeDisplayed={5}
+            containerClassName="flex items-center flex-wrap space-x-[8px]"
+            pageClassName="text-black bg-white font-body shadow-custom hover:text-white hover:bg-[#6f96c5] rounded transition-all"
             {...props}
         />
     );
@@ -48,10 +47,9 @@ export default function Paginate(props) {
 export const RouterPaginate = (props) => {
     const { query, push, pathname } = useRouter();
     const { page, ...rest } = query;
-    const initialPage = Number(page - 1);
     return (
         <Paginate
-            initialPage={initialPage}
+            initialPage={Number(page - 1)}
             disableInitialCallback
             onPageChange={({ selected }) => {
                 push({

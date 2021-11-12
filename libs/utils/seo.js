@@ -1,20 +1,19 @@
-const defaultSeo = `<!-- This site is optimized with the Yoast SEO Premium plugin v17.0 (Yoast SEO v17.0) - https://yoast.com/wordpress/plugins/seo/ -->
-<meta name="description" content="Experience Life blog. Our RV lifestyle experts provide tips and interviews about the RVing lifestyle including travel guides, cooking and entertaining. Plus reviews of RVs and gadgets">
-<link rel="canonical" href="https://experiencelife.lamesarv.com/">
-<link rel="next" href="https://experiencelife.lamesarv.com/page/2/">
-<title>RV Tips, Travel Guides and How To's Plus RV Reviews</title><meta property="og:locale" content="en_US">
+const defaultSeo = `<!-- This site is optimized with the Yoast SEO Premium plugin v17.2 (Yoast SEO v17.2.1) - https://yoast.com/wordpress/plugins/seo/ -->
+<title>My Rec Van -</title>
+<link rel="canonical" href="https://blog.recvan.com/blog">
+<link rel="next" href="https://blog.recvan.com/page/2/">
+<meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:title" content="La Mesa RV Blog">
-<meta property="og:description" content="Experience Life blog. Our RV lifestyle experts provide tips and interviews about the RVing lifestyle including travel guides, cooking and entertaining. Plus reviews of RVs and gadgets">
-<meta property="og:url" content="https://experiencelife.lamesarv.com/">
-<meta property="og:site_name" content="La Mesa RV Blog">
-<meta property="og:image" content="https://experiencelife.lamesarv.com/wp-content/uploads/2021/08/Ekko_Exterior-1-1024x576.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="576">
+<meta property="og:title" content="My Rec Van">
+<meta property="og:url" content="https://blog.recvan.com/">
+<meta property="og:site_name" content="My Rec Van">
+<meta property="og:image" content="https://blog.recvan.com/wp-content/uploads/2021/01/cropped-Untitled-design-10.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@lamesarv">
-<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://experiencelife.lamesarv.com/#website","url":"https://experiencelife.lamesarv.com/","name":"La Mesa RV Blog","description":"","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://experiencelife.lamesarv.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"CollectionPage","@id":"https://experiencelife.lamesarv.com/#webpage","url":"https://experiencelife.lamesarv.com/","name":"RV Tips, Travel Guides and How To's Plus RV Reviews","isPartOf":{"@id":"https://experiencelife.lamesarv.com/#website"},"description":"Experience Life blog. Our RV lifestyle experts provide tips and interviews about the RVing lifestyle including travel guides, cooking and entertaining. Plus reviews of RVs and gadgets","breadcrumb":{"@id":"https://experiencelife.lamesarv.com/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://experiencelife.lamesarv.com/"]}]},{"@type":"BreadcrumbList","@id":"https://experiencelife.lamesarv.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]}]}</script>
-<!-- / Yoast SEO Premium plugin. -->`;
+<meta name="twitter:site" content="@myrecvan">
+<script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/37e2b9da/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script src="//www.youtube.com/iframe_api"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://blog.recvan.com/#organization","name":"Rec Van","url":"https://blog.recvan.com/","sameAs":["https://www.facebook.com/myRecVan/","https://www.instagram.com/myrecvan/","https://www.youtube.com/channel/UCZ54nHb_M3U096WTXMpHgUw","https://twitter.com/myrecvan"],"logo":{"@type":"ImageObject","@id":"https://blog.recvan.com/#logo","inLanguage":"en-US","url":"https://blog.recvan.com/wp-content/uploads/2021/01/cropped-Untitled-design-10-1.png","contentUrl":"https://blog.recvan.com/wp-content/uploads/2021/01/cropped-Untitled-design-10-1.png","width":350,"height":223,"caption":"Rec Van"},"image":{"@id":"https://blog.recvan.com/#logo"}},{"@type":"WebSite","@id":"https://blog.recvan.com/#website","url":"https://blog.recvan.com/","name":"Rec Van","description":"","publisher":{"@id":"https://blog.recvan.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://blog.recvan.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"CollectionPage","@id":"https://blog.recvan.com/#webpage","url":"https://blog.recvan.com/","name":"My Rec Van -","isPartOf":{"@id":"https://blog.recvan.com/#website"},"about":{"@id":"https://blog.recvan.com/#organization"},"breadcrumb":{"@id":"https://blog.recvan.com/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://blog.recvan.com/"]}]},{"@type":"BreadcrumbList","@id":"https://blog.recvan.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]}]}</script>
+<!-- / Yoast SEO Premium plugin. -->z`;
 
 export const gallerySeo = `<!-- This site is optimized with the Yoast SEO Premium plugin v17.2 (Yoast SEO v17.2.1) - https://yoast.com/wordpress/plugins/seo/ -->
 <title>Gallery - My Rec Van</title>

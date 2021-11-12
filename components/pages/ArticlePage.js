@@ -1,8 +1,4 @@
-import Avartar from 'components/Avartar';
-import Tag from 'components/Tag';
-import { insertViewCount } from 'libs/apis';
-import { useEffect } from 'react';
-import { CLOUDINARY_UPLOAD_PRESET, EMAIL, HOST_URL } from '../../libs/const';
+import { EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
 import Container from '../Container';
 import Layout from '../Layout';
@@ -27,174 +23,134 @@ const ArticlePage = ({ pageProps }) => {
     };
     const imageUrl = featuredImage?.node?.sourceUrl;
     const { likesCount, onLike } = useLike(post);
-    useEffect(() => {
-        insertViewCount({ postId: post.id });
-    }, [post.id]);
-    const author = post.author?.node;
     return (
         <Layout pageProps={pageProps}>
-            <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="relative w-full min-h-[280px] lg:min-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
-                    {imageUrl && (
-                        <div
-                            className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
-                            itemScope="itemscope"
-                            itemProp="image"
-                            itemType="https://schema.org/ImageObject">
-                            <meta itemProp="width" content />
-                            <meta itemProp="height" content />
-                            <img
-                                width={770}
-                                height={434}
-                                src={imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )}
-                                className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
-                                alt={featuredImage?.node?.altText}
-                                loading="lazy"
-                                srcSet={`${imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )} 1440w,${imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )} 1170w, 
-                            ${imageUrl.replace(
-                                process.env.NEXT_PUBLIC_API_URL +
-                                    '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_770,f_auto/' +
-                                    CLOUDINARY_UPLOAD_PRESET +
-                                    '/'
-                            )} 770w, 
-                            ${imageUrl.replace(
-                                process.env.NEXT_PUBLIC_API_URL +
-                                    '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_370,f_auto/' +
-                                    CLOUDINARY_UPLOAD_PRESET +
-                                    '/'
-                            )} 370w, 
-                            ${imageUrl.replace(
-                                process.env.NEXT_PUBLIC_API_URL +
-                                    '/wp-content/uploads/',
-                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
-                                    CLOUDINARY_UPLOAD_PRESET +
-                                    '/'
-                            )} 270w`}
-                                sizes="100vw"
-                            />
-                        </div>
-                    )}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000a8] to-transparent"></div>
-                    <Container className="relative">
-                        <div className="flex flex-col items-start text-left text-white ">
-                            <div className="mb-[0.5em] flex flex-wrap gap-3 xl:gap-[19px] ]">
-                                {post.categories?.edges?.map(
-                                    ({ node: cate }, i) => (
-                                        <Tag
-                                            key={i}
+            <div className="py-10 lg:py-[3.8em] text-[18px]">
+                <Container className="lg:mb-[4em]">
+                    <div className="mb-[3.8em] text-center flex flex-col items-center">
+                        <div className="mb-[1em] space-x-3 xl:space-x-[19px] ]">
+                            {post.categories?.edges?.map(
+                                ({ node: cate }, i) => (
+                                    <span
+                                        key={i}
+                                        className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#a58858] text-[13px]">
+                                        <Link
                                             href={`/category/${cate.slug}/`}
-                                            label={cate.name}
-                                            className="inline-block px-3 py-1 text-sm text-white bg-opacity-100 rounded bg-primary hover:bg-secondary"
-                                        />
-                                    )
-                                )}
-                            </div>
-                            <h1
-                                style={{
-                                    textShadow: '2px 1px black'
-                                }}
-                                className="text-2xl md:text-3xl text-white lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
-                                itemProp="headline">
-                                {post.title}
-                            </h1>
-                            <div className="mt-[1.65em] gap-6 lg:gap-6 text-sm flex flex-wrap items-baseline">
-                                <Link
-                                    className="flex items-center font-bold text-white hover:text-opacity-70"
-                                    rel="author"
-                                    href={`/author/${post.author.node.slug}`}>
-                                    <span className="inline-block mr-1 align-middle ">
-                                        <div className="h-[13px] w-[28px] inline-flex items-center relative">
-                                            <Avartar
-                                                author={post?.author?.node}
-                                            />
-                                        </div>
+                                            rel="category tag">
+                                            {cate.name}
+                                        </Link>
                                     </span>
-                                    <span className="truncate post_author_name">
-                                        {post.author.node.name}
+                                )
+                            )}
+                        </div>
+                        <h1
+                            className="text-3xl lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%]"
+                            itemProp="headline">
+                            {post.title}
+                        </h1>
+                        <div className="mt-[2.65em] space-x-3 xl:space-x-[19px] text-[13px] flex flex-wrap items-baseline">
+                            <Link
+                                className="flex items-center hover:text-[#6f96c5]"
+                                rel="author"
+                                href={`/author/${post.author.node.slug}`}>
+                                <span className="mr-[11px] align-middle inline-block ">
+                                    <img
+                                        alt
+                                        src="https://secure.gravatar.com/avatar/0b9956a2b16aab3a656b4166a2bc65a8?s=56&d=mm&r=g"
+                                        srcSet="https://secure.gravatar.com/avatar/0b9956a2b16aab3a656b4166a2bc65a8?s=112&d=mm&r=g 2x"
+                                        className="w-[28px] h-[28px] rounded-full overflow-hidden inline"
+                                        height={56}
+                                        width={56}
+                                        loading="lazy"
+                                    />
+                                </span>
+                                <span className="truncate post_author_name">
+                                    {post.author.node.name}
+                                </span>
+                            </Link>{' '}
+                            <span className="inline-block mt-3 text-sm ">
+                                <span className="flex items-baseline ">
+                                    <span className="self-center inline-block mr-1">
+                                        <svg
+                                            stroke="currentColor"
+                                            fill="none"
+                                            strokeWidth={2}
+                                            viewBox="0 0 24 24"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            height="1em"
+                                            width="1em"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx={12} cy={12} r={10} />
+                                            <polyline points="12 6 12 12 16 14" />
+                                        </svg>
                                     </span>
-                                </Link>{' '}
-                                <span className="inline-block text-sm ">
-                                    <span className="flex items-baseline leading-[15px]">
-                                        <span className="self-center inline-block mr-1 text-[15px]">
-                                            <svg
-                                                stroke="currentColor"
-                                                fill="none"
-                                                strokeWidth={2}
-                                                viewBox="0 0 24 24"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                height="1em"
-                                                width="1em"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <circle
-                                                    cx={12}
-                                                    cy={12}
-                                                    r={10}
-                                                />
-                                                <polyline points="12 6 12 12 16 14" />
-                                            </svg>
-                                        </span>
-                                        <span className="leading-[15px] font-bold">
-                                            {new Date(
-                                                post.date
-                                            ).toLocaleDateString('en-US', {
+                                    <span className="leading-none text-[13px] mt-px">
+                                        {new Date(post.date).toLocaleDateString(
+                                            'en-US',
+                                            {
                                                 year: 'numeric',
                                                 month: 'long',
                                                 day: 'numeric'
-                                            })}
-                                        </span>
+                                            }
+                                        )}
                                     </span>
                                 </span>
-                            </div>{' '}
-                        </div>
-                    </Container>
-                </div>
-                <Container className="flex mt-[2em] lg:mt-[3.8em] flex-col lg:flex-row lg:space-x-[30px]  gap-y-16    items-start">
+                            </span>
+                        </div>{' '}
+                    </div>
+                    <div
+                        className="mx-auto "
+                        itemScope="itemscope"
+                        itemProp="image"
+                        itemType="https://schema.org/ImageObject">
+                        <meta itemProp="width" content />
+                        <meta itemProp="height" content />
+                        <img
+                            width={770}
+                            height={434}
+                            src={imageUrl.replace(
+                                process.env.NEXT_PUBLIC_API_URL +
+                                '/wp-content/uploads/',
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/rec-van-assets/'
+                            )}
+                            className="w-full object-contain bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
+                            alt={featuredImage?.node?.altText}
+                            loading="lazy"
+                            srcSet={`${imageUrl.replace(
+                                process.env.NEXT_PUBLIC_API_URL +
+                                '/wp-content/uploads/',
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_1170,f_auto/rec-van-assets/'
+                            )} 1170w, 
+                            ${imageUrl.replace(
+                                process.env.NEXT_PUBLIC_API_URL +
+                                '/wp-content/uploads/',
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_770,f_auto/rec-van-assets/'
+                            )} 770w, 
+                            ${imageUrl.replace(
+                                process.env.NEXT_PUBLIC_API_URL +
+                                '/wp-content/uploads/',
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_370,f_auto/rec-van-assets/'
+                            )} 370w, 
+                            ${imageUrl.replace(
+                                process.env.NEXT_PUBLIC_API_URL +
+                                '/wp-content/uploads/',
+                                'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                            )} 270w`}
+                            sizes="(max-width: 770px) 100vw, 770px"
+                        />
+                    </div>
+                </Container>
+
+                <Container className="flex flex-col lg:flex-row lg:space-x-[30px]  gap-y-16 items-start">
                     <div className="flex-1">
                         <article
                             className="max-w-full prose"
                             dangerouslySetInnerHTML={{
                                 __html: post.content
                                     .replace(/-[0-9]{3}x[0-9]{3}\.jpg/g, '.jpg')
-                                    .replace(
-                                        new RegExp(
-                                            process.env.NEXT_PUBLIC_API_URL +
-                                                'wp-content/uploads/',
-                                            'g'
-                                        ),
-                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/' +
-                                            CLOUDINARY_UPLOAD_PRESET +
-                                            '/'
-                                    )
-                                    .replace(
-                                        new RegExp(
-                                            'https://myrecvan.com/wp-content/uploads/',
-                                            'g'
-                                        ),
-                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/' +
-                                            CLOUDINARY_UPLOAD_PRESET +
-                                            '/'
-                                    )
+                                    .replace(new RegExp(process.env.NEXT_PUBLIC_API_URL + 'wp-content/uploads/', 'g'), 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/')
+                                    .replace(new RegExp('https://myrecvan.com/wp-content/uploads/', 'g'), 'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/v1/rec-van-assets/')
                             }}
                         />
                         <div className="space-y-[2.5em] py-[2.5em]">
@@ -205,7 +161,7 @@ const ArticlePage = ({ pageProps }) => {
                                         onClick={() => {
                                             onLike();
                                         }}
-                                        className="inline-flex rounded w-[46px] h-[46px] bg-[#E5D8CE] align-middle mr-[12px] text-[#720f21] group-hover:text-white  justify-center items-center">
+                                        className="inline-flex rounded w-[46px] h-[46px] bg-[#E5D8CE] align-middle mr-[12px] text-[#6f96c5] group-hover:text-white  justify-center items-center">
                                         <svg
                                             stroke="currentColor"
                                             fill="currentColor"
@@ -217,10 +173,10 @@ const ArticlePage = ({ pageProps }) => {
                                             <path d="M349.6 64c-36.4 0-70.7 16.7-93.6 43.9C233.1 80.7 198.8 64 162.4 64 97.9 64 48 114.2 48 179.1c0 79.5 70.7 143.3 177.8 241.7L256 448l30.2-27.2C393.3 322.4 464 258.6 464 179.1 464 114.2 414.1 64 349.6 64zm-80.8 329.3l-4.2 3.9-8.6 7.8-8.6-7.8-4.2-3.9c-50.4-46.3-94-86.3-122.7-122-28-34.7-40.4-63.1-40.4-92.2 0-22.9 8.4-43.9 23.7-59.3 15.2-15.4 36-23.8 58.6-23.8 26.1 0 52 12.2 69.1 32.5l24.5 29.1 24.5-29.1c17.1-20.4 43-32.5 69.1-32.5 22.6 0 43.4 8.4 58.7 23.8 15.3 15.4 23.7 36.5 23.7 59.3 0 29-12.5 57.5-40.4 92.2-28.8 35.7-72.3 75.7-122.8 122z" />
                                         </svg>
                                     </button>
-                                    <span className="mr-2 group-hover:text-[#720f21]">
+                                    <span className="mr-2 group-hover:text-[#6f96c5]">
                                         {likesCount}
                                     </span>
-                                    <span className="mr-2 group-hover:text-[#720f21]">
+                                    <span className="mr-2 group-hover:text-[#6f96c5]">
                                         likes
                                     </span>
                                 </div>
@@ -273,7 +229,7 @@ const ArticlePage = ({ pageProps }) => {
                                     </a>
                                     <a
                                         href={`mailto:${EMAIL}?subject=Why%20Your%20Van%20Needs%20a%20Fall%20Cleaning&body=https%3A%2F%2Fmyrecvan.com%2F2021%2F09%2Fwhy-your-van-needs-a-fall-cleaning%2F`}
-                                        className="text-white inline-flex justify-center items-center rounded w-[46px] h-[46px] bg-[#720f21] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
+                                        className="text-white inline-flex justify-center items-center rounded w-[46px] h-[46px] bg-[#6f96c5] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
                                         <svg
                                             stroke="currentColor"
                                             fill="currentColor"
@@ -318,7 +274,7 @@ const ArticlePage = ({ pageProps }) => {
                                                 });
                                             return false;
                                         }}
-                                        className="text-white inline-flex justify-center  group relative items-center rounded w-[46px] h-[46px] bg-[#720f21] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
+                                        className="text-white inline-flex justify-center  group relative items-center rounded w-[46px] h-[46px] bg-[#6f96c5] hover:bg-[#E5D8CE] cursor-pointer align-middle ">
                                         <div
                                             hidden
                                             className="absolute text-black transition-opacity opacity-0 pointer-events-none bottom-full group-hover:opacity-100">
@@ -344,7 +300,7 @@ const ArticlePage = ({ pageProps }) => {
                                     post && (
                                         <Link
                                             href={post.link}
-                                            className="lg:flex col-start-1 col-end-2 lg:space-x-4 hover:text-[#720f21]">
+                                            className="lg:flex col-start-1 col-end-2 lg:space-x-4 hover:text-[#6f96c5]">
                                             <div className="relative lg:max-w-[118px] w-full flex-shrink-0 mb-5">
                                                 <div className="w-full pt-[70%] lg:pt-[100%]" />
                                                 <img
@@ -353,14 +309,12 @@ const ArticlePage = ({ pageProps }) => {
                                                     src={post?.featuredImage?.node?.sourceUrl.replace(
                                                         process.env
                                                             .NEXT_PUBLIC_API_URL +
-                                                            '/wp-content/uploads/',
-                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
-                                                            CLOUDINARY_UPLOAD_PRESET +
-                                                            '/'
+                                                        '/wp-content/uploads/',
+                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
                                                     )}></img>
                                             </div>
                                             <div className="flex flex-col space-y-3">
-                                                <div className="flex items-center space-x-1 font-bold text-[#720f21]">
+                                                <div className="flex items-center space-x-1 font-bold text-[#6f96c5]">
                                                     <div className="height-[20px]">
                                                         <svg
                                                             className="transform rotate-180"
@@ -388,26 +342,22 @@ const ArticlePage = ({ pageProps }) => {
                                     post && (
                                         <Link
                                             href={post.link}
-                                            className="lg:flex col-start-2 col-end-3 lg:space-x-4 hover:text-[#720f21] flex-row-reverse lg:space-x-reverse">
+                                            className="lg:flex col-start-2 col-end-3 lg:space-x-4 hover:text-[#6f96c5] flex-row-reverse lg:space-x-reverse">
                                             <div className="relative lg:max-w-[118px] w-full flex-shrink-0 mb-5">
                                                 <div className="w-full pt-[70%] lg:pt-[100%]" />
-                                                {post?.featuredImage?.node
-                                                    ?.sourceUrl && (
-                                                    <img
-                                                        loading="lazy"
-                                                        className="absolute inset-0 object-cover w-full h-full overflow-hidden rounded"
-                                                        src={post?.featuredImage?.node?.sourceUrl.replace(
-                                                            process.env
-                                                                .NEXT_PUBLIC_API_URL +
-                                                                '/wp-content/uploads/',
-                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
-                                                                CLOUDINARY_UPLOAD_PRESET +
-                                                                '/'
-                                                        )}></img>
-                                                )}
+                                                {post?.featuredImage?.node?.sourceUrl && <img
+                                                    loading="lazy"
+                                                    className="absolute inset-0 object-cover w-full h-full overflow-hidden rounded"
+                                                    src={post?.featuredImage?.node?.sourceUrl.replace(
+                                                        process.env
+                                                            .NEXT_PUBLIC_API_URL +
+                                                        '/wp-content/uploads/',
+                                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
+                                                    )}></img>}
+
                                             </div>
                                             <div className="flex flex-col items-end space-y-3 text-right">
-                                                <div className="flex items-center space-x-1 space-x-reverse flex-row-reverse font-bold text-[#720f21]">
+                                                <div className="flex items-center space-x-1 space-x-reverse flex-row-reverse font-bold text-[#6f96c5]">
                                                     <div className="height-[20px]">
                                                         <svg
                                                             stroke="currentColor"
@@ -430,38 +380,12 @@ const ArticlePage = ({ pageProps }) => {
                                             </div>
                                         </Link>
                                     ))({
-                                    post: nextPost
-                                })}
-                            </div>
-                        </div>
-                        <div
-                            className="p-6 lg:p-12 bg-[#ffdabc] rounded flex gap-6 lg:gap-8"
-                            itemProp="author"
-                            itemScope="itemscope"
-                            itemType="https://schema.org/Person">
-                            <div
-                                className="w-[120px] h-[120px] rounded-full mb-[1em] relative overflow-hidden"
-                                itemProp="image">
-                                <div className="h-[120px] w-[120px] inline-flex items-center relative">
-                                    <Avartar size={120} />
-                                </div>
-                            </div>
-                            <div className="space-y-6">
-                                <h4
-                                    className="font-heading text-[25px] font-bold"
-                                    itemProp="name">
-                                    <span>{author.name}</span>
-                                </h4>
-                                <Link
-                                    href={`/author/${post.author.node.slug}`}
-                                    className="font-bold author_bio text-[#720f21] hover:text-base"
-                                    itemProp="description">
-                                    View all Posts
-                                </Link>
+                                        post: nextPost
+                                    })}
                             </div>
                         </div>
                         {/* <Comments post={post} /> */}
-                        <section className="my-[2.5em] p-[20px] lg:p-[30px] shadow rounded">
+                        <section className="my-[2.5em] p-[20px] lg:p-[30px] bg-[#c0b9a8] rounded">
                             <h3 className="text-[22px] mb-[1em] font-bold">
                                 You May Also Like
                             </h3>
@@ -478,31 +402,33 @@ const ArticlePage = ({ pageProps }) => {
                                                         src={post?.featuredImage?.node?.sourceUrl.replace(
                                                             process.env
                                                                 .NEXT_PUBLIC_API_URL +
-                                                                '/wp-content/uploads/',
-                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/' +
-                                                                CLOUDINARY_UPLOAD_PRESET +
-                                                                '/'
+                                                            '/wp-content/uploads/',
+                                                            'https://res.cloudinary.com/la-mesa-rv/image/upload/w_270,f_auto/rec-van-assets/'
                                                         )}></img>
                                                 </div>
                                                 <div className="post_header entry-header">
-                                                    <h6 className="font-bold hover:text-[#720f21]">
+                                                    <h6 className="font-bold hover:text-[#6f96c5]">
                                                         <Link href={post.link}>
                                                             {post.title}
                                                         </Link>
                                                     </h6>
-                                                    <div className="mb-[1em] mt-3 flex flex-wrap gap-2">
+                                                    <div className="mb-[1em] space-x-3 xl:space-x-[19px]">
                                                         {post.categories?.edges?.map(
                                                             (
                                                                 { node: cate },
                                                                 i
                                                             ) => (
-                                                                <Tag
+                                                                <span
                                                                     key={i}
-                                                                    href={`/category/${cate.slug}/`}
-                                                                    label={
-                                                                        cate.name
-                                                                    }
-                                                                    rel="category tag"></Tag>
+                                                                    className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#a58858] text-[13px]">
+                                                                    <Link
+                                                                        href={`/category/${cate.slug}/`}
+                                                                        rel="category tag">
+                                                                        {
+                                                                            cate.name
+                                                                        }
+                                                                    </Link>
+                                                                </span>
                                                             )
                                                         )}
                                                     </div>
