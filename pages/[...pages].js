@@ -20,7 +20,9 @@ export async function getStaticProps(context) {
     const props = getDynamicPageProps(context);
     switch (props.pageDetail.type) {
         case 'POST':
-            props.post = await postApi({ postId: 'cG9zdDoyMDA3Nw==' });
+            props.post = await postApi({
+                postId: props.pageDetail.params.postId
+            });
             props.seo = fixSeoImage(props.post.seo.fullHead);
             break;
         case 'YEAR':
