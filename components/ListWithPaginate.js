@@ -24,6 +24,7 @@ function ListWithPaginate({
             {totalPages > 1 && (
                 <div className="flex items-center justify-center w-full">
                     <Paginate
+                        key={router}
                         initialPage={currentPage - 1}
                         scroll={false}
                         shallow={true}

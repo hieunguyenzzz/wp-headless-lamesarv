@@ -15,8 +15,8 @@ function PageSearch({ pageProps }) {
     const router = useRouter();
     const { query } = router;
     const { pathDetail } = pageProps;
-    const { data, ...rest } = useSWR(
-        [query.s, pathDetail?.currentPage * 10],
+    const { data } = useSWR(
+        [query.s, (pathDetail?.currentPage - 1) * 10],
         useCallback(
             async (search, offset) =>
                 await postsByOffsetApi({
@@ -31,7 +31,6 @@ function PageSearch({ pageProps }) {
     const pageNodes = data?.nodes?.map((props, i) => {
         return <ArticleCard key={i} {...props} />;
     });
-    console.log([data, rest]);
     return (
         <Layout pageProps={pageProps}>
             <Banner
