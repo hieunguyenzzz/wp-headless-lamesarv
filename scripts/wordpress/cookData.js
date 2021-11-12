@@ -1,6 +1,7 @@
 require('dotenv').config();
 // var raw = require('./raw.json');
 var defaultData = require('./app.json');
+var numeral = require('numeral');
 // console.log({ raw });
 const normalizeDate = (dateString) => {
     const date = new Date(dateString);
@@ -16,16 +17,30 @@ const normalizeDate = (dateString) => {
         year
     };
 };
+const normalizePost = (node) => {
+    const objectDate = normalizeDate(node.date);
+    const { likesCount = 0, viewCount: viewsCount = 0 } = node;
+    const post = {
+        ...node,
+        postId: node.id,
+        id: node.databaseId,
+        archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
+        link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
+        objectDate,
+        likesCountString: numeral(likesCount).format('0 a').trim(),
+        viewsCountString: numeral(viewsCount).format('0 a').trim()
+    };
+    return post;
+};
 const normalize = (raw) => {
-    // console.log({ raw });
     const {
         users: usersRaw,
         posts: postsRaw,
         categories: categoriesraw,
-        comments,
         ...rest
     } = raw;
     const allPaths = {
+        homepage: [],
         category: [],
         author: [],
         ['[...pages]']: []
@@ -37,16 +52,8 @@ const normalize = (raw) => {
     const postsByCategory = {};
     const postsByMonth = {};
     const postsByAuthor = {};
-    const posts = postsRaw.edges.map(({ node }) => {
-        const objectDate = normalizeDate(node.date);
-        const post = {
-            ...node,
-            id: node.databaseId,
-            archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
-            link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
-            objectDate
-        };
-        return post;
+    const posts = (postsRaw?.edges || []).map(({ node }) => {
+        return normalizePost(node);
     });
 
     const users = usersRaw.nodes;
@@ -64,7 +71,7 @@ const normalize = (raw) => {
         );
         const totalPages = Math.ceil(postsByCate.length / 10);
         const postsByPage = postsByCate.reduce((result, post, index) => {
-            const page = Math.ceil(index / 10);
+            const page = Math.floor(index / 10) + 1;
             result[page] = result[page] || [];
             result[page].push(post.id);
             return result;
@@ -110,7 +117,7 @@ const normalize = (raw) => {
         allPaths['[...pages]'].push({
             path: post.link,
             type: 'POST',
-            params: { id: post.id, slug: post.slug }
+            params: { id: post.id, postId: post.postId, slug: post.slug }
         });
     });
 
@@ -177,13 +184,32 @@ const normalize = (raw) => {
         });
         allPaths.author = [...allPaths.author, ...paths];
     });
-    const recentPosts = posts.slice(0, 5);
+
+    posts.forEach((post, i, arr) => {
+        const totalPages = Math.ceil(arr.length / 10);
+        const paths = new Array(totalPages).fill(true).map((_, i) => {
+            const page = i + 1;
+            return {
+                currentPage: page,
+                path: `/${page}`,
+                params: { page },
+                posts: posts
+                    .filter((key, index) => {
+                        return Math.ceil(index / 10) === page;
+                    })
+                    .map(({ id }) => id),
+                totalPages
+            };
+        });
+        allPaths.homepage = [...allPaths.homepage, ...paths];
+    });
+
+    const recentPosts = posts.slice(0, 10);
     return {
         ...defaultData,
-        mainMenu: rest.menus.nodes[0].menuItems.edges,
+        mainMenu: rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
         allPaths,
         recentPosts,
-        recentComments: comments.nodes,
         categories: categoriesraw.nodes,
         postEntities,
         cateEntities,
@@ -194,8 +220,10 @@ const normalize = (raw) => {
         archives,
         postsByCategory,
         app: {
-            mainMenu: rest.menus.nodes[0].menuItems.edges,
-            generalSettings: rest.generalSettings
+            mainMenu:
+                rest.menus.nodes[0]?.menuItems?.edges || defaultData.mainMenu,
+            generalSettings: rest.generalSettings,
+            copyright: defaultData.copyright
         }
     };
 };

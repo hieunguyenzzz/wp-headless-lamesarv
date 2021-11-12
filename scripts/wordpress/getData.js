@@ -66,29 +66,7 @@ const getAllDataQuery = `{
       }
     }
   }
-  comments {
-    nodes {
-      id
-      author {
-        node {
-          name
-        }
-      }
-      approved
-      commentedOn {
-        node {
-          link
-          slug
-          id
-          ... on Post {
-            id
-            title
-          }
-        }
-      }
-    }
-  }
-  posts(first: 99999) {
+  posts(first: 999999) {
     pageInfo {
       hasNextPage
       endCursor
@@ -96,6 +74,7 @@ const getAllDataQuery = `{
     edges {
       cursor
       node {
+        viewCount
         likesCount
         databaseId
         id
@@ -103,13 +82,9 @@ const getAllDataQuery = `{
         uri
         slug
         title
-        content
         excerpt
         utmCampaign
         displayAdImage
-        seo {
-          fullHead
-        }
         author {
           node {
             id
@@ -191,6 +166,7 @@ async function fetcher({ query, variables = {} }) {
     });
 
     const { data } = await res.json();
+
     return data;
 }
 const getData = async () => {

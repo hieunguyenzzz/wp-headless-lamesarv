@@ -8,17 +8,20 @@ const getAllData = async () => {
             console.error(err);
             return;
         }
-        console.log('writed!');
+        console.log('data/raw.json writed!');
     });
     const data = await normalize(raw);
-    fs.writeFile('data/cookedData.json', JSON.stringify(data, null, 2), (err) => {
-        if (err) {
-            console.error(err);
-            return;
+    fs.writeFile(
+        'data/cookedData.json',
+        JSON.stringify(data, null, 2),
+        (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log('data/cookedData.json writed!');
         }
-        console.log('writed!');
-    });
+    );
     return data;
 };
 getAllData();
-

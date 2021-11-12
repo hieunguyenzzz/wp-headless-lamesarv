@@ -1,8 +1,9 @@
+import { postApi } from 'libs/apis';
+import { normalizePost } from 'libs/utils/normalize';
 import ArchivePage from '../components/pages/ArchivePage';
 import ArticlePage from '../components/pages/ArticlePage';
 import cookedData from '../data/cookedData.json';
-import { getDynamicPageProps } from '../libs/utils/pageProps';
-
+import { fixSeoImage, getDynamicPageProps } from '../libs/utils/pageProps';
 
 export default function Pages(props) {
     switch (props.pageProps.pageDetail.type) {
@@ -16,13 +17,26 @@ export default function Pages(props) {
     }
 }
 
-
 export async function getStaticProps(context) {
-    return {
-        props: getDynamicPageProps(context)
+    const props = getDynamicPageProps(context);
+    switch (props.pageDetail.type) {
+        case 'POST':
+            props.post = normalizePost(
+                await postApi({
+                    postId: props.pageDetail.params.postId
+                })
+            );
+            props.seo = fixSeoImage(props.post.seo.fullHead);
+            break;
+        case 'YEAR':
+        case 'MONTH':
+        default:
+            break;
     }
+    return {
+        props
+    };
 }
-
 
 export async function getStaticPaths() {
     const pages = cookedData.allPaths['[...pages]'];
