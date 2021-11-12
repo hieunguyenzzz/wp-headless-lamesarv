@@ -15,7 +15,7 @@ function PageSearch({ pageProps }) {
     const router = useRouter();
     const { query } = router;
     const { pathDetail } = pageProps;
-    const { data } = useSWR(
+    const { data, ...rest } = useSWR(
         [query.s, pathDetail?.currentPage * 10],
         useCallback(
             async (search, offset) =>
@@ -31,7 +31,7 @@ function PageSearch({ pageProps }) {
     const pageNodes = data?.nodes?.map((props, i) => {
         return <ArticleCard key={i} {...props} />;
     });
-    console.log([data]);
+    console.log([data, rest]);
     return (
         <Layout pageProps={pageProps}>
             <Banner
