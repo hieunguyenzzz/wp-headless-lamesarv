@@ -17,6 +17,21 @@ const normalizeDate = (dateString) => {
         year
     };
 };
+const normalizePost = (node) => {
+    const objectDate = normalizeDate(node.date);
+    const { likesCount = 0, viewCount: viewsCount = 0 } = node;
+    const post = {
+        ...node,
+        postId: node.id,
+        id: node.databaseId,
+        archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
+        link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
+        objectDate,
+        likesCountString: numeral(likesCount).format('0 a').trim(),
+        viewsCountString: numeral(viewsCount).format('0 a').trim()
+    };
+    return post;
+};
 const normalize = (raw) => {
     const {
         users: usersRaw,
@@ -38,19 +53,7 @@ const normalize = (raw) => {
     const postsByMonth = {};
     const postsByAuthor = {};
     const posts = (postsRaw?.edges || []).map(({ node }) => {
-        const objectDate = normalizeDate(node.date);
-        const { likesCount = 0, viewsCount = 0 } = node;
-        const post = {
-            ...node,
-            postId: node.id,
-            id: node.databaseId,
-            archiveUrl: `/${objectDate.year}/${objectDate.month}/${node.slug}`,
-            link: node.uri.replace(process.env.NEXT_PUBLIC_API_URL, ''),
-            objectDate,
-            likesCountString: numeral(likesCount).format('0 a').trim(),
-            viewsCountString: numeral(viewsCount).format('0 a').trim()
-        };
-        return post;
+        return normalizePost(node);
     });
 
     const users = usersRaw.nodes;

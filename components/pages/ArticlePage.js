@@ -1,5 +1,7 @@
 import Avartar from 'components/Avartar';
 import Tag from 'components/Tag';
+import { insertViewCount } from 'libs/apis';
+import { useEffect } from 'react';
 import { CLOUDINARY_UPLOAD_PRESET, EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
 import Container from '../Container';
@@ -25,6 +27,10 @@ const ArticlePage = ({ pageProps }) => {
     };
     const imageUrl = featuredImage?.node?.sourceUrl;
     const { likesCount, onLike } = useLike(post);
+    useEffect(() => {
+        insertViewCount({ postId: post.id });
+    }, [post.id]);
+    const author = post.author?.node;
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
@@ -428,8 +434,34 @@ const ArticlePage = ({ pageProps }) => {
                                 })}
                             </div>
                         </div>
+                        <div
+                            className="p-6 lg:p-12 bg-[#ffdabc] rounded flex gap-6 lg:gap-8"
+                            itemProp="author"
+                            itemScope="itemscope"
+                            itemType="https://schema.org/Person">
+                            <div
+                                className="w-[120px] h-[120px] rounded-full mb-[1em] relative overflow-hidden"
+                                itemProp="image">
+                                <div className="h-[120px] w-[120px] inline-flex items-center relative">
+                                    <Avartar size={120} />
+                                </div>
+                            </div>
+                            <div className="space-y-6">
+                                <h4
+                                    className="font-heading text-[25px] font-bold"
+                                    itemProp="name">
+                                    <span>{author.name}</span>
+                                </h4>
+                                <Link
+                                    href={`/author/${post.author.node.slug}`}
+                                    className="font-bold author_bio text-[#720f21] hover:text-base"
+                                    itemProp="description">
+                                    View all Posts
+                                </Link>
+                            </div>
+                        </div>
                         {/* <Comments post={post} /> */}
-                        <section className="my-[2.5em] p-[20px] lg:p-[30px] bg-[#c0b9a8] rounded">
+                        <section className="my-[2.5em] p-[20px] lg:p-[30px] shadow rounded">
                             <h3 className="text-[22px] mb-[1em] font-bold">
                                 You May Also Like
                             </h3>
@@ -464,17 +496,13 @@ const ArticlePage = ({ pageProps }) => {
                                                                 { node: cate },
                                                                 i
                                                             ) => (
-                                                                <span
+                                                                <Tag
                                                                     key={i}
-                                                                    className="bg-white leading-[1.15em] rounded-[5px] px-[12px] py-[6px] text-[#122947] inline-block  hover:text-white hover:bg-[#720f21] text-[13px]">
-                                                                    <Link
-                                                                        href={`/category/${cate.slug}/`}
-                                                                        rel="category tag">
-                                                                        {
-                                                                            cate.name
-                                                                        }
-                                                                    </Link>
-                                                                </span>
+                                                                    href={`/category/${cate.slug}/`}
+                                                                    label={
+                                                                        cate.name
+                                                                    }
+                                                                    rel="category tag"></Tag>
                                                             )
                                                         )}
                                                     </div>

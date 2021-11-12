@@ -4,6 +4,7 @@ export const postApi = async ({ postId }) => {
     const { post } = await fetcher({
         query: `{
           post(id:"${postId}"){
+            viewCount
             likesCount
           databaseId
           id
@@ -69,6 +70,7 @@ export const postsApi = async (search, endCursor) => {
             slug
             title
             excerpt
+            view_count
             utmCampaign
             displayAdImage
             featuredImage {
@@ -114,34 +116,53 @@ export const postsByOffsetApi = async ({ search = '', offset = 0 }) => {
         edges {
           cursor
           node {
+            viewCount
+        likesCount
+        databaseId
+        id
+        link
+        uri
+        slug
+        title
+        excerpt
+        utmCampaign
+        displayAdImage
+        author {
+          node {
             id
-            link
+            name
             slug
-            title
-            excerpt
-            utmCampaign
-            displayAdImage
-            featuredImage {
-              node {
-                id
-                altText
-                sourceUrl     
-                mediaDetails{
-                  width
-                  height
-               }   
-              }
+          }
+        }
+        featuredImage {
+          node {
+            id
+            altText
+            sourceUrl
+            mediaDetails {
+              width
+              height
             }
-            categories {
-              edges {
-                node {
-                  id
-                  name
-                  slug
-                }
-              }
+          }
+        }
+        categories {
+          edges {
+            node {
+              id
+              name
+              slug
             }
-            date
+          }
+        }
+        comments {
+          edges {
+            node {
+              id
+              content
+            }
+          }
+        }
+        date
           }
         }
       }

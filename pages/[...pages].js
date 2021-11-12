@@ -1,4 +1,5 @@
 import { postApi } from 'libs/apis';
+import { normalizePost } from 'libs/utils/normalize';
 import ArchivePage from '../components/pages/ArchivePage';
 import ArticlePage from '../components/pages/ArticlePage';
 import cookedData from '../data/cookedData.json';
@@ -20,9 +21,11 @@ export async function getStaticProps(context) {
     const props = getDynamicPageProps(context);
     switch (props.pageDetail.type) {
         case 'POST':
-            props.post = await postApi({
-                postId: props.pageDetail.params.postId
-            });
+            props.post = normalizePost(
+                await postApi({
+                    postId: props.pageDetail.params.postId
+                })
+            );
             props.seo = fixSeoImage(props.post.seo.fullHead);
             break;
         case 'YEAR':
