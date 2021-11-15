@@ -37,41 +37,42 @@ const ArticlePage = ({ pageProps }) => {
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
-                    {imageUrl && (
-                        <div
-                            className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
-                            itemScope="itemscope"
-                            itemProp="image"
-                            itemType="https://schema.org/ImageObject">
-                            <meta itemProp="width" content />
-                            <meta itemProp="height" content />
-                            <img
-                                width={770}
-                                height={434}
-                                src={imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )}
-                                className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
-                                alt={featuredImage?.node?.altText}
-                                loading="lazy"
-                                srcSet={`${imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )} 1440w,${imageUrl.replace(
-                                    process.env.NEXT_PUBLIC_API_URL +
-                                        '/wp-content/uploads/',
-                                    'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
-                                        CLOUDINARY_UPLOAD_PRESET +
-                                        '/'
-                                )} 1170w, 
+                <div className="container max-w-[1620px] w-full mx-auto  px-6 lg:px-[50px]">
+                    <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
+                        {imageUrl && (
+                            <div
+                                className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
+                                itemScope="itemscope"
+                                itemProp="image"
+                                itemType="https://schema.org/ImageObject">
+                                <meta itemProp="width" content />
+                                <meta itemProp="height" content />
+                                <img
+                                    width={770}
+                                    height={434}
+                                    src={imageUrl.replace(
+                                        process.env.NEXT_PUBLIC_API_URL +
+                                            '/wp-content/uploads/',
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                            CLOUDINARY_UPLOAD_PRESET +
+                                            '/'
+                                    )}
+                                    className="w-full bg-gray-100 h-full object-cover bg-gray-100 transform transition-transform duration-1000 ease-in-out group-hover:scale-105 z-[-1]"
+                                    alt={featuredImage?.node?.altText}
+                                    loading="lazy"
+                                    srcSet={`${imageUrl.replace(
+                                        process.env.NEXT_PUBLIC_API_URL +
+                                            '/wp-content/uploads/',
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                            CLOUDINARY_UPLOAD_PRESET +
+                                            '/'
+                                    )} 1440w,${imageUrl.replace(
+                                        process.env.NEXT_PUBLIC_API_URL +
+                                            '/wp-content/uploads/',
+                                        'https://res.cloudinary.com/la-mesa-rv/image/upload/f_auto/' +
+                                            CLOUDINARY_UPLOAD_PRESET +
+                                            '/'
+                                    )} 1170w, 
                             ${imageUrl.replace(
                                 process.env.NEXT_PUBLIC_API_URL +
                                     '/wp-content/uploads/',
@@ -93,85 +94,87 @@ const ArticlePage = ({ pageProps }) => {
                                     CLOUDINARY_UPLOAD_PRESET +
                                     '/'
                             )} 270w`}
-                                sizes="100vw"
-                            />
-                        </div>
-                    )}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000a8] to-transparent"></div>
-                    <Container className="relative">
-                        <div className="flex flex-col items-start text-left text-white ">
-                            <div className="mb-[0.5em] flex flex-wrap gap-3 xl:gap-[19px] ]">
-                                {post.categories?.edges?.map(
-                                    ({ node: cate }, i) => (
-                                        <Tag
-                                            key={i}
-                                            href={`/category/${cate.slug}/`}
-                                            label={cate.name}
-                                            className="inline-block px-3 py-1 text-sm text-white bg-opacity-100 rounded bg-primary hover:bg-secondary"
-                                        />
-                                    )
-                                )}
+                                    sizes="100vw"
+                                />
                             </div>
-                            <h1
-                                style={{
-                                    textShadow: '2px 1px black'
-                                }}
-                                className="text-2xl md:text-3xl text-white lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
-                                itemProp="headline">
-                                {post.title}
-                            </h1>
-                            <div className="mt-[1.65em] gap-6 lg:gap-6 text-sm flex flex-wrap items-baseline">
-                                <Link
-                                    className="flex items-center font-bold text-white hover:text-opacity-70"
-                                    rel="author"
-                                    href={`/author/${post.author.node.slug}`}>
-                                    <span className="inline-block mr-1 align-middle ">
-                                        <div className="h-[13px] w-[28px] inline-flex items-center relative">
-                                            <Avartar
-                                                author={post?.author?.node}
+                        )}
+                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000a8] to-transparent"></div>
+                        <Container className="relative">
+                            <div className="flex flex-col items-start text-left text-white ">
+                                <div className="mb-[0.5em] flex flex-wrap gap-3 xl:gap-[19px] ]">
+                                    {post.categories?.edges?.map(
+                                        ({ node: cate }, i) => (
+                                            <Tag
+                                                key={i}
+                                                href={`/category/${cate.slug}/`}
+                                                label={cate.name}
+                                                className="inline-block px-3 py-1 text-sm text-white bg-opacity-100 rounded bg-primary hover:bg-secondary"
                                             />
-                                        </div>
-                                    </span>
-                                    <span className="truncate post_author_name">
-                                        {post.author.node.name}
-                                    </span>
-                                </Link>{' '}
-                                <span className="inline-block text-sm ">
-                                    <span className="flex items-baseline leading-[15px]">
-                                        <span className="self-center inline-block mr-1 text-[15px]">
-                                            <svg
-                                                stroke="currentColor"
-                                                fill="none"
-                                                strokeWidth={2}
-                                                viewBox="0 0 24 24"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                height="1em"
-                                                width="1em"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <circle
-                                                    cx={12}
-                                                    cy={12}
-                                                    r={10}
+                                        )
+                                    )}
+                                </div>
+                                <h1
+                                    style={{
+                                        textShadow: '2px 1px black'
+                                    }}
+                                    className="text-2xl md:text-3xl text-white lg:text-4xl font-bold xl:text-[54px] !leading-tight max-w-[80%] "
+                                    itemProp="headline">
+                                    {post.title}
+                                </h1>
+                                <div className="mt-[1.65em] gap-6 lg:gap-6 text-sm flex flex-wrap items-baseline">
+                                    <Link
+                                        className="flex items-center font-bold text-white hover:text-opacity-70"
+                                        rel="author"
+                                        href={`/author/${post.author.node.slug}`}>
+                                        <span className="inline-block mr-1 align-middle ">
+                                            <div className="h-[13px] w-[28px] inline-flex items-center relative">
+                                                <Avartar
+                                                    author={post?.author?.node}
                                                 />
-                                                <polyline points="12 6 12 12 16 14" />
-                                            </svg>
+                                            </div>
                                         </span>
-                                        <span className="leading-[15px] font-bold">
-                                            {new Date(
-                                                post.date
-                                            ).toLocaleDateString('en-US', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric'
-                                            })}
+                                        <span className="truncate post_author_name">
+                                            {post.author.node.name}
+                                        </span>
+                                    </Link>{' '}
+                                    <span className="inline-block text-sm ">
+                                        <span className="flex items-baseline leading-[15px]">
+                                            <span className="self-center inline-block mr-1 text-[15px]">
+                                                <svg
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    strokeWidth={2}
+                                                    viewBox="0 0 24 24"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    height="1em"
+                                                    width="1em"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle
+                                                        cx={12}
+                                                        cy={12}
+                                                        r={10}
+                                                    />
+                                                    <polyline points="12 6 12 12 16 14" />
+                                                </svg>
+                                            </span>
+                                            <span className="leading-[15px] font-bold">
+                                                {new Date(
+                                                    post.date
+                                                ).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'long',
+                                                    day: 'numeric'
+                                                })}
+                                            </span>
                                         </span>
                                     </span>
-                                </span>
-                            </div>{' '}
-                        </div>
-                    </Container>
+                                </div>{' '}
+                            </div>
+                        </Container>
+                    </div>
                 </div>
+
                 <Container className="flex mt-[2em] lg:mt-[3.8em] flex-col lg:flex-row lg:space-x-[30px]  gap-y-16    items-start">
                     <div className="flex-1">
                         <article
