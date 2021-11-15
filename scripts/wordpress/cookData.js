@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 // var raw = require('./raw.json');
 var defaultData = require('./app.json');
 var numeral = require('numeral');
