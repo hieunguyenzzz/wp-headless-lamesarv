@@ -1,4 +1,5 @@
 import Avartar from 'components/Avartar';
+import Comments from 'components/Comments';
 import Tag from 'components/Tag';
 import { insertViewCount } from 'libs/apis';
 import { usePost } from 'libs/hooks/post/usePost';
@@ -442,7 +443,7 @@ const ArticlePage = ({ pageProps }) => {
                             itemScope="itemscope"
                             itemType="https://schema.org/Person">
                             <div
-                                className="w-[120px] h-[120px] rounded-full mb-[1em] relative overflow-hidden"
+                                className="w-[120px] h-[120px] rounded-full relative overflow-hidden"
                                 itemProp="image">
                                 <div className="h-[120px] w-[120px] inline-flex items-center relative">
                                     <Avartar size={120} />
@@ -462,7 +463,8 @@ const ArticlePage = ({ pageProps }) => {
                                 </Link>
                             </div>
                         </div>
-                        {/* <Comments post={post} /> */}
+                        <div className="mt-[2.5em]" />
+                        <Comments post={post} />
                         <section className="my-[2.5em] p-[20px] lg:p-[30px] shadow rounded">
                             <h3 className="text-[22px] mb-[1em] font-bold">
                                 You May Also Like
