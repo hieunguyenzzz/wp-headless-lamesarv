@@ -92,7 +92,7 @@ export const Header = ({ pageProps }) => {
         });
     return (
         <>
-            <header className="sticky top-0 z-10 pointer-events-none h-header">
+            <header className="sticky top-0 z-10 pointer-events-none h-header font-heading">
                 <div
                     ref={headerRef}
                     className={(() => {
@@ -148,7 +148,7 @@ export const Header = ({ pageProps }) => {
                                             itemScope="itemscope"
                                             itemType="https://schema.org/SiteNavigationElement">
                                             <ul
-                                                className="lg:flex flex-wrap gap-x-6 gap-y-2 font-bold text-lg lg:text-[17px]"
+                                                className="lg:flex flex-wrap gap-x-6 gap-y-1 py-2 font-bold text-lg lg:text-[17px]"
                                                 style={{
                                                     touchAction: 'pan-y'
                                                 }}>
@@ -177,7 +177,7 @@ export const Header = ({ pageProps }) => {
                                                                             }
                                                                         </span>
                                                                     </Link>
-                                                                    <div className="absolute right-0 hidden gap-4 shadow top-full group-hover:block">
+                                                                    <div className="absolute hidden gap-4 transform -translate-x-1/2 shadow left-1/2 top-full group-hover:block">
                                                                         <div className="flex flex-col gap-1 py-3 bg-white animated fadeIn">
                                                                             {children.map(
                                                                                 (
@@ -404,7 +404,7 @@ export const Header = ({ pageProps }) => {
                                                                             )}
                                                                         </div>
                                                                         {!!children?.length && (
-                                                                            <div className="h-0 -mt-4 overflow-hidden whitespace-pre-line transition-all pointer-events-auto group-focus:h-auto group-focus:block group-focus:mt-0">
+                                                                            <div className="h-0 -mt-4 overflow-hidden whitespace-pre-line transition-all pointer-events-auto group-focus:h-auto group-focus:block group-focus:mt-0 focus-within:h-auto focus-within:block focus-within:mt-0">
                                                                                 {children.map(
                                                                                     (
                                                                                         {
@@ -418,8 +418,18 @@ export const Header = ({ pageProps }) => {
                                                                                                 key={
                                                                                                     i
                                                                                                 }
+                                                                                                onClick={(
+                                                                                                    e
+                                                                                                ) => {
+                                                                                                    e.stopPropagation();
+                                                                                                }}
                                                                                                 className="inline-block mt-6 w-[28rem] pl-10 font-bold text-xl hover:text-[#d85726]">
                                                                                                 <Link
+                                                                                                    onClick={(
+                                                                                                        e
+                                                                                                    ) => {
+                                                                                                        e.stopPropagation();
+                                                                                                    }}
                                                                                                     href={
                                                                                                         path
                                                                                                     }>

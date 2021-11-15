@@ -1,6 +1,8 @@
 import Avartar from 'components/Avartar';
+import Comments from 'components/Comments';
 import Tag from 'components/Tag';
 import { insertViewCount } from 'libs/apis';
+import { usePost } from 'libs/hooks/post/usePost';
 import { useEffect } from 'react';
 import { CLOUDINARY_UPLOAD_PRESET, EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
@@ -11,7 +13,8 @@ import SideBar from '../SideBar';
 import StickyColumn from '../StickyColumn';
 
 const ArticlePage = ({ pageProps }) => {
-    const { post, prePost, nextPost } = pageProps;
+    const { post } = usePost();
+    const { prePost, nextPost } = pageProps;
     const { featuredImage } = post;
     const shareUrl = encodeURI(HOST_URL + post.link);
     const shareUrls = {
@@ -34,7 +37,7 @@ const ArticlePage = ({ pageProps }) => {
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="relative w-full min-h-[280px] lg:min-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
+                <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
                     {imageUrl && (
                         <div
                             className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
@@ -440,27 +443,33 @@ const ArticlePage = ({ pageProps }) => {
                             itemScope="itemscope"
                             itemType="https://schema.org/Person">
                             <div
-                                className="w-[120px] h-[120px] rounded-full mb-[1em] relative overflow-hidden"
+                                className="w-[120px] h-[120px] rounded-full relative overflow-hidden"
                                 itemProp="image">
                                 <div className="h-[120px] w-[120px] inline-flex items-center relative">
                                     <Avartar size={120} />
                                 </div>
                             </div>
-                            <div className="space-y-6">
+                            <div className="space-y-3">
                                 <h4
                                     className="font-heading text-[25px] font-bold"
                                     itemProp="name">
                                     <span>{author.name}</span>
                                 </h4>
-                                <Link
-                                    href={`/author/${post.author.node.slug}`}
-                                    className="font-bold author_bio text-[#720f21] hover:text-base"
-                                    itemProp="description">
-                                    View all Posts
-                                </Link>
+                                <div className="text-opacity-75">
+                                    La Mesa RV Digital Team
+                                </div>
+                                <div>
+                                    <Link
+                                        href={`/author/${post.author.node.slug}`}
+                                        className="font-bold author_bio text-[#720f21] "
+                                        itemProp="description">
+                                        View all Posts
+                                    </Link>
+                                </div>
                             </div>
                         </div>
-                        {/* <Comments post={post} /> */}
+                        <div className="mt-[2.5em]" />
+                        <Comments post={post} />
                         <section className="my-[2.5em] p-[20px] lg:p-[30px] shadow rounded">
                             <h3 className="text-[22px] mb-[1em] font-bold">
                                 You May Also Like

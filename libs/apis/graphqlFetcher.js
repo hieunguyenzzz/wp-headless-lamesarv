@@ -5,7 +5,7 @@ export default async function graphqlFetcher(query, variables = {}) {
         method: 'POST',
         body: JSON.stringify({
             query,
-            variables: variables
+            variables
         }),
         headers: { 'Content-Type': 'application/json' }
     });
