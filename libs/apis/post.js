@@ -1,61 +1,17 @@
+import { GET_POSTS_QUERY } from 'libs/queries/post';
 import { normalizePost } from '../utils/normalize';
 import fetcher from './fetcher';
+import graphqlFetcher from './graphqlFetcher';
 export const postApi = async ({ postId }) => {
-    const { post } = await fetcher({
-        query: `{
-          post(id:"${postId}"){
-            viewCount
-            likesCount
-          databaseId
-          id
-          link
-          uri
-          slug
-          title
-          content
-          excerpt
-          utmCampaign
-          displayAdImage
-          seo {
-            fullHead
-          }
-          author {
-            node {
-              id
-              name
-              slug
-            }
-          }
-          featuredImage {
-            node {
-              id
-              altText
-              sourceUrl
-              mediaDetails {
-                width
-                height
-              }
-            }
-          }
-          categories {
-            edges {
-              node {
-                id
-                name
-                slug
-              }
-            }
-          }
-          date
-        }
-      }`
+    const { post } = await graphqlFetcher(GET_POSTS_QUERY, {
+        id: postId
     });
-    return post;
+    return normalizePost(post);
 };
 export const postsApi = async (search, endCursor) => {
     const data = await fetcher({
         query: `{
-      posts(first: 10 ${endCursor ? ', after:"' + endCursor + '"' : ''} ${
+        posts(first: 10 ${endCursor ? ', after:"' + endCursor + '"' : ''} ${
             search ? ', where:{search:"' + search + '"}' : ''
         }) {
         pageInfo {

@@ -1,6 +1,7 @@
 import Avartar from 'components/Avartar';
 import Tag from 'components/Tag';
 import { insertViewCount } from 'libs/apis';
+import { usePost } from 'libs/hooks/post/usePost';
 import { useEffect } from 'react';
 import { CLOUDINARY_UPLOAD_PRESET, EMAIL, HOST_URL } from '../../libs/const';
 import { useLike } from '../../libs/hooks/post/useLike';
@@ -11,7 +12,8 @@ import SideBar from '../SideBar';
 import StickyColumn from '../StickyColumn';
 
 const ArticlePage = ({ pageProps }) => {
-    const { post, prePost, nextPost } = pageProps;
+    const { post } = usePost();
+    const { prePost, nextPost } = pageProps;
     const { featuredImage } = post;
     const shareUrl = encodeURI(HOST_URL + post.link);
     const shareUrls = {
