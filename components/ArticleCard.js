@@ -20,7 +20,7 @@ export default function ArticleCard({
     const imageUrl = featuredImage?.node?.sourceUrl;
     const [imageLoaded, setImageLoaded] = useState(false);
     return (
-        <article className="max-w-2xl mx-auto rounded shadow">
+        <article className="mx-auto rounded shadow">
             <div className="relative w-full overflow-hidden bg-gray-100 rounded-t group">
                 {imageUrl && (
                     <Image
