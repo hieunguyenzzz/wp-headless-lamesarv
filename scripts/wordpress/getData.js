@@ -109,6 +109,7 @@ const getAllDataQuery = `{
               id
               name
               slug
+              description
             }
           }
         }
@@ -130,6 +131,7 @@ const getAllDataQuery = `{
       name
       slug
       link
+      description
       seo {
         fullHead
       }
