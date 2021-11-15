@@ -23,9 +23,12 @@ export default function Category({ pageProps }) {
         <Layout pageProps={pageProps}>
             <Banner
                 heading={category.name}
+                description={category.description}
                 subHeading={
-                    <div className="font-bold">
-                        <Link className="text-[#888583]" href="/">
+                    <div className="font-bold ">
+                        <Link
+                            className="text-opacity-50 hover:text-opacity-90 text-secondary"
+                            href="/">
                             Home
                         </Link>
                         <span className="mx-[0.3em] opacity-75 text-2xl">
@@ -46,7 +49,9 @@ export default function Category({ pageProps }) {
                                 />
                             </svg>
                         </span>
-                        <Link className="text-[#888583]" href="/">
+                        <Link
+                            className="text-opacity-50 hover:text-opacity-90 text-secondary"
+                            href="/">
                             All Posts
                         </Link>
                         <span className="mx-[0.3em] opacity-75 text-2xl">
@@ -67,7 +72,7 @@ export default function Category({ pageProps }) {
                                 />
                             </svg>
                         </span>
-                        <span className="opacity-75 breadcrumbs_item current">
+                        <span className="breadcrumbs_item current text-secondary text-opacity-80">
                             {category.name}
                         </span>
                     </div>
@@ -75,12 +80,12 @@ export default function Category({ pageProps }) {
             />
 
             {!posts?.length && (
-                <Container className="flex flex-col lg:flex-row lg:space-x-8 py-16 lg:py-[110px] gap-y-16 items-start">
+                <Container className="flex flex-col items-start py-8 lg:flex-row lg:space-x-8 gap-y-16">
                     <ResultEmpty search={query.s} />
                 </Container>
             )}
             {posts?.length && (
-                <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-16 lg:py-[110px] gap-y-16 items-start">
+                <Container className="flex flex-col lg:flex-row lg:space-x-[30px] py-8  gap-y-12 items-start">
                     <div className="flex-1 space-y-8">
                         {pageNodes}
                         {pathDetail.totalPages > 1 && (
