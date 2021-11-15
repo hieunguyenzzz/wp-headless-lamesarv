@@ -9,8 +9,6 @@ export default async function graphqlFetcher(query, variables = {}) {
         }),
         headers: { 'Content-Type': 'application/json' }
     });
-    console.log({ query, variables });
-
     const { data, errors } = await res.json();
     if (errors) {
         console.error(JSON.stringify(errors, 2, null));

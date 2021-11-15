@@ -37,7 +37,7 @@ const ArticlePage = ({ pageProps }) => {
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="relative w-full min-h-[280px] lg:min-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
+                <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
                     {imageUrl && (
                         <div
                             className="mx-auto z-[-1] absolute top-0 left-0 w-full h-full overflow-hidden"
@@ -449,18 +449,23 @@ const ArticlePage = ({ pageProps }) => {
                                     <Avartar size={120} />
                                 </div>
                             </div>
-                            <div className="space-y-6">
+                            <div className="space-y-3">
                                 <h4
                                     className="font-heading text-[25px] font-bold"
                                     itemProp="name">
                                     <span>{author.name}</span>
                                 </h4>
-                                <Link
-                                    href={`/author/${post.author.node.slug}`}
-                                    className="font-bold author_bio text-[#720f21] hover:text-base"
-                                    itemProp="description">
-                                    View all Posts
-                                </Link>
+                                <div className="text-opacity-75">
+                                    La Mesa RV Digital Team
+                                </div>
+                                <div>
+                                    <Link
+                                        href={`/author/${post.author.node.slug}`}
+                                        className="font-bold author_bio text-[#720f21] "
+                                        itemProp="description">
+                                        View all Posts
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="mt-[2.5em]" />

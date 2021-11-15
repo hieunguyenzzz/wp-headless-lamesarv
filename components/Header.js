@@ -148,7 +148,7 @@ export const Header = ({ pageProps }) => {
                                             itemScope="itemscope"
                                             itemType="https://schema.org/SiteNavigationElement">
                                             <ul
-                                                className="lg:flex flex-wrap gap-x-6 gap-y-2 font-bold text-lg lg:text-[17px]"
+                                                className="lg:flex flex-wrap gap-x-6 gap-y-1 py-2 font-bold text-lg lg:text-[17px]"
                                                 style={{
                                                     touchAction: 'pan-y'
                                                 }}>
@@ -177,7 +177,7 @@ export const Header = ({ pageProps }) => {
                                                                             }
                                                                         </span>
                                                                     </Link>
-                                                                    <div className="absolute right-0 hidden gap-4 shadow top-full group-hover:block">
+                                                                    <div className="absolute hidden gap-4 transform -translate-x-1/2 shadow left-1/2 top-full group-hover:block">
                                                                         <div className="flex flex-col gap-1 py-3 bg-white animated fadeIn">
                                                                             {children.map(
                                                                                 (
