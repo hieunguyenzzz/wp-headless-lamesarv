@@ -63,7 +63,9 @@ export const Header = ({ pageProps }) => {
         };
         window.addEventListener('scroll', onScrollHandler, false);
         createObserver(headerElement);
-        return () => {};
+        return () => {
+            window.removeEventListener('scroll', onScrollHandler, false);
+        };
     }, []);
     const searchPath = basePath + '/';
     const menu = pageProps.app.mainMenu
@@ -125,7 +127,7 @@ export const Header = ({ pageProps }) => {
                               }
                             : null
                     }>
-                    <Container>
+                    <div className="container max-w-[1270px] w-full mx-auto  px-6 lg:px-[50px]">
                         <div className="w-full h-full pointer-events-auto">
                             <div className="flex items-center justify-between w-full space-x-6 transition-all h-header">
                                 <div
@@ -559,7 +561,7 @@ export const Header = ({ pageProps }) => {
                                 </label>
                             </div>
                         </div>
-                    </Container>
+                    </div>
                     <div className="absolute inset-0 z-[-1] border-b border-[#720f21] bg-white" />
                 </div>
             </header>
