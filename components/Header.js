@@ -92,7 +92,7 @@ export const Header = ({ pageProps }) => {
         });
     return (
         <>
-            <header className="sticky top-0 z-10 pointer-events-none h-header">
+            <header className="sticky top-0 z-10 pointer-events-none h-header font-heading">
                 <div
                     ref={headerRef}
                     className={(() => {
