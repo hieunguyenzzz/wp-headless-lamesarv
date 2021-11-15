@@ -63,7 +63,9 @@ export const Header = ({ pageProps }) => {
         };
         window.addEventListener('scroll', onScrollHandler, false);
         createObserver(headerElement);
-        return () => {};
+        return () => {
+            window.removeEventListener('scroll', onScrollHandler, false);
+        };
     }, []);
     const searchPath = basePath + '/';
     const menu = pageProps.app.mainMenu
