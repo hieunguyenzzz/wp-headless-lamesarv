@@ -24,7 +24,7 @@ export const useLike = (post) => {
         setLike(!like);
     }, [like, post.id]);
     return {
-        likesCount: post.likesCount || likesCount,
+        likesCount: likesCount || post.likesCount,
         onLike: handleLike,
         like
     };
