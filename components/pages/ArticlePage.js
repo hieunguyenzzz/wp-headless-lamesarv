@@ -441,12 +441,12 @@ const ArticlePage = ({ pageProps }) => {
                             </div>
                         </div>
                         <div
-                            className="p-6 lg:p-12 bg-[#ffdabc] rounded flex gap-6 lg:gap-8"
+                            className="p-6 lg:p-12 bg-[#ffdabc] rounded flex gap-6 lg:gap-8 "
                             itemProp="author"
                             itemScope="itemscope"
                             itemType="https://schema.org/Person">
                             <div
-                                className="w-[120px] h-[120px] rounded-full relative overflow-hidden"
+                                className="w-[120px] flex- h-[120px] rounded-full relative overflow-hidden flex-shrink-0"
                                 itemProp="image">
                                 <div className="h-[120px] w-[120px] inline-flex items-center relative">
                                     <Avartar size={120} />
