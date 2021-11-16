@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Avartar from './Avartar';
 import Link from './Link';
 import Tag from './Tag';
+
 export default function ArticleCard({
     featuredImage,
     title,
@@ -14,7 +15,11 @@ export default function ArticleCard({
     excerpt,
     author,
     likesCountString,
-    viewsCountString
+    viewsCountString,
+    imageRatio = {
+        width: 770,
+        height: 433
+    }
 }) {
     const href = link || '/';
     const imageUrl = featuredImage?.node?.sourceUrl;
@@ -24,8 +29,14 @@ export default function ArticleCard({
             <div className="relative w-full overflow-hidden bg-gray-100 rounded-t group">
                 {imageUrl && (
                     <Image
-                        width={featuredImage.node.mediaDetails.width}
-                        height={featuredImage.node.mediaDetails.height}
+                        width={
+                            imageRatio?.width ||
+                            featuredImage.node.mediaDetails.width
+                        }
+                        height={
+                            imageRatio?.height ||
+                            featuredImage.node.mediaDetails.height
+                        }
                         cloudName="la-mesa-rv"
                         publicId={
                             CLOUDINARY_UPLOAD_PRESET +
@@ -48,9 +59,15 @@ export default function ArticleCard({
                         alt={featuredImage?.node?.altText}
                         loading="lazy">
                         <Transformation
-                            width={featuredImage.node.mediaDetails.width}
-                            height={featuredImage.node.mediaDetails.height}
-                            crop="scale"
+                            width={
+                                imageRatio?.width ||
+                                featuredImage.node.mediaDetails.width
+                            }
+                            height={
+                                imageRatio?.height ||
+                                featuredImage.node.mediaDetails.height
+                            }
+                            crop={imageRatio && 'fill'}
                         />
                         <Transformation fetchFormat="auto" />
                     </Image>

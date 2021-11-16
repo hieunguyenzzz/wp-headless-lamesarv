@@ -37,7 +37,7 @@ const ArticlePage = ({ pageProps }) => {
     return (
         <Layout pageProps={pageProps}>
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
-                <div className="container max-w-[1620px] w-full mx-auto  px-6 lg:px-[50px]">
+                <div className="container max-w-[1620px] w-full mx-auto ">
                     <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
                         {imageUrl && (
                             <div
