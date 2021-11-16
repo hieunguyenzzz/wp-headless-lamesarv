@@ -15,9 +15,11 @@ export const usePost = () => {
         [post.postId]
     );
     const { data, error } = useSWR(key, postApi);
-    return {
-        post: data?.post || post,
-        error,
-        isLoading: !error && !data
-    };
+    return useMemo(() => {
+        return {
+            post: data || post,
+            error,
+            isLoading: !error && !data
+        };
+    }, [data, error, post]);
 };
