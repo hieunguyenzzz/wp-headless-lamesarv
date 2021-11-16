@@ -34,7 +34,8 @@ export const fixSeoImage = (seo) => {
 
     fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo);
     fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
-    fixedSeo = fixedSeo.replaceAll(/-[0-9]{3}x[0-9]{3}\.jpg/g, '.jpg');
+    fixedSeo = fixedSeo.replace(/-[0-9]{3,4}x[0-9]{2,4}\.jpg/g, '.jpg');
+
     return fixedSeo;
 };
 export const getAppProps = (context, cookedData = data) => {
