@@ -6,7 +6,7 @@ import TwoColumnsWithSidebar from './TwoColumnsWithSidebar';
 const VisibleAnimationArticleCard = (props) => {
     return (
         <AnimateBlock>
-            <ArticleCard {...props} />
+            <ArticleCard {...props} imageRatio={null} />
         </AnimateBlock>
     );
 };
