@@ -11,21 +11,21 @@ const unLikeMutation = ` mutation unlikeMutation($id:Int) {
     }
   }`;
 export const useLike = (post) => {
-  const [like, setLike] = useState(false);
-  const [likesCount, setlikesCount] = useState(post?.likesCount || 0);
-  const handleLike = useCallback(async () => {
-    const { postLike: { likes_count } = {} } = await graphqlFetcher(
-      like ? unLikeMutation : likeMutation,
-      {
-        id: post.id
-      }
-    );
-    setlikesCount(likes_count);
-    setLike(!like);
-  }, [like, post.id]);
-  return {
-    likesCount,
-    onLike: handleLike,
-    like
-  };
+    const [like, setLike] = useState(false);
+    const [likesCount, setlikesCount] = useState();
+    const handleLike = useCallback(async () => {
+        const { postLike: { likes_count } = {} } = await graphqlFetcher(
+            like ? unLikeMutation : likeMutation,
+            {
+                id: post.id
+            }
+        );
+        setlikesCount(likes_count);
+        setLike(!like);
+    }, [like, post.id]);
+    return {
+        likesCount: post.likesCount || likesCount,
+        onLike: handleLike,
+        like
+    };
 };
