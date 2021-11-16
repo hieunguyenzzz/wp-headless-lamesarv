@@ -67,8 +67,7 @@ export default function ArticleCard({
                                 imageRatio?.height ||
                                 featuredImage.node.mediaDetails.height
                             }
-                            gravity="face"
-                            crop="scale"
+                            crop={imageRatio && 'fill'}
                         />
                         <Transformation fetchFormat="auto" />
                     </Image>
