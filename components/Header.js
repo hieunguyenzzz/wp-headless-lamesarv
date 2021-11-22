@@ -367,7 +367,9 @@ export const Header = ({ pageProps }) => {
                                                             },
                                                             i
                                                         ) => {
-                                                            if (children) {
+                                                            if (
+                                                                children?.length
+                                                            ) {
                                                                 return (
                                                                     <div
                                                                         key={i}
@@ -377,11 +379,15 @@ export const Header = ({ pageProps }) => {
                                                                         }>
                                                                         <div className="w-full flex items-center font-bold text-2xl hover:text-[#d85726]">
                                                                             <div className="flex-1 py-1 text-left">
-                                                                                <span className="font-bold capitalize ">
+                                                                                <Link
+                                                                                    href={
+                                                                                        path
+                                                                                    }
+                                                                                    className="font-bold capitalize ">
                                                                                     {
                                                                                         label
                                                                                     }
-                                                                                </span>
+                                                                                </Link>
                                                                             </div>
                                                                             {!!children?.length && (
                                                                                 <div className="transform transition-transform rotate-90 text-white group-focus:-rotate-90 duration-300 ease-in-out text-[24px]">
