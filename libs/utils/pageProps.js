@@ -1,3 +1,4 @@
+import graphqlFetcher from 'libs/apis/graphqlFetcher';
 import {
     CLOUDINARY_STORAGE_URL,
     DOMAIN,
@@ -6,8 +7,10 @@ import {
     STORAGE_URL,
     STORAGE_URL_2
 } from 'libs/const';
+import { GET_PAGE_BY_ID } from 'libs/queries/page';
 import replaceall from 'replaceall';
 import data from '../../data/cookedData.json';
+import { normalizePage } from './normalize';
 import { getNextAndPrePosts, getRecommendationPosts } from './post';
 import seo, { gallerySeo } from './seo';
 
@@ -152,7 +155,7 @@ export const getDynamicPageProps = (context, cookedData = data) => {
         // console.log([page.path, path])
         return page.path === path;
     });
-    switch (pageDetail.type) {
+    switch (pageDetail?.type) {
         case 'MONTH':
         case 'YEAR': {
             return {
@@ -167,6 +170,28 @@ export const getDynamicPageProps = (context, cookedData = data) => {
             };
         }
         default:
-            throw new Error('Path not found!');
+            return null;
     }
+};
+
+export const getStaticPageProps = async (context, cookedData = data) => {
+    const { params } = context;
+    const path = '/' + params.pages.join('/');
+    const staticPage = cookedData.allPaths.pages.find((page) => {
+        return page.path === path;
+    });
+    if (staticPage) {
+        const { page } = await graphqlFetcher(GET_PAGE_BY_ID, {
+            id: staticPage.id
+        });
+        const normalizedData = normalizePage(page);
+        return {
+            props: {
+                ...getAppProps(context),
+                seo: normalizedData.seo,
+                page: normalizedData
+            }
+        };
+    }
+    return null;
 };

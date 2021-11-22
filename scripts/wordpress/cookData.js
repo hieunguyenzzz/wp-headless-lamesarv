@@ -37,6 +37,7 @@ const normalize = (raw) => {
     const {
         users: usersRaw,
         posts: postsRaw,
+        pages: pagesRaw,
         categories: categoriesraw,
         ...rest
     } = raw;
@@ -44,6 +45,7 @@ const normalize = (raw) => {
         homepage: [],
         category: [],
         author: [],
+        pages: [],
         ['[...pages]']: []
     };
     const postEntities = {};
@@ -56,7 +58,19 @@ const normalize = (raw) => {
     const posts = (postsRaw?.edges || []).map(({ node }) => {
         return normalizePost(node);
     });
-
+    const pages = pagesRaw.nodes.map(({ id, title, slug }) => {
+        return {
+            id,
+            title,
+            path: '/' + slug,
+            type: 'PAGE',
+            slug,
+            params: { id, slug }
+        };
+    });
+    pages.forEach((page) => {
+        allPaths.pages.push(page);
+    });
     const users = usersRaw.nodes;
     users.forEach((user) => {
         authorEntities[user.slug] = user;
