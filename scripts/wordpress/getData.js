@@ -66,6 +66,14 @@ const getAllDataQuery = `{
       }
     }
   }
+  pages(first:99999) {
+    nodes {
+      id
+      title
+      slug
+      date
+    }
+  }
   posts(first: 999999) {
     pageInfo {
       hasNextPage
