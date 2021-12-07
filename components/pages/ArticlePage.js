@@ -13,9 +13,10 @@ import SideBar from '../SideBar';
 import StickyColumn from '../StickyColumn';
 
 const CustomStyle = () => {
-    <style
-        dangerouslySetInnerHTML={{
-            __html: `
+    return (
+        <style
+            dangerouslySetInnerHTML={{
+                __html: `
         .gallery {
             margin: 0 -5px;
             display: -webkit-flex;
@@ -135,7 +136,8 @@ const CustomStyle = () => {
             min-height: 100px;
             vertical-align: top
         }`
-        }}></style>;
+            }}></style>
+    );
 };
 
 const ArticlePage = ({ pageProps }) => {
