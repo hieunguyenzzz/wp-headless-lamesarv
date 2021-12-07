@@ -1,12 +1,11 @@
-module.exports =
-    process.env.NODE_ENV === 'production'
-        ? {
-              reactStrictMode: true,
-              trailingSlash: true,
-              basePath: '/blog'
-          }
-        : {
-              reactStrictMode: true,
-              trailingSlash: true,
-              basePath: '/blog'
-          };
+module.exports = {
+    reactStrictMode: true,
+    trailingSlash: true,
+    basePath: '/blog',
+    serverRuntimeConfig: {
+        // Will only be available on the server side
+    },
+    publicRuntimeConfig: {
+        // Will be available on both server and client
+    }
+};
