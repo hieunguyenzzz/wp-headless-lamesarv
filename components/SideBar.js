@@ -1,8 +1,10 @@
 import { fixImageUrl } from 'libs/utils/cloudinary';
+import getConfig from 'next/config';
 import { useRouter } from 'next/router';
 import { useNewsletter } from '../libs/hooks/useNewsletter';
 import AsideCard from './AsideCard';
 import Link from './Link';
+const { publicRuntimeConfig } = getConfig();
 const NewsletterForm = () => {
     const { loading, onSubmit, success } = useNewsletter();
     if (success)
@@ -155,11 +157,13 @@ function SideBar({ pageProps }) {
                         alt={displayAdImage}></img>
                 </aside>
             )}
-            <aside className="p-8 shadow widget widget_email-subscribers-form">
-                <div>
-                    <NewsletterForm />
-                </div>
-            </aside>
+            {publicRuntimeConfig.newsletter && (
+                <aside className="p-8 shadow widget widget_email-subscribers-form">
+                    <div>
+                        <NewsletterForm />
+                    </div>
+                </aside>
+            )}
             <AsideCard heading="RV Lifestyle">
                 <ul className="flex flex-col space-y-3">
                     {pageProps.recentPosts?.map(({ title, link }, i) => {
