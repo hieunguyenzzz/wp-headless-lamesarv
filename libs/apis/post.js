@@ -1,9 +1,9 @@
-import { GET_POSTS_QUERY } from 'libs/queries/post';
+import { GET_POST_QUERY } from 'libs/queries/post';
 import { normalizePost } from '../utils/normalize';
 import fetcher from './fetcher';
 import graphqlFetcher from './graphqlFetcher';
 export const postApi = async ({ postId }) => {
-    const { post } = await graphqlFetcher(GET_POSTS_QUERY, {
+    const { post } = await graphqlFetcher(GET_POST_QUERY, {
         id: postId
     });
     return normalizePost(post);

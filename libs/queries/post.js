@@ -1,4 +1,4 @@
-export const GET_POSTS_QUERY = `query GET_POSTS_QUERY( $id: ID! ){
+export const GET_POST_QUERY = `query GET_POST_QUERY( $id: ID! ){
     post( id: $id ){
     viewCount
     likesCount
