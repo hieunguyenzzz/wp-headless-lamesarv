@@ -12,6 +12,132 @@ import Link from '../Link';
 import SideBar from '../SideBar';
 import StickyColumn from '../StickyColumn';
 
+const CustomStyle = () => {
+    <style
+        dangerouslySetInnerHTML={{
+            __html: `
+        .gallery {
+            margin: 0 -5px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            -webkit-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0 5px
+        }
+        
+        figure.gallery-item {
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+        
+        .gallery-columns-9 .gallery-item {
+            width: 11.1111111111% !important
+        }
+        
+        .gallery-columns-8 .gallery-item {
+            width: 12.5% !important
+        }
+        
+        .gallery-columns-7 .gallery-item {
+            width: 14.2857142857% !important
+        }
+        
+        .gallery-columns-6 .gallery-item {
+            width: 16.6666666667% !important
+        }
+        
+        .gallery-columns-5 .gallery-item {
+            width: 20% !important
+        }
+        
+        .gallery-columns-4 .gallery-item {
+            width: 25% !important
+        }
+        
+        .gallery-columns-3 .gallery-item {
+            width: 33.3333333333% !important
+        }
+        
+        .gallery-columns-2 .gallery-item {
+            width: 50% !important
+        }
+        
+        .gallery-columns-1 .gallery-item {
+            width: 100% !important
+        }
+        
+        .gallery-item a {
+            display: block
+        }
+        
+        .gallery-item a img {
+            border: none !important;
+            display: block;
+            width: 100%
+        }
+        
+        .gallery-columns-9 .gallery-caption {
+            font-size: .625em;
+            line-height: 1.75em
+        }
+        
+        .gallery-columns-8 .gallery-caption {
+            font-size: .6875em;
+            line-height: 1.75em
+        }
+        
+        .gallery-columns-7 .gallery-caption {
+            font-size: .75em;
+            line-height: 1.75em
+        }
+        
+        .gallery-columns-6 .gallery-caption {
+            font-size: .8125em;
+            line-height: 1.75em
+        }
+        
+        audio,
+        canvas,
+        progress,
+        video {
+            display: inline-block;
+            vertical-align: baseline
+        }
+        
+        audio:not([controls]) {
+            display: none;
+            height: 0
+        }
+        
+        iframe,
+        video,
+        embed {
+            max-width: 100%;
+            min-height: 100px;
+            vertical-align: top
+        }`
+        }}></style>;
+};
+
 const ArticlePage = ({ pageProps }) => {
     const { post } = usePost();
     const { prePost, nextPost } = pageProps;
@@ -36,6 +162,7 @@ const ArticlePage = ({ pageProps }) => {
     const author = post.author?.node;
     return (
         <Layout pageProps={pageProps}>
+            <CustomStyle />
             <div className="pb-10 lg:pb-[3.8em] text-[18px] flex flex-col justify-end items-end">
                 <div className="container max-w-[1620px] w-full mx-auto ">
                     <div className="relative w-full min-h-[280px] lg:min-h-[500px] max-h-[500px] lg:h-[calc(100vh-var(--header-height))] py-5 lg:py-12 flex items-end">
