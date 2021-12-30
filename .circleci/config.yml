@@ -7,12 +7,13 @@ executors:
 jobs:
   build-and-deploy:
     environment:
-      NEXT_PUBLIC_API_URL: https://user1:unruffled-3lag-willy1-1Lemon@blog.recvan.com
-      NEXT_PUBLIC_HOST_URL: https://recvan.com/blog
-      NEXT_PUBLIC_WORDPRESS_STORAGE_URL: https://myrecvan.com/wp-content/uploads
-      NEXT_PUBLIC_WORDPRESS_STORAGE_URL_2: https://blog.recvan.com/wp-content/uploads
-      NEXT_PUBLIC_CLOUDINARY_STORAGE_URL: https://res.cloudinary.com/la-mesa-rv/image/upload/c_scale,w_1080/f_auto/v1/rec-van-assets
-      TOKEN: dXNlcjE6dW5ydWZmbGVkLTNsYWctd2lsbHkxLTFMZW1vbg==
+      NEXT_PUBLIC_API_URL: https://lamesarv.hieunguyen.dev
+      NEXT_PUBLIC_HOST_URL: https://lamesarv.hieunguyen.dev/out 
+      NEXT_PUBLIC_DOMAIN: experiencelife.lamesarv.com
+      NEXT_PUBLIC_WORDPRESS_STORAGE_URL: https://lamesarv.hieunguyen.dev/wp-content/uploads
+      NEXT_PUBLIC_WORDPRESS_STORAGE_URL_2: https://experiencelife.lamesarv.com/wp-content/uploads
+      NEXT_PUBLIC_CLOUDINARY_STORAGE_URL: https://res.cloudinary.com/la-mesa-rv/image/upload/c_scale,w_1080/f_auto/v1/experience-life-assets      
+      NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: GTM-WH6KWR4
       
     executor: my-custom-executor
     steps:
@@ -22,7 +23,7 @@ jobs:
           sudo apt-get update && sudo apt install rsync -y
           yarn
           yarn build          
-          rsync -va --delete  /home/circleci/project/out -e "ssh -o StrictHostKeyChecking=no" recvan@137.184.137.12:/var/www/recvan/data/www/headless-myrecvan.hieunguyen.dev/
+          rsync -va --delete  /home/circleci/project/blog/ -e "ssh -o StrictHostKeyChecking=no" recvan@137.184.137.12:/var/www/recvan/data/www/headless-myrecvan.hieunguyen.dev/out
 
 workflows:
   my-custom-workflow:
