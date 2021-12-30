@@ -23,7 +23,7 @@ jobs:
           sudo apt-get update && sudo apt install rsync -y
           yarn
           yarn build          
-          rsync -va --delete  /home/circleci/project/blog/ -e "ssh -o StrictHostKeyChecking=no" recvan@137.184.137.12:/var/www/recvan/data/www/headless-myrecvan.hieunguyen.dev/out
+          rsync -va --delete  /home/circleci/project/blog/ -e "ssh -o StrictHostKeyChecking=no" lamesarv@137.184.137.12:/var/www/lamesarv/data/www/lamesarv.hieunguyen.dev/out
 
 workflows:
   my-custom-workflow:
