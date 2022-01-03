@@ -3,7 +3,7 @@ executors:
   my-custom-executor:
     docker:
       - image: cimg/node:16.11.1
-    resource_class: medium+  
+    resource_class: xlarge
       
 jobs:
   build-and-deploy:
