@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,6 +33,6 @@ jobs:
         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
     - name: Adding know host
       run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-    - run: npm ci
+    - run: npm install
     - run: npm run build --if-present
-    - run: rsync -avz . lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
+    - run: rsync -avz .out/ lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
