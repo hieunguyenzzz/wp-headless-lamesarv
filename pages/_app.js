@@ -7,8 +7,10 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import defaultSeo from '../data/seo';
 import '../styles/globals.css';
-function MyApp({ Component, pageProps }) {
-    // console.log({ pageProps });
+function MyApp({ Component, pageProps, router: ssRouter }) {
+    if (typeof window === 'undefined') {
+        console.log(ssRouter.asPath + '-> done!');
+    }
     const yoastHead = htmlParser(pageProps.seo || defaultSeo);
     const router = useRouter();
     useEffect(() => {
