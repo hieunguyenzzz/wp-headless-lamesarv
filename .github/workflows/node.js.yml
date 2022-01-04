@@ -45,5 +45,5 @@ jobs:
         
     - run: yarn
     - run: yarn run build
-    - run: rsync -avz .blog/ lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
+    - run: rsync -avz blog/ lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
   
