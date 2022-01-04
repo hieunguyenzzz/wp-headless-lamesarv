@@ -44,6 +44,6 @@ jobs:
         echo NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID =${{ secrets.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID }} >> .env
         
     - run: yarn
-    - run: yarn run build --if-present
-    - run: rsync -avz .out/ lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
+    - run: yarn run build
+    - run: rsync -avz .blog/ lamesarv@${{ secrets.SSH_HOST }}:/var/www/lamesarv/data/www/test-github-action
   
