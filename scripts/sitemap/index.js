@@ -2,30 +2,30 @@ require('dotenv').config();
 const fs = require('fs');
 var fetch = require('node-fetch');
 var replaceall = require('replaceall');
-const { DOMAIN } = require('../const');
+const { API_URL } = require('../const');
 const sitemapUrls = [
-    `https://${DOMAIN}/sitemap_index.xml`,
-    `https://${DOMAIN}/post-sitemap.xml`,
-    `https://${DOMAIN}/page-sitemap.xml`,
-    `https://${DOMAIN}/e-landing-page-sitemap.xml`,
-    `https://${DOMAIN}/category-sitemap.xml`,
-    `https://${DOMAIN}/author-sitemap.xml`
+    `https://${API_URL}/sitemap_index.xml`,
+    `https://${API_URL}/post-sitemap.xml`,
+    `https://${API_URL}/page-sitemap.xml`,
+    `https://${API_URL}/e-landing-page-sitemap.xml`,
+    `https://${API_URL}/category-sitemap.xml`,
+    `https://${API_URL}/author-sitemap.xml`
 ];
 const getSitemap = async (url) => {
     const res = await fetch(url);
     // console.log({ res });
     let text = await res.text();
     let newtext = replaceall(
-        `https://${DOMAIN}`,
+        `https://${API_URL}`,
         process.env.NEXT_PUBLIC_HOST_URL,
         text
     );
     newtext = replaceall(
-        `//${DOMAIN}`,
+        `//${API_URL}`,
         process.env.NEXT_PUBLIC_HOST_URL,
         newtext
     );
-    const filename = 'public/' + url.replace(`https://${DOMAIN}/`, '');
+    const filename = 'public/' + url.replace(`https://${API_URL}/`, '');
     fs.writeFile(filename, newtext, (err) => {
         if (err) {
             console.error(err);

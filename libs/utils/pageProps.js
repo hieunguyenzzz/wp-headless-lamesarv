@@ -1,7 +1,7 @@
 import graphqlFetcher from 'libs/apis/graphqlFetcher';
 import {
+    API_URL,
     CLOUDINARY_STORAGE_URL,
-    DOMAIN,
     HOST_URL,
     STORAGE_PATH,
     STORAGE_URL,
@@ -16,8 +16,8 @@ import seo, { gallerySeo } from './seo';
 
 export const fixLink = (seo) => {
     let fixedSeo;
-    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, seo);
-    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`http://${API_URL}`, HOST_URL, seo);
+    fixedSeo = replaceall(`https://${API_URL}`, HOST_URL, fixedSeo);
     return fixedSeo;
 };
 export const fixSeoImage = (seo) => {
@@ -25,18 +25,18 @@ export const fixSeoImage = (seo) => {
     fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
     fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo);
     fixedSeo = replaceall(
-        `http://${DOMAIN}${STORAGE_PATH}`,
+        `http://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
     fixedSeo = replaceall(
-        `https://${DOMAIN}${STORAGE_PATH}`,
+        `https://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
 
-    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo);
-    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`http://${API_URL}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`https://${API_URL}`, HOST_URL, fixedSeo);
     fixedSeo = fixedSeo.replace(/-[0-9]{3,4}x[0-9]{2,4}\.jpg/g, '.jpg');
 
     return fixedSeo;
