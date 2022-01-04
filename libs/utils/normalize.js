@@ -1,7 +1,6 @@
 import {
     API_URL,
     CLOUDINARY_STORAGE_URL,
-    DOMAIN,
     HOST_URL,
     STORAGE_PATH,
     STORAGE_URL,
@@ -15,18 +14,18 @@ export const fixSeo = (seo) => {
     fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
     fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo);
     fixedSeo = replaceall(
-        `http://${DOMAIN}${STORAGE_PATH}`,
+        `http://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
     fixedSeo = replaceall(
-        `https://${DOMAIN}${STORAGE_PATH}`,
+        `https://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
 
-    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo);
-    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`http://${API_URL}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`https://${API_URL}`, HOST_URL, fixedSeo);
     return fixedSeo;
 };
 
@@ -35,18 +34,18 @@ export const fixContent = (seo) => {
     fixedSeo = replaceall(STORAGE_URL, CLOUDINARY_STORAGE_URL, seo);
     fixedSeo = replaceall(STORAGE_URL_2, CLOUDINARY_STORAGE_URL, fixedSeo);
     fixedSeo = replaceall(
-        `http://${DOMAIN}${STORAGE_PATH}`,
+        `http://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
     fixedSeo = replaceall(
-        `https://${DOMAIN}${STORAGE_PATH}`,
+        `https://${API_URL}${STORAGE_PATH}`,
         CLOUDINARY_STORAGE_URL,
         fixedSeo
     );
 
-    fixedSeo = replaceall(`http://${DOMAIN}`, HOST_URL, fixedSeo);
-    fixedSeo = replaceall(`https://${DOMAIN}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`http://${API_URL}`, HOST_URL, fixedSeo);
+    fixedSeo = replaceall(`https://${API_URL}`, HOST_URL, fixedSeo);
     fixedSeo = replaceall(API_URL, HOST_URL, fixedSeo);
     return fixedSeo;
 };
