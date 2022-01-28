@@ -1,3 +1,4 @@
+import { HOST_URL } from 'libs/const';
 import { GTM_ID } from 'libs/gtm';
 // eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Head, Html, Main, NextScript } from 'next/document';
@@ -44,6 +45,11 @@ class MyDocument extends Document {
                         type="text/css"
                         media="all"
                     />
+                    <link
+                        rel="alternate"
+                        type="application/rss+xml"
+                        title="La Mesa RV Blog » Feed"
+                        href={`${HOST_URL}/feed.xml`}></link>
                 </Head>
                 <body>
                     <noscript>
