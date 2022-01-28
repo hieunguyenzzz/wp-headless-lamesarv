@@ -14,6 +14,7 @@ jobs:
       NEXT_PUBLIC_WORDPRESS_STORAGE_URL_2: https://experiencelife.lamesarv.com/wp-content/uploads
       NEXT_PUBLIC_CLOUDINARY_STORAGE_URL: https://res.cloudinary.com/la-mesa-rv/image/upload/c_scale,w_1080/f_auto/v1/experience-life-assets      
       NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: GTM-WH6KWR4
+      NEXT_PUBLIC_SOURCE_URL: https://blog.recvan.com/out/
       
     executor: my-custom-executor
     steps:
